@@ -14,14 +14,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: PageView(
-
         children: [
           Welcome1(),
           Welcome2(),
           Welcome3(),
         ],
       ),
-
     );
   }
 }

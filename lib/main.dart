@@ -1,14 +1,14 @@
+import 'package:edu_connect/screens/sign_up_screen.dart';
 import 'package:edu_connect/screens/welcome_screen.dart';
 import 'package:edu_connect/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main()  async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -18,8 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: appTheme(),
-      home: WelcomeScreen(),
+      home: SignUp(),
     );
   }
 }
-

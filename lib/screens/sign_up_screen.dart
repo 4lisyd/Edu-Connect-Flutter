@@ -1,10 +1,8 @@
-
-
+import 'package:edu_connect/components/buttons.dart';
 import 'package:edu_connect/screens/sign_up_user/email_log.dart';
 import 'package:edu_connect/screens/sign_up_user/phone_log.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 
 class SignUp extends StatelessWidget {
   @override
@@ -14,19 +12,37 @@ class SignUp extends StatelessWidget {
         title: Text("choose sign up method"),
       ),
       body: Container(
-
         child: SafeArea(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("How would you like to sign up?",style: Theme.of(context).textTheme.bodyText1,),
-                RaisedButton(onPressed: (){Navigator.push(context,  MaterialPageRoute(builder: (context) => EmailSignUp()),);}, child: Container(child: Text("Sign in using Email"))),
-                RaisedButton(onPressed: (){Navigator.push(context,  MaterialPageRoute(builder: (context) => PhoneSignUp()),);}, child: Text("Sign in using Phone number")),
+                Text(
+                  "How would you like to sign up?",
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Custombutton1(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EmailSignUp()),
+                  );
+                }, 'Sign in using Email'),
+                SizedBox(
+                  height: 10,
+                ),
+                Custombutton1(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PhoneSignUp()),
+                  );
+                }, "Sign in using Phone"),
+
                 //RaisedButton(onPressed: (){}, child: Text("Sign in using Google")),
               ],
-
             ),
           ),
         ),

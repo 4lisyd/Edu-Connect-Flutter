@@ -1,6 +1,7 @@
 //import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:edu_connect/services/auth_phone.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,6 +46,7 @@ class PhoneSignUp extends StatelessWidget {
                       icon: Icon(Icons.phone_android),
                       hintText: "Enter phone number",
                     ),
+                    keyboardType: TextInputType.phone,
                   ),
                 ),
               ),

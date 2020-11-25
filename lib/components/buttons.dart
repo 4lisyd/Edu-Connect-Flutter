@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Custombutton_error1 extends StatelessWidget {
-  Custombutton_error1(Function this.onPressed, String this.buttonlabel);
+class Custombutton1 extends StatelessWidget {
+  Custombutton1(Function this.onPressed, String this.buttonlabel);
 
   final Function onPressed;
 
@@ -23,7 +23,7 @@ class Custombutton_error1 extends StatelessWidget {
               style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.w700,
-                  fontSize: 18),
+                  fontSize: 16),
             )),
           ),
         ));

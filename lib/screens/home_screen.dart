@@ -1,6 +1,7 @@
 import 'package:edu_connect/screens/home_screens/home_chat.dart';
 import 'package:edu_connect/screens/home_screens/home_home.dart';
 import 'package:edu_connect/screens/home_screens/home_profile.dart';
+import 'package:edu_connect/screens/home_screens/home_search.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
@@ -15,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> navbarWidgets = <Widget>[
     HomeChat(),
     HomeHome(),
+    HomeSearch(),
     HomeProfile(),
   ];
 
@@ -42,8 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Icon(Icons.home),
           ),
           Container(
+            child: Icon(Icons.search),
+          ),
+          Container(
             child: Icon(Icons.face),
           ),
+
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.chat),
           //   label: 'chats',

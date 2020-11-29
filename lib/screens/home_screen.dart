@@ -1,7 +1,10 @@
+import 'package:edu_connect/models/users.dart';
 import 'package:edu_connect/screens/home_screens/home_chat.dart';
 import 'package:edu_connect/screens/home_screens/home_home.dart';
 import 'package:edu_connect/screens/home_screens/home_profile.dart';
 import 'package:edu_connect/screens/home_screens/home_search.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 

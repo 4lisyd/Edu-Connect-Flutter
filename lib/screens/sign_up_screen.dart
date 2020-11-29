@@ -1,8 +1,10 @@
 import 'package:edu_connect/components/buttons.dart';
+import 'package:edu_connect/models/users.dart';
 import 'package:edu_connect/screens/sign_up_user/email_log.dart';
 import 'package:edu_connect/screens/sign_up_user/phone_log.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatelessWidget {
   @override
@@ -30,7 +32,7 @@ class SignUp extends StatelessWidget {
                     context,
                     MaterialPageRoute(builder: (context) => EmailSignUp()),
                   );
-                }, 'Sign in using Email'),
+                }, 'Sign in using Google'),
                 SizedBox(
                   height: 10,
                 ),
@@ -40,6 +42,28 @@ class SignUp extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => PhoneSignUp()),
                   );
                 }, "Sign in using Phone"),
+                // Text(
+                //   'sd   s',
+                //   style: Theme.of(context).textTheme.bodyText1,
+                // ),
+                Consumer<UserCurrent>(
+                    builder: (context, user, child) => Text(
+                          user.name,
+                          style: Theme.of(context).textTheme.bodyText1,
+                        )),
+
+                FlatButton(
+                    onPressed: () {
+                      // User user = User();
+                      print(currentUser.loggedin);
+                      currentUser.setUser("shhsdjjf", "d", "phoneNo", true);
+                      print(currentUser.phoneNo);
+                      context.read<UserCurrent>().setName('hh');
+                    },
+                    child: Container(
+                      color: Colors.blue,
+                      child: Text('okasdasd'),
+                    ))
 
                 //RaisedButton(onPressed: (){}, child: Text("Sign in using Google")),
               ],

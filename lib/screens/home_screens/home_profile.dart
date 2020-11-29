@@ -1,4 +1,8 @@
+import 'package:edu_connect/components/buttons.dart';
+import 'package:edu_connect/models/users.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeProfile extends StatefulWidget {
   @override
@@ -26,23 +30,41 @@ class _HomeProfileState extends State<HomeProfile> {
                 width: MediaQuery.of(context).size.width / 1.7,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10000),
-                  child: Image.network(
-                      'https://www.cathysummers.com/images/20180525_035.jpg'),
+                  child:
+                      Image.asset('lib/assets/userData/defaultUserAvatar.png'),
                 ),
               ),
-              Text(
-                "Angela Terror",
-                style: Theme.of(context).textTheme.headline1,
-              ),
+              Consumer<UserCurrent>(
+                  builder: (context, user, child) => Text(
+                        currentUser.name.toString(),
+                        style: Theme.of(context).textTheme.headline1,
+                      )),
+              Consumer<UserCurrent>(
+                  builder: (context, user, child) => Text(
+                        currentUser.phoneNo.toString(),
+                        style: Theme.of(context).textTheme.bodyText1,
+                      )),
+              Consumer<UserCurrent>(
+                  builder: (context, user, child) => Text(
+                        currentUser.uid.toString(),
+                        style: Theme.of(context).textTheme.bodyText1,
+                      )),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'im looking for a ',
+                    'im looking for a tutor',
                     style: Theme.of(context).textTheme.bodyText1,
                     textAlign: TextAlign.center,
                   )
                 ],
-              )
+              ),
+              Custombutton1(() async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setBool('login', false);
+                Navigator.pushNamed(context, "/welcome");
+              }, "Sign Out"),
             ],
           ),
         ),

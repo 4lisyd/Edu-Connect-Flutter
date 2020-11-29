@@ -1,9 +1,12 @@
 import 'package:edu_connect/components/dialog_box.dart';
+import 'package:edu_connect/models/users.dart';
 import 'package:edu_connect/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Future<bool> loginUserPhone(String phone, BuildContext context) async {
+Future<bool> loginUserPhone(
+    String phone, String username, BuildContext context) async {
   //https://firebase.flutter.dev/docs/auth/phone             reference
   FirebaseAuth _auth = FirebaseAuth.instance;
   // final _codeformcontroller = TextEditingController();
@@ -61,7 +64,17 @@ Future<bool> loginUserPhone(String phone, BuildContext context) async {
                     print(user.displayName);
                     print(user.uid);
 
-                    Navigator.pop(context);
+                    print('username');
+                    print(username);
+                    currentUser.setUser(
+                        username, user1.uid, user1.phoneNumber, true);
+
+                    print(currentUser.name);
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.setBool('login', true);
+
+                    Navigator.pushNamed(context, "/");
 
 // gets called when the verification is done automatically by auto code retrieval
                   }

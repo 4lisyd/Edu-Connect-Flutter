@@ -21,6 +21,7 @@ dependencies:
   provider: ^4.3.2+2
   cloud_firestore: ^0.14.0
   curved_navigation_bar: ^0.3.4
+  shared_preferences: ^0.5.12+4
 
 
 
@@ -42,6 +43,7 @@ flutter:
     - lib/assets/animations/lotties/welcome_email.json
     - lib/assets/animations/lotties/welcome_confused.json
     - lib/assets/animations/lotties/swipe_left.json
+    - lib/assets/userData/defaultUserAvatar.png
 
 
   # To add custom assets.fonts to your application, add a assets.fonts section here,

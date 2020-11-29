@@ -9,9 +9,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:edu_connect/components/dialog_box.dart';
 
 class PhoneSignUp extends StatelessWidget {
-  String phonenumber;
+  //String phonenumber;
+  //String userName;
   final _phoneformcontroller = TextEditingController();
   final _phoneformKey = GlobalKey<FormState>();
+  final _usernameformKey = GlobalKey<FormState>();
+  final _usernameformcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +54,33 @@ class PhoneSignUp extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 30, right: 50),
+                child: Form(
+                  key: _usernameformKey,
+                  child: TextFormField(
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'field is empty';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      print(_usernameformcontroller.text);
+                    },
+                    controller: _usernameformcontroller,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      icon: Icon(Icons.face_unlock_outlined),
+                      hintText: "Enter your name",
+                    ),
+                    keyboardType: TextInputType.phone,
+                  ),
+                ),
+              ),
+              SizedBox(height: 30),
               Container(
                 width: 320,
                 color: Theme.of(context).accentColor,
@@ -62,9 +92,12 @@ class PhoneSignUp extends StatelessWidget {
                       //     context: context,
                       //     builder: (BuildContext context) =>
                       //         customDialogBox1("FirebaseAuthException"));
-                      if (_phoneformKey.currentState.validate()) {
+                      if (_phoneformKey.currentState.validate() &&
+                          _usernameformKey.currentState.validate()) {
                         final phone = _phoneformcontroller.text.trim();
-                        loginUserPhone(phone, context);
+                        final userName = _usernameformcontroller.text.trim();
+
+                        loginUserPhone(phone, userName, context);
                       }
                     }),
               ),

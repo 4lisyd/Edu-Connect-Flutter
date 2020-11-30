@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
 
       bottomNavigationBar: CurvedNavigationBar(
+        index: 1,
         color: Theme.of(context).accentColor,
         backgroundColor: Color(0xfffffff),
 

@@ -76,7 +76,7 @@ class PhoneSignUp extends StatelessWidget {
                       icon: Icon(Icons.face_unlock_outlined),
                       hintText: "Enter your name",
                     ),
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.name,
                   ),
                 ),
               ),

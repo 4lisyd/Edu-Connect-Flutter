@@ -70,6 +70,12 @@ class Searchbytestprepblock {
 }
 
 List<Searchbytestprepblock> list_searchbytestprepblock = [
-  Searchbytestprepblock("rawalpindi",
+  Searchbytestprepblock(
+      "IELTS", "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
+  Searchbytestprepblock(
+      "FSC", "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
+  Searchbytestprepblock("Engineering",
+      "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
+  Searchbytestprepblock("Humanity Sci",
       "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
 ];

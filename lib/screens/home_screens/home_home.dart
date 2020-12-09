@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:edu_connect/components/homeblocks.dart';
+import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeHome extends StatefulWidget {
   @override
@@ -19,10 +21,39 @@ class _HomeHomeState extends State<HomeHome> {
                   height: 50,
                 ),
                 Container(
+                  padding: EdgeInsets.only(left: 20),
                   width: MediaQuery.of(context).size.width,
                   child: Text(
-                    "Choose tutor by City.",
-                    style: Theme.of(context).textTheme.headline1,
+                    "Pick out a Tutor!",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .copyWith(fontSize: 40, shadows: [
+                      Shadow(
+                          blurRadius: 40,
+                          offset: Offset(0, 10),
+                          color: Colors.amberAccent),
+                    ]),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Divider(
+                  thickness: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 20),
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                    "By City.",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .copyWith(shadows: [
+                      Shadow(
+                          blurRadius: 40,
+                          offset: Offset(0, 10),
+                          color: Colors.amberAccent),
+                    ]),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -33,26 +64,55 @@ class _HomeHomeState extends State<HomeHome> {
                     scrollDirection: Axis.horizontal,
                     itemCount: list_searchbycityblock.length,
                     itemBuilder: (context, index) {
-                      print("ok");
-                      print(list_searchbycityblock[0]);
                       final item = list_searchbycityblock[index];
 
-                      return Container(
-                        margin: EdgeInsets.all(20),
-                        color: Colors.greenAccent,
-                        width: 220,
-                        height: 500,
-                        child: ClipRRect(
-                          child: Column(
-                            children: [
-                              Text(
-                                list_searchbycityblock[index].title,
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              SizedBox(
-                                height: 50,
-                              ),
-                            ],
+                      return FlatButton(
+                        onPressed: list_searchbycityblock[index].onPressFunc,
+                        child: Container(
+                          margin: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          width: 220,
+                          height: 500,
+                          child: ClipRRect(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Stack(
+                                    alignment: Alignment.topRight,
+                                    children: [
+                                      Center(
+                                        child: Container(
+                                          color: Theme.of(context).primaryColor,
+                                          height: 10,
+                                        ),
+                                      ),
+                                      Image.asset(
+                                        list_searchbycityblock[index]
+                                            .imageAsset,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          list_searchbycityblock[index].title,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1,
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                // SizedBox(
+                                //   height: 50,
+                                // ),
+                              ],
+                            ),
                           ),
                         ),
                       );
@@ -80,11 +140,22 @@ class _HomeHomeState extends State<HomeHome> {
                 SizedBox(
                   height: 50,
                 ),
+
+                ////////////////////////////////////////////////////////////////
                 Container(
                   width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.only(left: 20),
                   child: Text(
-                    "Choose tutor by Subject.",
-                    style: Theme.of(context).textTheme.headline1,
+                    "By Subject.",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .copyWith(shadows: [
+                      Shadow(
+                          blurRadius: 40,
+                          offset: Offset(0, 10),
+                          color: Colors.amberAccent),
+                    ]),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -103,18 +174,23 @@ class _HomeHomeState extends State<HomeHome> {
                         //  borderRadius: BorderRadius.circular(100),
                         child: Container(
                           margin: EdgeInsets.all(20),
-                          color: Colors.greenAccent,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                           width: 220,
                           height: 500,
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 list_searchbysubjectblock[index].title,
                                 style: Theme.of(context).textTheme.headline1,
                               ),
-                              SizedBox(
-                                height: 50,
-                              ),
+                              // SizedBox(
+                              //   height: 50,
+                              // ),
                             ],
                           ),
                         ),
@@ -125,11 +201,21 @@ class _HomeHomeState extends State<HomeHome> {
                 SizedBox(
                   height: 50,
                 ),
+                ////////////////////////////////////////////////////////////
                 Container(
                   width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.only(left: 20),
                   child: Text(
-                    "Choose tutor by Test Prep.",
-                    style: Theme.of(context).textTheme.headline1,
+                    "By Test Prep.",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1
+                        .copyWith(shadows: [
+                      Shadow(
+                          blurRadius: 40,
+                          offset: Offset(0, 10),
+                          color: Colors.amberAccent),
+                    ]),
                     textAlign: TextAlign.left,
                   ),
                 ),
@@ -142,26 +228,25 @@ class _HomeHomeState extends State<HomeHome> {
                     itemBuilder: (context, index) {
                       //print("ok");
                       // print(list_searchbycityblock[0]);
-                      final item = list_searchbysubjectblock[index];
+                      final item = list_searchbytestprepblock[index];
 
-                      return ClipRRect(
-                        //  borderRadius: BorderRadius.circular(100),
-                        child: Container(
-                          margin: EdgeInsets.all(20),
-                          color: Colors.greenAccent,
-                          width: 220,
-                          height: 500,
-                          child: Column(
-                            children: [
-                              Text(
-                                list_searchbysubjectblock[index].title,
-                                style: Theme.of(context).textTheme.headline1,
-                              ),
-                              SizedBox(
-                                height: 50,
-                              ),
-                            ],
-                          ),
+                      return Container(
+                        margin: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        width: 220,
+                        height: 500,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              list_searchbytestprepblock[index].title,
+                              style: Theme.of(context).textTheme.headline1,
+                            ),
+                          ],
                         ),
                       );
                     },

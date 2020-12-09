@@ -1,6 +1,7 @@
-import 'package:edu_connect/models/users.dart';
+import 'package:edu_connect/models/user.dart';
 import 'package:edu_connect/screens/home_screen.dart';
 import 'package:edu_connect/screens/sign_up_screen.dart';
+import 'package:edu_connect/screens/sign_up_user/tutor_signup.dart';
 import 'package:edu_connect/screens/welcome_screen.dart';
 import 'screens/welcome_user/welcome2.dart';
 import 'screens/welcome_user/welcome3.dart';
@@ -29,8 +30,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  MyApp([bool this.login]);
   bool login;
-  MyApp(bool this.login);
 
   // This widget is the root of your application.
   @override
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/welcome': (context) => WelcomeScreen(),
         '/signup': (context) => SignUp(),
+        '/tutorsignup': (context) => TutorSignUp(),
       },
     );
   }

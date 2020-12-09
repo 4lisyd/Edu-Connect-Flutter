@@ -1,4 +1,5 @@
-import 'package:edu_connect/models/users.dart';
+import 'package:edu_connect/models/shared_preferences.dart';
+import 'package:edu_connect/models/user.dart';
 import 'package:edu_connect/screens/home_screens/home_chat.dart';
 import 'package:edu_connect/screens/home_screens/home_home.dart';
 import 'package:edu_connect/screens/home_screens/home_profile.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //currentUser.setName(name);
   int _selectedIndex = 1;
 
   List<Widget> navbarWidgets = <Widget>[
@@ -23,8 +25,23 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeProfile(),
   ];
 
+  // User user =  FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+
+    UserCurrent current_user = UserCurrent(auth);
+    currentUser1 = current_user;
+    currentUser1.setName("ali");
+
+    SharedPref sharedpref = SharedPref();
+    try {
+      () async {
+        currentUser1.fromJson(await sharedpref.read('user'));
+      };
+    } catch (e) {}
+
     return Scaffold(
       //https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
 

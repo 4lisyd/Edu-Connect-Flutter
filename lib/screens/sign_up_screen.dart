@@ -1,5 +1,5 @@
 import 'package:edu_connect/components/buttons.dart';
-import 'package:edu_connect/models/users.dart';
+import 'package:edu_connect/models/user.dart';
 import 'package:edu_connect/screens/sign_up_user/email_log.dart';
 import 'package:edu_connect/screens/sign_up_user/phone_log.dart';
 import 'package:flutter/material.dart';
@@ -46,24 +46,24 @@ class SignUp extends StatelessWidget {
                 //   'sd   s',
                 //   style: Theme.of(context).textTheme.bodyText1,
                 // ),
-                Consumer<UserCurrent>(
-                    builder: (context, user, child) => Text(
-                          user.name,
-                          style: Theme.of(context).textTheme.bodyText1,
-                        )),
+                // Consumer<UserCurrent>(
+                //     builder: (context, user, child) => Text(
+                //           user.name,
+                //           style: Theme.of(context).textTheme.bodyText1,
+                //         )),
 
-                FlatButton(
-                    onPressed: () {
-                      // User user = User();
-                      print(currentUser.loggedin);
-                      currentUser.setUser("shhsdjjf", "d", "phoneNo", true);
-                      print(currentUser.phoneNo);
-                      context.read<UserCurrent>().setName('hh');
-                    },
-                    child: Container(
-                      color: Colors.blue,
-                      child: Text('okasdasd'),
-                    ))
+                // FlatButton(
+                //     onPressed: () {
+                //       // User user = User();
+                //       print(currentUser.loggedin);
+                //       currentUser.setUser("shhsdjjf", "d", "phoneNo", true);
+                //       print(currentUser.phoneNo);
+                //       context.read<UserCurrent>().setName('hh');
+                //     },
+                //     child: Container(
+                //       color: Colors.blue,
+                //       child: Text('okasdasd'),
+                //     ))
 
                 //RaisedButton(onPressed: (){}, child: Text("Sign in using Google")),
               ],

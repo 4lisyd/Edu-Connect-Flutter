@@ -17,11 +17,18 @@ dependencies:
   lottie: ^0.7.0+1
   google_sign_in: ^4.5.6
   firebase_auth: ^0.18.3
-  firebase_core: "0.5.2"
+  firebase_core: ^0.5.3
   provider: ^4.3.2+2
   cloud_firestore: ^0.14.0
   curved_navigation_bar: ^0.3.4
   shared_preferences: ^0.5.12+4
+  image_picker:
+    git:
+      url: https://github.com/cpboyd/plugins.git
+      ref: image_picker_workaround
+      path: packages/image_picker/image_picker
+  firebase_storage: ^5.2.0
+
 
 
 

@@ -1,6 +1,8 @@
 import 'package:edu_connect/components/dialog_box.dart';
-import 'package:edu_connect/models/users.dart';
+import 'package:edu_connect/models/shared_preferences.dart';
+import 'package:edu_connect/models/user.dart';
 import 'package:edu_connect/screens/home_screen.dart';
+import 'package:edu_connect/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,6 +11,9 @@ Future<bool> loginUserPhone(
     String phone, String username, BuildContext context) async {
   //https://firebase.flutter.dev/docs/auth/phone             reference
   FirebaseAuth _auth = FirebaseAuth.instance;
+
+  currentUser1 = UserCurrent(_auth);
+  //print(currentUser.uid);
   // final _codeformcontroller = TextEditingController();
 
   _auth.verifyPhoneNumber(
@@ -60,18 +65,16 @@ Future<bool> loginUserPhone(
 //print(response.user.phoneNumber);
                     print("xokx");
                     User user1 = await FirebaseAuth.instance.currentUser;
-                    print(user1.phoneNumber);
-                    print(user.displayName);
-                    print(user.uid);
-
-                    print('username');
-                    print(username);
-                    currentUser.setUser(
-                        username, user1.uid, user1.phoneNumber, true);
-
-                    print(currentUser.name);
+                    currentUser1.name = username;
+                    currentUser1.phoneNo = phone;
+                    UserSign_parent(user1.uid).registerNewUser(username, phone);
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
+
+                    SharedPref sharedpref = SharedPref();
+                    sharedpref.save("user", currentUser1.toJson());
+                    currentUser1.fromJson(await sharedpref.read('user'));
+
                     prefs.setBool('login', true);
 
                     Navigator.pushNamed(context, "/");

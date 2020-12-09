@@ -31,15 +31,15 @@ class _Welcome3State extends State<Welcome3> {
               ),
               Lottie.asset("lib/assets/animations/lotties/welcome_email.json",
                   reverse: true, height: 400),
-              Custombutton1(() {
-                Navigator.pushNamed(context, '/signup');
-              }, "i am a Parent/Guardian."),
+              // Custombutton1(() {
+              //   Navigator.pushNamed(context, '/signup');
+              // }, "i am a Parent/Guardian."),
               SizedBox(
                 height: 30,
               ),
               Custombutton1(() {
                 Navigator.pushNamed(context, '/signup');
-              }, "i am a Tutor."),
+              }, "Let's find some Tutors"),
             ],
           ),
         ),

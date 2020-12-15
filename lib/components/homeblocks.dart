@@ -30,14 +30,14 @@ class Searchbycityblock {
 }
 
 List<Searchbycityblock> list_searchbycityblock = [
-  Searchbycityblock("Victoria",
-      "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
-  Searchbycityblock("Tronto",
-      "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
-  Searchbycityblock("Vancouver",
-      "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
-  Searchbycityblock("Calgary",
-      "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
+  Searchbycityblock(
+      "Victoria", "lib/assets/userData/defaultUserAvatar.png", () {}),
+  Searchbycityblock(
+      "Tronto", "lib/assets/userData/defaultUserAvatar.png", () {}),
+  Searchbycityblock(
+      "Vancouver", "lib/assets/userData/defaultUserAvatar.png", () {}),
+  Searchbycityblock(
+      "Calgary", "lib/assets/userData/defaultUserAvatar.png", () {}),
 ];
 
 //Searchbycityblock searchbycityblock = Searchbycityblock();

@@ -6,13 +6,18 @@ import 'package:edu_connect/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 Future<bool> loginUserPhone(
     String phone, String username, BuildContext context) async {
   //https://firebase.flutter.dev/docs/auth/phone             reference
   FirebaseAuth _auth = FirebaseAuth.instance;
+  UserCurrent currentUser_bloc =
+      Provider.of<UserCurrent>(context, listen: false);
 
-  currentUser1 = UserCurrent(_auth);
+  // currentUser1 = UserCurrent(_auth);
+
+  //^
   //print(currentUser.uid);
   // final _codeformcontroller = TextEditingController();
 
@@ -65,15 +70,15 @@ Future<bool> loginUserPhone(
 //print(response.user.phoneNumber);
                     print("xokx");
                     User user1 = await FirebaseAuth.instance.currentUser;
-                    currentUser1.name = username;
-                    currentUser1.phoneNo = phone;
+                    currentUser_bloc.name = username;
+                    currentUser_bloc.phoneNo = phone;
                     UserSign_parent(user1.uid).registerNewUser(username, phone);
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
 
                     SharedPref sharedpref = SharedPref();
-                    sharedpref.save("user", currentUser1.toJson());
-                    currentUser1.fromJson(await sharedpref.read('user'));
+                    sharedpref.save("user", currentUser_bloc.toJson());
+                    currentUser_bloc.fromJson(await sharedpref.read('user'));
 
                     prefs.setBool('login', true);
 

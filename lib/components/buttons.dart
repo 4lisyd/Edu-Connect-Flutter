@@ -2,11 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Custombutton1 extends StatelessWidget {
-  Custombutton1(Function this.onPressed, String this.buttonlabel);
+  Custombutton1(
+    Function this.onPressed,
+    String this.buttonlabel, {
+    Color this.buttonColor,
+  });
 
   final Function onPressed;
-
+  Color buttonColor;
   String buttonlabel;
+
   @override
   Widget build(BuildContext context) {
     return FlatButton(
@@ -16,14 +21,13 @@ class Custombutton1 extends StatelessWidget {
           child: Container(
             width: 220,
             height: 50,
-            color: Theme.of(context).accentColor,
+            color: buttonColor != null
+                ? buttonColor
+                : Theme.of(context).accentColor,
             child: Center(
                 child: Text(
               buttonlabel,
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16),
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
             )),
           ),
         ));

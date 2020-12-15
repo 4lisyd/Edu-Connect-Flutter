@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,32 +16,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //currentUser.setName(name);
   int _selectedIndex = 1;
-
-  List<Widget> navbarWidgets = <Widget>[
-    HomeChat(),
-    HomeHome(),
-    HomeSearch(),
-    HomeProfile(),
-  ];
-
-  // User user =  FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-
-    UserCurrent current_user = UserCurrent(auth);
-    currentUser1 = current_user;
-    currentUser1.setName("ali");
+    List<Widget> navbarWidgets = <Widget>[
+      HomeChat(),
+      HomeHome(),
+      HomeSearch(),
+      HomeProfile(),
+    ];
 
     SharedPref sharedpref = SharedPref();
-    try {
-      () async {
-        currentUser1.fromJson(await sharedpref.read('user'));
-      };
-    } catch (e) {}
+
+    hello() async {
+      //print(await sharedpref.read('user'));
+      Provider.of<UserCurrent>(context, listen: false).fromJson(
+        await sharedpref.read('user'),
+      );
+    }
+
+    hello();
 
     return Scaffold(
       //https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
@@ -70,15 +66,6 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             child: Icon(Icons.face),
           ),
-
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.chat),
-          //   label: 'chats',
-          // ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.face),
-          //   label: 'profile',
-          // ),
         ],
       ),
       body: navbarWidgets.elementAt(_selectedIndex),

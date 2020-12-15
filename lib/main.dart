@@ -22,7 +22,8 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserCurrent()),
+        ChangeNotifierProvider<UserCurrent>(create: (context) => UserCurrent()),
+        ChangeNotifierProvider<TutorAttr>(create: (context) => TutorAttr()),
       ],
       child: MyApp(login),
     ),
@@ -32,7 +33,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   MyApp([bool this.login]);
   bool login;
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

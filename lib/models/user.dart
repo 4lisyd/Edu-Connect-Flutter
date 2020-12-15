@@ -3,41 +3,37 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class TutorAttr {
-  List<String> subjects = [];
+class TutorAttr extends ChangeNotifier {
+  TutorAttr() {
+    this.name = "sdsddddd";
+  }
+  String name = '23';
+  String uid;
+  String phoneNo;
 }
 
 class UserCurrent extends ChangeNotifier {
-  final FirebaseAuth auth;
+  /// final FirebaseAuth auth;
   //String name = 'name';
   String name;
   String uid;
   String phoneNo;
   bool loggedin;
-  String profilePhotoAsset;
+  String profilePhotoAsset = 'lib/assets/userData/defaultUserAvatar.png';
+  bool profileSet = false;
   bool isTutor = false;
 
   // void setAuthInstance(FirebaseAuth authTEMP) {
   //   auth = authTEMP;
   // }
 
-  UserCurrent([this.auth]) {
-    setUser();
-  }
-  void setUser() {
-    print("userSET");
-    User user = auth.currentUser;
-    this.name = user.displayName != null ? user.displayName : "null";
-    this.uid = user.uid != null ? user.uid : "null";
-    this.phoneNo = user.phoneNumber != null ? user.phoneNumber : "null";
-    this.loggedin = true;
-
-    notifyListeners();
+  UserCurrent() {
+    print("new usercurretn");
   }
 
-  void setName(String name) {
-    this.name = name;
-
+  void setProfileImage(String photoAsset) {
+    this.profilePhotoAsset = photoAsset;
+    this.profileSet = true;
     notifyListeners();
   }
 
@@ -50,10 +46,20 @@ class UserCurrent extends ChangeNotifier {
   void fromJson(
     Map<String, dynamic> json,
   ) {
-    name = json['name'];
-    phoneNo = json['phoneNo'];
-    uid = json['uid'];
+    // print("from json being executed");
+    this.name = json['name'];
+    this.phoneNo = json['phoneNo'];
+    this.uid = json['uid'];
+    //this.profilePhotoAsset = 'lib/assets/userData/defaultUserAvatar.png';
+
+    //  print(';;;;;;;;;;;;;;;;;;');
+
+    // print(uid);
+
+    // print(';;;;;;;;;;;;;;;;;;');
+
+    notifyListeners();
   }
 }
 
-UserCurrent currentUser1 = UserCurrent();
+// UserCurrent currentUser1 = UserCurrent();

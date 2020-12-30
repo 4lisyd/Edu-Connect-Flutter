@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:edu_connect/models/tutor.dart';
+import 'package:provider/provider.dart';
 
 class CustomRadioTiles_gender extends StatefulWidget {
   bool userGender_temp;
@@ -15,6 +17,9 @@ class _CustomRadioTiles_genderState extends State<CustomRadioTiles_gender> {
 
   @override
   Widget build(BuildContext context) {
+    Tutor tutor_bloc = Provider.of<Tutor>(context);
+    Tutor tutor_bloc_NL = Provider.of<Tutor>(context, listen: false);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -37,6 +42,7 @@ class _CustomRadioTiles_genderState extends State<CustomRadioTiles_gender> {
                   selectedRadio = 1;
                   widget.userGender_temp = true;
                   print(widget.userGender_temp);
+                  tutor_bloc.gender = widget.userGender_temp;
                 });
               },
             ),
@@ -49,6 +55,7 @@ class _CustomRadioTiles_genderState extends State<CustomRadioTiles_gender> {
                   selectedRadio = 2;
                   widget.userGender_temp = false;
                   print(widget.userGender_temp);
+                  tutor_bloc.gender = widget.userGender_temp;
                 });
               },
             ),

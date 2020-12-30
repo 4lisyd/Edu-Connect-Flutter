@@ -28,6 +28,7 @@ dependencies:
       ref: image_picker_workaround
       path: packages/image_picker/image_picker
   firebase_storage: ^5.2.0
+  geolocator: ^6.1.13
 
 
 
@@ -51,6 +52,7 @@ flutter:
     - lib/assets/animations/lotties/welcome_confused.json
     - lib/assets/animations/lotties/swipe_left.json
     - lib/assets/userData/defaultUserAvatar.png
+    - lib/assets/UI_pictures/subject_icons/
 
 
   # To add custom assets.fonts to your application, add a assets.fonts section here,

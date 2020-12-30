@@ -1,26 +1,5 @@
 import 'package:flutter/material.dart';
 
-// class searchbycityblock extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-//
-// class searchbysubjectblock extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-//
-// class searchbytestprepblock extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container();
-//   }
-// }
-
 class Searchbycityblock {
   String title;
   String imageAsset;
@@ -28,6 +7,8 @@ class Searchbycityblock {
 
   Searchbycityblock([this.title, this.imageAsset, this.onPressFunc]);
 }
+
+//// you can add cities here
 
 List<Searchbycityblock> list_searchbycityblock = [
   Searchbycityblock(
@@ -50,16 +31,22 @@ class Searchbysubjectblock {
   Searchbysubjectblock([this.title, this.imageAsset, this.onPressFunc]);
 }
 
+//// you can add subjects here
+
 List<Searchbysubjectblock> list_searchbysubjectblock = [
   Searchbysubjectblock(
-      "Maths", "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
-  Searchbysubjectblock("English",
-      "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
-  Searchbysubjectblock("Arabic",
-      "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
-  Searchbysubjectblock("Geology",
-      "/edu_connect/lib/assets/userData/defaultUserAvatar.png", () {}),
+      "Maths", "lib/assets/UI_pictures/subject_icons/maths.png", () {}),
+  Searchbysubjectblock(
+      "English", "lib/assets/UI_pictures/subject_icons/english.png", () {}),
+  Searchbysubjectblock(
+      "Arabic", "lib/assets/UI_pictures/subject_icons/arabic.png", () {}),
+  Searchbysubjectblock(
+      "Science", "lib/assets/UI_pictures/subject_icons/science.png", () {}),
+  Searchbysubjectblock("Social Studies",
+      "lib/assets/UI_pictures/subject_icons/socialstudies.png", () {}),
 ];
+
+//// you can add tests here
 
 class Searchbytestprepblock {
   String title;

@@ -15,7 +15,12 @@ ThemeData appTheme() {
         fontFamily: 'Gotham',
         fontWeight: FontWeight.w900,
       ),
-      headline2: TextStyle(),
+      headline2: TextStyle(
+        color: Color(0xff344955),
+        fontSize: 20,
+        fontFamily: 'Gotham',
+        fontWeight: FontWeight.w900,
+      ),
       bodyText1: TextStyle(
           color: Color(0xff4A6572),
           fontSize: 14,

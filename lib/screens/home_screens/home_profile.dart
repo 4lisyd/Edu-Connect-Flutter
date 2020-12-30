@@ -31,7 +31,7 @@ class _HomeProfileState extends State<HomeProfile> {
 
     Future<void> getGalleryImage() async {
       _image = await ImagePicker.pickImage(
-          source: ImageSource.gallery, imageQuality: 1);
+          source: ImageSource.gallery, imageQuality: 10);
     }
 
     return Scaffold(
@@ -66,6 +66,8 @@ class _HomeProfileState extends State<HomeProfile> {
                                     backgroundColor: Colors.white,
                                     child: Image.network(
                                       snapshot.data,
+                                      fit: BoxFit.fill,
+                                      height: 500,
                                     ),
                                   );
                                 } else {
@@ -130,25 +132,31 @@ class _HomeProfileState extends State<HomeProfile> {
                 Text(
                   currentUser_bloc != null
                       ? currentUser_bloc.uid.toString()
-                      : "null",
+                      : "nugll",
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
-                Text(
-                  currentUser_bloc != null
-                      ? currentUser_bloc.phoneNo.toString()
-                      : "null",
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
+                // Text(
+                //   currentUser_bloc != null
+                //       ? currentUser_bloc_NL.phoneNo.toString()
+                //       : "null",
+                //   style: Theme.of(context).textTheme.bodyText1,
+                // ),
 
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'im looking for a tutor',
-                      style: Theme.of(context).textTheme.bodyText1,
-                      textAlign: TextAlign.center,
-                    )
+                    Provider.of<UserCurrent>(context, listen: false).isTutor
+                        ? Text(
+                            'im a tutor looking for students',
+                            style: Theme.of(context).textTheme.bodyText1,
+                            textAlign: TextAlign.center,
+                          )
+                        : Text(
+                            'im a Guardian looking for a Tutor',
+                            style: Theme.of(context).textTheme.bodyText1,
+                            textAlign: TextAlign.center,
+                          )
                   ],
                 ),
                 SizedBox(

@@ -5,11 +5,13 @@ class customTextField1 extends StatelessWidget {
   TextInputType keyboard_type;
   TextEditingController textEditingController;
   Icon leading_icon = Icon(Icons.keyboard_arrow_right_outlined);
+  Function onPressed;
 
   customTextField1(
     this.hint_text,
     this.keyboard_type,
-    this.textEditingController, {
+    this.textEditingController,
+    this.onPressed, {
     this.leading_icon,
   });
 
@@ -30,6 +32,9 @@ class customTextField1 extends StatelessWidget {
         ],
       ),
       child: TextField(
+        onChanged: (value) {
+          onPressed(value);
+        },
         maxLines: keyboard_type == TextInputType.multiline ? null : 1,
         autofocus: true,
         cursorColor: Theme.of(context).primaryColor,

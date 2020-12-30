@@ -32,7 +32,7 @@ Future<bool> loginUserPhone(
 
       if (user != null) {
         // gets called when the verification is done automatically by auto code retrieval
-        print('called');
+        print('user is null');
       }
     },
 
@@ -41,7 +41,7 @@ Future<bool> loginUserPhone(
 
     ///////
     verificationFailed: (FirebaseAuthException) {
-      print("success122!");
+      print("verification failed+9!");
       print(FirebaseAuthException);
       showDialog(
           context: context,
@@ -59,6 +59,8 @@ Future<bool> loginUserPhone(
             return customDialogBox2(
               "please enter the OTP code",
               (String string) async {
+                ////////////////////////////////////important//////////////////////////////////////////////
+
                 try {
                   AuthCredential credential = PhoneAuthProvider.credential(
                       verificationId: verificationID, smsCode: string);
@@ -83,6 +85,8 @@ Future<bool> loginUserPhone(
                     prefs.setBool('login', true);
 
                     Navigator.pushNamed(context, "/");
+
+                    ////////////////////////////////////important//////////////////////////////////////////////
 
 // gets called when the verification is done automatically by auto code retrieval
                   }

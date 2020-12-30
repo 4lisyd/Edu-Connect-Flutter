@@ -1,6 +1,7 @@
+import 'package:edu_connect/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:edu_connect/components/weekDaysToggle.dart';
+import 'package:edu_connect/components/buildTogglesW.dart';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:core';
@@ -12,6 +13,7 @@ import 'package:edu_connect/components/textfield.dart';
 import 'package:edu_connect/components/buttons.dart';
 import 'package:edu_connect/components/radiotiles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:edu_connect/models/tutor.dart';
 
 class TutorSignUp extends StatefulWidget {
   @override
@@ -24,15 +26,16 @@ class _TutorSignUpState extends State<TutorSignUp> {
   TextEditingController textEditingController_name;
   TextEditingController textEditingController_email;
   TextEditingController textEditingController_bio;
-  Map<String, bool> daysAvailable = {
-    "Monday": false,
-    "Tuesday": false,
-    "Wednesday": false,
-    "Thursday": false,
-    "Friday": false,
-    "Saturday": false,
-    "Sunday": false,
-  };
+
+  // Map<String, bool> daysAvailable = {
+  //   "Monday": false,
+  //   "Tuesday": false,
+  //   "Wednesday": false,
+  //   "Thursday": false,
+  //   "Friday": false,
+  //   "Saturday": false,
+  //   "Sunday": false,
+  // };
 
   var locations = ['rawalpindi', 'islamabad', 'peshawar'];
   var _selectedLocation;
@@ -62,7 +65,17 @@ class _TutorSignUpState extends State<TutorSignUp> {
     UserCurrent currentUser_bloc_NL =
         Provider.of<UserCurrent>(context, listen: false);
 
+    Tutor tutor_bloc = Provider.of<Tutor>(context);
+    Tutor tutor_bloc_NL = Provider.of<Tutor>(context, listen: false);
+
+    UserSign_Tutor userSign_Tutor = UserSign_Tutor(
+      currentUser_bloc_NL.uid,
+    );
+
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
+      ),
       body: Container(
         color: Colors.white,
         child: SafeArea(
@@ -150,6 +163,9 @@ class _TutorSignUpState extends State<TutorSignUp> {
                   "Enter name",
                   TextInputType.text,
                   textEditingController_name,
+                  (value) {
+                    tutor_bloc_NL.name = value;
+                  },
                   leading_icon: Icon(Icons.face),
                 ),
                 SizedBox(
@@ -159,6 +175,9 @@ class _TutorSignUpState extends State<TutorSignUp> {
                   "Enter email",
                   TextInputType.emailAddress,
                   textEditingController_email,
+                  (value) {
+                    tutor_bloc_NL.email = value;
+                  },
                   leading_icon: Icon(Icons.email_outlined),
                 ),
                 CustomRadioTiles_gender(),
@@ -168,6 +187,9 @@ class _TutorSignUpState extends State<TutorSignUp> {
                     "Set Bio \n\n\n i.e i have 2 years of experience \n in teaching algebra",
                     TextInputType.multiline,
                     textEditingController_bio,
+                    (value) {
+                      tutor_bloc_NL.bio = value;
+                    },
                     leading_icon: Icon(Icons.description_outlined),
                   ),
                 )
@@ -200,13 +222,14 @@ class _TutorSignUpState extends State<TutorSignUp> {
                         onChanged: (value) {
                           setState(() {
                             _selectedLocation = value;
+                            _location = value;
                           });
                         },
                         hint: Text(
                           "Choose Area",
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
-                        icon: Icon(Icons.location_city),
+                        icon: Icon(Icons.location_on_outlined),
                         value: _selectedLocation,
                         items: _locations.map((location) {
                           return DropdownMenuItem(
@@ -229,14 +252,70 @@ class _TutorSignUpState extends State<TutorSignUp> {
                       .copyWith(fontSize: 20),
                 ),
                 SizedBox(
+                  height: 20,
+                ),
+                buildTogglesW(tutor_bloc.daysAvailable),
+
+                /////////////// provider pattern for this logic all saves to Tutor where it signs up as well as uploads everything to cloud firebase reduce clutter btw user sign up User and tutor and Tutor sign up Read more about OOP
+                SizedBox(
                   height: 30,
                 ),
-                buildDaysAvailibilityW(daysAvailable),
+                Text(
+                  "Subjects Preferred",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1
+                      .copyWith(fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                buildTogglesW(tutor_bloc.subjectPreferred),
+
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Tests Preferred",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1
+                      .copyWith(fontSize: 20),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                buildTogglesW(tutor_bloc.testPreferred),
+
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Are you currently ",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1
+                          .copyWith(fontSize: 17),
+                    ),
+                    buildTogglesW(tutor_bloc.areYou)
+                  ],
+                ),
                 SizedBox(
                   height: 30,
                 ),
                 Custombutton1(
-                  () {},
+                  () {
+                    // print(tutor_bloc_NL.email);
+                    // print(tutor_bloc_NL.area);
+                    // tutor_bloc_NL.area = _location;
+                    // print(tutor_bloc_NL.area);
+
+                    userSign_Tutor.registerNewUser(tutor_bloc_NL);
+                    Navigator.pop(context);
+                  },
                   "Submit",
                   // buttonColor: Theme.of(context).accentColor.withOpacity(0.5),
                 ),

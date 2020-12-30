@@ -3,15 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class TutorAttr extends ChangeNotifier {
-  TutorAttr() {
-    this.name = "sdsddddd";
-  }
-  String name = '23';
-  String uid;
-  String phoneNo;
-}
-
 class UserCurrent extends ChangeNotifier {
   /// final FirebaseAuth auth;
   //String name = 'name';
@@ -22,7 +13,8 @@ class UserCurrent extends ChangeNotifier {
   String profilePhotoAsset = 'lib/assets/userData/defaultUserAvatar.png';
   bool profileSet = false;
   bool isTutor = false;
-
+  String locationString = "all";
+  // Location location;
   // void setAuthInstance(FirebaseAuth authTEMP) {
   //   auth = authTEMP;
   // }

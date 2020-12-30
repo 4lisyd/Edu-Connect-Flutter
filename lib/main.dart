@@ -12,6 +12,7 @@ import 'screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'models/tutor.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<UserCurrent>(create: (context) => UserCurrent()),
-        ChangeNotifierProvider<TutorAttr>(create: (context) => TutorAttr()),
+        ChangeNotifierProvider<Tutor>(create: (context) => Tutor()),
       ],
       child: MyApp(login),
     ),

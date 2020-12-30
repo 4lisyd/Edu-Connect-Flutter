@@ -20,6 +20,7 @@ class PhoneSignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).accentColor,
         title: Text("Phone number login"),
       ),
       body: Container(

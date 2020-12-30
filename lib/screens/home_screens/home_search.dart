@@ -19,22 +19,7 @@ class _HomeSearchState extends State<HomeSearch> {
         ),
         child: SafeArea(
           child: Column(
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.search),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintText: "Search Tutors around you.",
-                          filled: true,
-                          border: OutlineInputBorder(),
-                          fillColor: Theme.of(context).accentColor),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+            children: [],
           ),
         ),
       ),

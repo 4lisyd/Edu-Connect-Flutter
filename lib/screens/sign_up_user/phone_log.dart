@@ -1,5 +1,7 @@
 //import 'dart:js';
 
+import 'package:edu_connect/components/buttons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -25,86 +27,149 @@ class PhoneSignUp extends StatelessWidget {
       ),
       body: Container(
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              //Text("Enter username",style: Theme.of(context).textTheme.bodyText1,),
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 50),
-                child: Form(
-                  key: _phoneformKey,
-                  child: TextFormField(
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'field is empty';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      print(_phoneformcontroller.text);
-                    },
-                    controller: _phoneformcontroller,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      icon: Icon(Icons.phone_android),
-                      hintText: "Enter phone number",
-                    ),
-                    keyboardType: TextInputType.phone,
-                  ),
+          child: Stack(alignment: Alignment.center, children: [
+            Container(
+              decoration: BoxDecoration(
+                // color: Color.fromRGBO(255, 255, 255, 1),
+                image: DecorationImage(
+                  image: AssetImage("lib/assets/background_img/tiles_bg2.jpg"),
+                  colorFilter: ColorFilter.mode(
+                      Theme.of(context).accentColor.withOpacity(.8),
+                      BlendMode.hardLight),
+                  fit: BoxFit.fill,
                 ),
               ),
-              SizedBox(height: 30),
+            ),
+            // Positioned(
+            //   top: 80,
+            //   child: Center(
+            //     child: Container(
+            //       margin: EdgeInsets.only(right: 40),
+            //       width: MediaQuery.of(context).size.width,
+            //       height: 194,
+            //       decoration: BoxDecoration(
+            //           color: Theme.of(context).accentColor.withOpacity(0.4),
+            //           borderRadius: BorderRadius.only(
+            //               bottomRight: Radius.circular(40),
+            //               topRight: Radius.circular(40))),
+            //     ),
+            //   ),
+            // ),
+            Container(
+              height: 300,
+              // color: Colors.white,
+              margin: EdgeInsets.only(right: 20),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(40),
+                      bottomRight: Radius.circular(40))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //Text("Enter username",style: Theme.of(context).textTheme.bodyText1,),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30, right: 30),
+                    child: Form(
+                      key: _phoneformKey,
+                      child: TextFormField(
+                        validator: (text) {
+                          if (text == null || text.isEmpty || text[0] != '+') {
+                            return 'input a valid number (i.e +974 665 5527 1)';
+                          }
 
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 50),
-                child: Form(
-                  key: _usernameformKey,
-                  child: TextFormField(
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'field is empty';
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      print(_usernameformcontroller.text);
-                    },
-                    controller: _usernameformcontroller,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      icon: Icon(Icons.face_unlock_outlined),
-                      hintText: "Enter your name",
+                          return null;
+                        },
+                        onChanged: (value) {
+                          print(_phoneformcontroller.text);
+                        },
+                        controller: _phoneformcontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          icon: Icon(Icons.phone_android),
+                          hintText: "Enter phone number",
+                        ),
+                        keyboardType: TextInputType.phone,
+                      ),
                     ),
-                    keyboardType: TextInputType.name,
                   ),
-                ),
-              ),
-              SizedBox(height: 30),
-              Container(
-                width: 320,
-                color: Theme.of(context).accentColor,
-                child: FlatButton(
-                    textColor: Colors.white,
-                    child: Text("Continue"),
-                    onPressed: () {
-                      // showDialog(
-                      //     context: context,
-                      //     builder: (BuildContext context) =>
-                      //         customDialogBox1("FirebaseAuthException"));
-                      if (_phoneformKey.currentState.validate() &&
-                          _usernameformKey.currentState.validate()) {
-                        final phone = _phoneformcontroller.text.trim();
-                        final userName = _usernameformcontroller.text.trim();
+                  SizedBox(height: 20),
 
-                        loginUserPhone(phone, userName, context);
-                      }
-                    }),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: Form(
+                      key: _usernameformKey,
+                      child: TextFormField(
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return 'field is empty';
+                          }
+                          if (text.length >= 15 || text.length <= 2) {
+                            return 'please input a feasible name';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) {
+                          print(_usernameformcontroller.text);
+                        },
+                        controller: _usernameformcontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          icon: Icon(Icons.face_unlock_outlined),
+                          hintText: "Enter your name",
+                        ),
+                        keyboardType: TextInputType.name,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 50),
+                  // Container(
+                  //   width: 320,
+                  //   color: Theme.of(context).accentColor,
+                  //   child: FlatButton(
+                  //       textColor: Colors.white,
+                  //       child: Text(
+                  //         "Continue",
+                  //         style: Theme.of(context).textTheme.bodyText2,
+                  //       ),
+                  //       onPressed: () {
+                  //         // showDialog(
+                  //         //     context: context,
+                  //         //     builder: (BuildContext context) =>
+                  //         //         customDialogBox1("FirebaseAuthException"));
+                  //         if (_phoneformKey.currentState.validate() &&
+                  //             _usernameformKey.currentState.validate()) {
+                  //           final phone = _phoneformcontroller.text.trim();
+                  //           final userName =
+                  //               _usernameformcontroller.text.trim();
+                  //
+                  //           loginUserPhone(phone, userName, context);
+                  //         }
+                  //       }),
+                  // ),
+                  Hero(
+                    tag: 'lets find some tutors',
+                    child: Custombutton1(
+                      () {
+                        if (_phoneformKey.currentState.validate() &&
+                            _usernameformKey.currentState.validate()) {
+                          final phone = _phoneformcontroller.text.trim();
+                          final userName = _usernameformcontroller.text.trim();
+
+                          loginUserPhone(phone, userName, context);
+                        }
+                      },
+                      'Continue',
+                    ),
+                  ),
+
+                  // Text("Enter Password",style: Theme.of(context).textTheme.bodyText1,),
+                ],
               ),
-              // Text("Enter Password",style: Theme.of(context).textTheme.bodyText1,),
-            ],
-          ),
+            ),
+          ]),
         ),
       ),
     );

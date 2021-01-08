@@ -1,3 +1,4 @@
+import 'package:edu_connect/screens/search_result/profileView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,56 +40,73 @@ class SearchResult extends StatelessWidget {
                 child: StreamBuilder(
                   stream: firestoreInstance
                       .collection("tutors")
-                      // .where("subjectsPreferred.$subject", isEqualTo: true)
-                      // .where("area", isEqualTo: location)
+                      .where("subjectsPreferred.$subject", isEqualTo: true)
+                      .where("area", isEqualTo: location)
                       .get()
                       .asStream(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    return ListView.builder(
-                      itemCount: snapshot.data.docs.length,
-                      itemBuilder: (context, item) {
-                        print('lll');
-                        print(snapshot.data.docs.length);
-                        print('lll');
-                        return MaterialButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          child: Stack(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(left: 20),
-                                margin: EdgeInsets.only(left: 8),
-                                height: 90,
-                                width: 90,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).accentColor,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (context, item) {
+                          // print('lll');
+                          // print(snapshot.data.docs.length);
+                          // print('lll');
+                          return MaterialButton(
+                            padding: EdgeInsets.zero,
+                            splashColor: Theme.of(context).accentColor,
+                            onPressed: () {
+                              print('profile view pressed');
+                              // Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          ProfileView(
+                                              snapshot.data.docs[item].id)));
+                            },
+                            child: Stack(
+                              children: [
+                                Hero(
+                                  tag: 'yellowbox_profileview',
+                                  child: Container(
+                                    padding: EdgeInsets.only(left: 20),
+                                    margin: EdgeInsets.only(left: 8),
+                                    height: 90,
+                                    width: 90,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).accentColor,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 200,
-                                padding: EdgeInsets.all(20),
-                                margin: EdgeInsets.only(
-                                    bottom: 20, left: 20, top: 10),
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColorDark,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      bottomLeft: Radius.circular(30),
-                                    )),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        ClipOval(
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 200,
+                                  padding: EdgeInsets.all(10),
+                                  margin: EdgeInsets.only(
+                                      bottom: 20, left: 20, top: 10),
+                                  decoration: BoxDecoration(
+                                      color: Theme.of(context).primaryColorDark,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        bottomLeft: Radius.circular(30),
+                                      )),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          ClipOval(
+                                              child: Hero(
+                                            tag: 'profilepic',
                                             child: FutureBuilder(
                                                 future: _storage.getImage(
                                                     snapshot
@@ -123,36 +141,135 @@ class SearchResult extends StatelessWidget {
                                                       ],
                                                     );
                                                   }
-                                                })),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        Container(
-                                          child: Text(
-                                            // snapshot.data.docs[item].id,
-                                            snapshot.data.docs[item]
-                                                .data()['name'],
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText2,
-                                            // textAlign: TextAlign.start,
+                                                }),
+                                          )),
+                                          SizedBox(
+                                            width: 10,
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                    );
+                                          Container(
+                                            child: Text(
+                                              // snapshot.data.docs[item].id,
+                                              snapshot.data.docs[item]
+                                                  .data()['name'],
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline1,
+                                              // textAlign: TextAlign.start,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                        ],
+                                      ),
+
+                                      // SizedBox(
+                                      //   height: 20,
+                                      // ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        width: 300,
+                                        height: 50,
+                                        child: Text(
+                                          // snapshot.data.docs[item].id,
+                                          snapshot.data.docs[item]
+                                              .data()['bio'],
+
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2
+                                              .copyWith(fontSize: 13),
+                                          textAlign: TextAlign.justify,
+
+                                          // textAlign: TextAlign.start,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Wrap(
+                                        children: [
+                                          Chip(
+                                            label: Text(snapshot.data.docs[item]
+                                                .data()['area']),
+                                            avatar: Icon(
+                                                Icons.location_on_outlined),
+                                            padding: EdgeInsets.only(
+                                                left: -2, right: 0),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Chip(
+                                            label: Text(snapshot.data.docs[item]
+                                                .data()['area']),
+                                            avatar: Icon(
+                                                Icons.location_on_outlined),
+                                            padding: EdgeInsets.only(
+                                                left: -2, right: 0),
+                                          ),
+                                          // Chip(
+                                          //   label: Text(snapshot.data.docs[item]
+                                          //       .data()['email']),
+                                          //   avatar: Icon(Icons.email),
+                                          //   padding: EdgeInsets.only(
+                                          //       left: 20, right: 20),
+                                          // ),
+                                        ],
+                                      ),
+                                      // Row(
+                                      //   children: [
+                                      //     Icon(Icons.location_on),
+                                      //     SizedBox(
+                                      //       width: 10,
+                                      //     ),
+                                      //     Container(
+                                      //       child: Text(
+                                      //         // snapshot.data.docs[item].id,
+                                      //         snapshot.data.docs[item]
+                                      //             .data()['area'],
+                                      //         style: Theme.of(context)
+                                      //             .textTheme
+                                      //             .bodyText2,
+                                      //         // textAlign: TextAlign.start,
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      // Row(
+                                      //   children: [
+                                      //     Icon(Icons.email),
+                                      //     SizedBox(
+                                      //       width: 10,
+                                      //     ),
+                                      //     Container(
+                                      //       child: Text(
+                                      //         // snapshot.data.docs[item].id,
+                                      //         snapshot.data.docs[item]
+                                      //             .data()['email'],
+                                      //         style: Theme.of(context)
+                                      //             .textTheme
+                                      //             .bodyText2,
+                                      //         // textAlign: TextAlign.start,
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return CircularProgressIndicator(
+                        strokeWidth: 7,
+                      );
+                    }
                   },
                 ),
               ),

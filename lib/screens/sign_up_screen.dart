@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
+// class depreciated from the app now only there's one option for signing up
+
 class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -36,12 +38,7 @@ class SignUp extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Custombutton1(() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PhoneSignUp()),
-                  );
-                }, "Sign in using Phone"),
+                Custombutton1(() {}, "Sign in using Phone"),
                 // Text(
                 //   'sd   s',
                 //   style: Theme.of(context).textTheme.bodyText1,

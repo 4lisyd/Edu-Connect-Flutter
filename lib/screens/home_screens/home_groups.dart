@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class HomeSearch extends StatefulWidget {
+class HomeGroups extends StatefulWidget {
   @override
-  _HomeSearchState createState() => _HomeSearchState();
+  _HomeGroupsState createState() => _HomeGroupsState();
 }
 
-class _HomeSearchState extends State<HomeSearch> {
+class _HomeGroupsState extends State<HomeGroups> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,8 +18,11 @@ class _HomeSearchState extends State<HomeSearch> {
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [],
+          child: Center(
+            child: Text(
+              "tutor groups coming soon!",
+              style: Theme.of(context).textTheme.headline2,
+            ),
           ),
         ),
       ),

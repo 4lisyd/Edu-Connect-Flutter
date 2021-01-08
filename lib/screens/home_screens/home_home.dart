@@ -3,10 +3,12 @@ import 'package:edu_connect/screens/search_result/searchResult.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_connect/components/homeblocks.dart';
 import 'package:flutter/rendering.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:edu_connect/models/user.dart';
+import 'package:edu_connect/components/search_criteria.dart';
 
 class HomeHome extends StatefulWidget {
   @override
@@ -34,72 +36,123 @@ class _HomeHomeState extends State<HomeHome> {
                 SizedBox(
                   height: 10,
                 ),
-                // animationText_Gradient("Let's Find a Tutor,"),
+                //  animationText_Gradient("Let's Find a Tutor,"),
                 Row(
                   children: [
-                    Icon(
-                      Icons.search,
-                      size: 30,
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 12,
+                        right: 0,
+                      ),
+                      child: Icon(
+                        Icons.search,
+                        size: 30,
+                      ),
                     ),
                     Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                            hintText: "Search Tutors around you.",
-                            filled: true,
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            fillColor: Theme.of(context).accentColor),
+                      child: MaterialButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              print('search clicked...');
+                              return SearchCriteria();
+                            },
+                          );
+                        },
+                        child: Container(
+                          height: 60,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          child: Center(
+                              child: Text(
+                            "Search Through the catalog",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline1
+                                .copyWith(fontSize: 20),
+                          )),
+                        ),
                       ),
                     ),
                     SizedBox(
-                      width: 15,
+                      width: 10,
                     ),
                   ],
                 ),
-                // animationText_Gradient("You Always Wanted."),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Icon(Icons.location_on_outlined),
-                    Container(
-                      height: 50,
-                      child: FutureBuilder<DocumentSnapshot>(
-                        future: FirebaseFirestore.instance
-                            .collection('location')
-                            .doc('qatar')
-                            .get(),
-                        builder: (context, snapshot) {
-                          // print(snapshot.data['locations'].toString());
-                          var dropdownList = snapshot.data['locations'];
-                          print(dropdownList);
-                          List<dynamic> _locations = dropdownList;
+                //animationText_Gradient("You Always Wanted."),
 
-                          return DropdownButton(
-                            onChanged: (value) {
-                              setState(() {
-                                _selectedLocation = value;
-                                _location = value;
-                                currentUser_bloc_NL.locationString = value;
-                              });
-                            },
-                            hint: Text(
-                              "Choose Area",
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            icon: Icon(Icons.location_on_outlined),
-                            value: _selectedLocation,
-                            items: _locations.map((location) {
-                              return DropdownMenuItem(
-                                child: Text(location),
-                                value: location,
-                              );
-                            }).toList(),
-                          );
-                        },
-                      ),
-                    )
-                  ],
-                ),
+                // area search...
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     // Icon(Icons.location_on_outlined),
+                //     Container(
+                //       height: 50,
+                //       child: FutureBuilder<DocumentSnapshot>(
+                //         future: FirebaseFirestore.instance
+                //             .collection('location')
+                //             .doc('qatar')
+                //             .get(),
+                //         builder: (context, snapshot) {
+                //           // print(snapshot.data['locations'].toString());
+                //
+                //           if (snapshot.hasData) {
+                //             var dropdownList = snapshot.data['locations'];
+                //             print(dropdownList);
+                //             List<dynamic> _locations = dropdownList;
+                //
+                //             return Row(
+                //               mainAxisSize: MainAxisSize.max,
+                //               children: [
+                //                 FlatButton(
+                //                   materialTapTargetSize:
+                //                       MaterialTapTargetSize.shrinkWrap,
+                //                   padding: EdgeInsets.zero,
+                //                   child: Icon(Icons.cancel),
+                //                   onPressed: () {
+                //                     setState(() {
+                //                       _selectedLocation = null;
+                //                       _location = null;
+                //                       currentUser_bloc_NL.locationString = null;
+                //                     });
+                //                   },
+                //                 ),
+                //                 DropdownButton(
+                //                   onChanged: (value) {
+                //                     setState(() {
+                //                       _selectedLocation = value;
+                //                       _location = value;
+                //                       currentUser_bloc_NL.locationString =
+                //                           value;
+                //                     });
+                //                   },
+                //                   hint: Text(
+                //                     "Choose Area",
+                //                     style:
+                //                         Theme.of(context).textTheme.bodyText1,
+                //                   ),
+                //                   icon: Icon(Icons.location_on_outlined),
+                //                   value: _selectedLocation,
+                //                   items: _locations.map((location) {
+                //                     return DropdownMenuItem(
+                //                       child: Text(location),
+                //                       value: location,
+                //                     );
+                //                   }).toList(),
+                //                 ),
+                //               ],
+                //             );
+                //           } else
+                //             return Text('');
+                //         },
+                //       ),
+                //     )
+                //   ],
+                // ),
 
                 // Container(
                 //   padding: EdgeInsets.only(left: 20),
@@ -207,7 +260,7 @@ class _HomeHomeState extends State<HomeHome> {
                 //       }),
                 // ),
                 SizedBox(
-                  height: 50,
+                  height: 40,
                 ),
 
                 ////////////////////////////////////////////////////////////////
@@ -288,7 +341,7 @@ class _HomeHomeState extends State<HomeHome> {
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 40,
                 ),
                 ////////////////////////////////////////////////////////////
                 Container(

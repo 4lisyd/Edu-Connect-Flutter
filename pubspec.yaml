@@ -29,6 +29,9 @@ dependencies:
       path: packages/image_picker/image_picker
   firebase_storage: ^5.2.0
   geolocator: ^6.1.13
+  flutter_phone_direct_caller:
+    git:
+      url: https://github.com/yanisalfian/flutter-phone-direct-caller.git
 
 
 
@@ -53,6 +56,7 @@ flutter:
     - lib/assets/animations/lotties/swipe_left.json
     - lib/assets/userData/defaultUserAvatar.png
     - lib/assets/UI_pictures/subject_icons/
+    - lib/assets/background_img/
 
 
   # To add custom assets.fonts to your application, add a assets.fonts section here,

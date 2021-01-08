@@ -3,7 +3,7 @@ import 'package:edu_connect/models/user.dart';
 import 'package:edu_connect/screens/home_screens/home_chat.dart';
 import 'package:edu_connect/screens/home_screens/home_home.dart';
 import 'package:edu_connect/screens/home_screens/home_profile.dart';
-import 'package:edu_connect/screens/home_screens/home_search.dart';
+import 'package:edu_connect/screens/home_screens/home_groups.dart';
 import 'package:edu_connect/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> navbarWidgets = <Widget>[
       HomeChat(),
       HomeHome(),
-      HomeSearch(),
+      HomeGroups(),
       HomeProfile(),
     ];
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Icon(Icons.home),
           ),
           Container(
-            child: Icon(Icons.search),
+            child: Icon(Icons.group_add_sharp),
           ),
           Container(
             child: Icon(Icons.face),

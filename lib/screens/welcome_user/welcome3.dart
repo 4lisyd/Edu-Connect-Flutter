@@ -1,4 +1,5 @@
 import 'package:edu_connect/components/buttons.dart';
+import 'package:edu_connect/screens/sign_up_user/phone_log.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -37,9 +38,15 @@ class _Welcome3State extends State<Welcome3> {
               SizedBox(
                 height: 30,
               ),
-              Custombutton1(() {
-                Navigator.pushNamed(context, '/signup');
-              }, "Let's find some Tutors"),
+              Hero(
+                tag: 'lets find some tutors',
+                child: Custombutton1(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PhoneSignUp()),
+                  );
+                }, "Let's find some Tutors"),
+              ),
             ],
           ),
         ),

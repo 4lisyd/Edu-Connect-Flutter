@@ -1,5 +1,6 @@
 import 'package:edu_connect/models/user.dart';
 import 'package:edu_connect/screens/home_screen.dart';
+import 'package:edu_connect/screens/search_result/profileView.dart';
 import 'package:edu_connect/screens/sign_up_screen.dart';
 import 'package:edu_connect/screens/sign_up_user/tutor_signup.dart';
 import 'package:edu_connect/screens/welcome_screen.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => WelcomeScreen(),
         '/signup': (context) => SignUp(),
         '/tutorsignup': (context) => TutorSignUp(),
+        //  '/profileview': (context) => ProfileView(),
       },
     );
   }

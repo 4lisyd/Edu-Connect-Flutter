@@ -18,8 +18,8 @@ class HomeHome extends StatefulWidget {
 class _HomeHomeState extends State<HomeHome> {
   var _selectedLocation;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  CollectionReference locations_firestore =
-      FirebaseFirestore.instance.collection('locations');
+  DocumentReference locations_firestore =
+      FirebaseFirestore.instance.collection('locations').doc('qatar');
   String _location;
 
   @override

@@ -13,6 +13,17 @@ class SearchResult extends StatelessWidget {
 
   SearchResult(this.location, this.subject) {}
 
+  cal_days_avail(Map<String, bool> daysAvailable) {
+    int counter = 0;
+
+    for (bool item in daysAvailable.values) {
+      if (item == true) {
+        counter += 1;
+      }
+    }
+    return counter;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -171,11 +182,19 @@ class SearchResult extends StatelessWidget {
                                       ),
                                       Container(
                                         width: 300,
-                                        height: 50,
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                            // gradient: new LinearGradient(
+                                            //   colors: [Colors.red, Colors.cyan],
+                                            // ),
+                                            ),
                                         child: Text(
                                           // snapshot.data.docs[item].id,
                                           snapshot.data.docs[item]
-                                              .data()['bio'],
+                                                  .data()['bio']
+                                                  .toString()
+                                                  .substring(0, 100) +
+                                              "...",
 
                                           style: Theme.of(context)
                                               .textTheme
@@ -199,16 +218,23 @@ class SearchResult extends StatelessWidget {
                                             padding: EdgeInsets.only(
                                                 left: -2, right: 0),
                                           ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
+                                          SizedBox(width: 5),
                                           Chip(
-                                            label: Text(snapshot.data.docs[item]
-                                                .data()['area']),
+                                            label: Text(
+                                              "" +
+                                                  cal_days_avail(Map<String,
+                                                          bool>.from(snapshot
+                                                              .data.docs[item]
+                                                              .data()[
+                                                          'daysAvailability']))
+                                                      .toString() +
+                                                  " days a week",
+                                            ),
                                             avatar: Icon(
-                                                Icons.location_on_outlined),
+                                              Icons.timer,
+                                            ),
                                             padding: EdgeInsets.only(
-                                                left: -2, right: 0),
+                                                left: -2, right: 6),
                                           ),
                                           // Chip(
                                           //   label: Text(snapshot.data.docs[item]
@@ -219,44 +245,6 @@ class SearchResult extends StatelessWidget {
                                           // ),
                                         ],
                                       ),
-                                      // Row(
-                                      //   children: [
-                                      //     Icon(Icons.location_on),
-                                      //     SizedBox(
-                                      //       width: 10,
-                                      //     ),
-                                      //     Container(
-                                      //       child: Text(
-                                      //         // snapshot.data.docs[item].id,
-                                      //         snapshot.data.docs[item]
-                                      //             .data()['area'],
-                                      //         style: Theme.of(context)
-                                      //             .textTheme
-                                      //             .bodyText2,
-                                      //         // textAlign: TextAlign.start,
-                                      //       ),
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                      // Row(
-                                      //   children: [
-                                      //     Icon(Icons.email),
-                                      //     SizedBox(
-                                      //       width: 10,
-                                      //     ),
-                                      //     Container(
-                                      //       child: Text(
-                                      //         // snapshot.data.docs[item].id,
-                                      //         snapshot.data.docs[item]
-                                      //             .data()['email'],
-                                      //         style: Theme.of(context)
-                                      //             .textTheme
-                                      //             .bodyText2,
-                                      //         // textAlign: TextAlign.start,
-                                      //       ),
-                                      //     ),
-                                      //   ],
-                                      // )
                                     ],
                                   ),
                                 )

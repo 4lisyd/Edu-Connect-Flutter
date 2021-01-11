@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Provider.of<UserCurrent>(context, listen: false).fromJson(
         await sharedpref.read('user'),
       );
-      SystemChrome.setEnabledSystemUIOverlays([]);
+      // SystemChrome.setEnabledSystemUIOverlays([]);
 
       print(Provider.of<UserCurrent>(context, listen: false).uid);
       print(user.uid);
@@ -82,43 +82,41 @@ class _HomeScreenState extends State<HomeScreen> {
       // animationController.dispose() instead of your controller.dispose
     }
 
-    return SafeArea(
-      child: Scaffold(
-        //https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
+    return Scaffold(
+      //https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
 
-        bottomNavigationBar: CurvedNavigationBar(
-          index: 1,
-          color: Theme.of(context).accentColor,
-          backgroundColor: Color(0xfffffff),
-          height: 45,
+      bottomNavigationBar: CurvedNavigationBar(
+        index: 1,
+        color: Theme.of(context).accentColor,
+        backgroundColor: Color(0xfffffff),
+        height: 45,
 
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
-          //type: BottomNavigationBarType.fixed,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        //type: BottomNavigationBarType.fixed,
 
-          items: [
-            Container(
-              child: Icon(Icons.chat),
-            ),
-            Container(
-              child: Icon(Icons.home),
-            ),
-            Container(
-              child: Icon(Icons.group_add_sharp),
-            ),
-            Container(
-              child: Icon(Icons.face),
-            ),
-          ],
-        ),
-        body: navbarWidgets.elementAt(_selectedIndex),
-        extendBody: true,
-
-        // backgroundColor: Colors.transparent,
+        items: [
+          Container(
+            child: Icon(Icons.chat),
+          ),
+          Container(
+            child: Icon(Icons.home),
+          ),
+          Container(
+            child: Icon(Icons.group_add_sharp),
+          ),
+          Container(
+            child: Icon(Icons.face),
+          ),
+        ],
       ),
+      body: navbarWidgets.elementAt(_selectedIndex),
+      extendBody: true,
+
+      // backgroundColor: Colors.transparent,
     );
   }
 }

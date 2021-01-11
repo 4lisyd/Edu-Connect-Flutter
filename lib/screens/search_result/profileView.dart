@@ -189,6 +189,9 @@ class ProfileView extends StatelessWidget {
                               bool res =
                                   await FlutterPhoneDirectCaller.callNumber(
                                       snapshot.data.data()['phoneNo']);
+
+                              print('calling this number');
+                              print(snapshot.data.data()['phoneNo']);
                             }, "Call"),
                             SizedBox(
                               height: 20,

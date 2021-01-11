@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -37,10 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
     User user = FirebaseAuth.instance.currentUser;
 
     hello() async {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+      ));
       //print(await sharedpref.read('user'));
       Provider.of<UserCurrent>(context, listen: false).fromJson(
         await sharedpref.read('user'),
       );
+      SystemChrome.setEnabledSystemUIOverlays([]);
 
       print(Provider.of<UserCurrent>(context, listen: false).uid);
       print(user.uid);
@@ -68,44 +73,52 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     hello();
+
+    void initState() {}
+
     void dispose() {
       // TODO: implement dispose
       super.dispose();
       // animationController.dispose() instead of your controller.dispose
     }
 
-    return Scaffold(
-      //https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
+    return SafeArea(
+      child: Scaffold(
+        //https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
 
-      bottomNavigationBar: CurvedNavigationBar(
-        index: 1,
-        color: Theme.of(context).accentColor,
-        backgroundColor: Color(0xfffffff),
-        height: 45,
+        bottomNavigationBar: CurvedNavigationBar(
+          index: 1,
+          color: Theme.of(context).accentColor,
+          backgroundColor: Color(0xfffffff),
+          height: 45,
 
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        //type: BottomNavigationBarType.fixed,
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          //type: BottomNavigationBarType.fixed,
 
-        items: [
-          Container(
-            child: Icon(Icons.chat),
-          ),
-          Container(
-            child: Icon(Icons.home),
-          ),
-          Container(
-            child: Icon(Icons.group_add_sharp),
-          ),
-          Container(
-            child: Icon(Icons.face),
-          ),
-        ],
+          items: [
+            Container(
+              child: Icon(Icons.chat),
+            ),
+            Container(
+              child: Icon(Icons.home),
+            ),
+            Container(
+              child: Icon(Icons.group_add_sharp),
+            ),
+            Container(
+              child: Icon(Icons.face),
+            ),
+          ],
+        ),
+        body: navbarWidgets.elementAt(_selectedIndex),
+        extendBody: true,
+
+        // backgroundColor: Colors.transparent,
       ),
-      body: navbarWidgets.elementAt(_selectedIndex),
     );
   }
 }

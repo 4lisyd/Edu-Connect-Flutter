@@ -29,6 +29,7 @@ dependencies:
       path: packages/image_picker/image_picker
   firebase_storage: ^5.2.0
   geolocator: ^6.1.13
+  flutter_email_sender: ^4.0.0
   flutter_phone_direct_caller:
     git:
       url: https://github.com/yanisalfian/flutter-phone-direct-caller.git

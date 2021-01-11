@@ -6,11 +6,21 @@ import 'package:edu_connect/models/storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 //https://pub.dev/packages/flutter_phone_direct_caller
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+//https://pub.dev/packages/flutter_email_sender/install
 
 class ProfileView extends StatelessWidget {
   String tid;
 
   ProfileView(this.tid);
+
+  final Email email = Email(
+    body: "_bodyController.text",
+    subject: "_subjectController.text",
+    recipients: [],
+    attachmentPaths: [],
+    isHTML: true,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +120,6 @@ class ProfileView extends StatelessWidget {
                       ),
                       Container(
                         margin: EdgeInsets.all(10),
-                        height: 1500,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
@@ -170,7 +179,9 @@ class ProfileView extends StatelessWidget {
                             SizedBox(
                               height: 20,
                             ),
-                            Custombutton1(() {}, "Email"),
+                            Custombutton1(() async {
+                              await FlutterEmailSender.send(email);
+                            }, "Email"),
                             SizedBox(
                               height: 20,
                             ),

@@ -134,7 +134,8 @@ class _OngoingChatState extends State<OngoingChat> {
                               if (messageController.text.trim().isNotEmpty) {
                                 //send messages
                                 widget.chatservice.sendMessage(
-                                    widget.senderID, "alright its working");
+                                    widget.senderID, messageController.text);
+                                messageController.clear();
                               }
                             },
                             child: Icon(

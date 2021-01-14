@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ChatService {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
-  Stream<QuerySnapshot> returnChatStreamOfUser(
+  Stream<QuerySnapshot> returnActiveChatsOfUser(
     String uid,
   ) {
     bool isTutor = true;
@@ -32,8 +32,17 @@ class ChatService {
         .collection('messages')
         // .where('senderID', arrayContains: [senderID])
         .doc('1V1CKAsyUOtAMGwLPPYP Uvwb4fAWuyRnWyKB2rarRnD8DBH2')
-        .set({}, SetOptions(merge: true));
+        .update({
+      "messages": FieldValue.arrayUnion([
+        {
+          "message": message,
+          "seen": true,
+          'time': Timestamp.now(),
+          "senderID": senderID,
+        }
+      ])
+    });
 
-    print("temp.whenComplete(() => temp.toString())");
+    // print("temp.whenComplete(() => temp.toString())");
   }
 }

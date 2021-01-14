@@ -28,21 +28,21 @@ class _HomeHomeState extends State<HomeHome> {
         Provider.of<UserCurrent>(context, listen: false);
 
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                // colorFilter: ColorFilter.mode(
-                //     Theme.of(context).primaryColor.withOpacity(1),
-                //     BlendMode.colorBurn),
-                image: AssetImage(
-                  'lib/assets/background_img/tiles_bg6.jpg',
-                ),
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              // colorFilter: ColorFilter.mode(
+              //     Theme.of(context).primaryColor.withOpacity(1),
+              //     BlendMode.colorBurn),
+              image: AssetImage(
+                'lib/assets/background_img/tiles_bg6.jpg',
               ),
             ),
+          ),
+          child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -22,6 +22,26 @@ class ProfileView extends StatelessWidget {
     isHTML: true,
   );
 
+  //
+  // for (var i = cal_stars(snapshot
+  //     .data.docs[item]
+  //     .data()['ratings']);
+  // i >= 1;
+  // i--) {
+  // Icon(Icons.star);
+  // }
+  //
+  //
+  cal_stars(List<dynamic> numbers) {
+    int temp_counter1 = 0;
+    int temp_counter2 = 0;
+    for (int item in numbers) {
+      temp_counter1 += item;
+      temp_counter2 += 1;
+    }
+    return (temp_counter1 / temp_counter2);
+  }
+
   @override
   Widget build(BuildContext context) {
     final firestoreInstance = FirebaseFirestore.instance;
@@ -112,6 +132,45 @@ class ProfileView extends StatelessWidget {
                                     .copyWith(fontSize: 25),
                               ),
                             ),
+                            Positioned(
+                              top: 75,
+                              left: 170,
+                              child: Container(
+                                width: 200,
+                                child: Builder(
+                                  builder: (BuildContext context) {
+                                    return Row(
+                                      children: [
+                                        for (int i = 1;
+                                            i <=
+                                                cal_stars(snapshot.data
+                                                    .data()['ratings']);
+                                            i++)
+                                          Icon(Icons.star),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 75,
+                              left: 170,
+                              child: Container(
+                                width: 200,
+                                child: Builder(
+                                  builder: (BuildContext context) {
+                                    return Row(
+                                      children: [
+                                        for (int i = 1; i <= 5; i++)
+                                          Icon(Icons
+                                              .star_border_purple500_sharp),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -123,8 +182,10 @@ class ProfileView extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(40),
                               topRight: Radius.circular(40),
+                              bottomLeft: Radius.circular(40),
+                              topLeft: Radius.circular(40),
+                              bottomRight: Radius.circular(40),
                             ),
                             color: Theme.of(context).primaryColor),
                         padding: EdgeInsets.all(15),
@@ -172,27 +233,87 @@ class ProfileView extends StatelessWidget {
                                 snapshot.data.data()['testsPreferred'],
                               ),
                             ),
+                            // SizedBox(
+                            //   height: 20,
+                            // ),
+                            // Custombutton1(() {}, "Chat"),
+                            // SizedBox(
+                            //   height: 20,
+                            // ),
+                            // Custombutton1(() async {
+                            //   await FlutterEmailSender.send(email);
+                            // }, "Email"),
+                            // SizedBox(
+                            //   height: 20,
+                            // ),
+                            // Custombutton1(() async {
+                            //   bool res =
+                            //       await FlutterPhoneDirectCaller.callNumber(
+                            //           snapshot.data.data()['phoneNo']);
+                            //
+                            //   print('calling this number');
+                            //   print(snapshot.data.data()['phoneNo']);
+                            // }, "Call"),
                             SizedBox(
-                              height: 20,
+                              width: 5,
                             ),
-                            Custombutton1(() {}, "Chat"),
-                            SizedBox(
-                              height: 20,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                MaterialButton(
+                                  onPressed: () {},
+                                  height: 50,
+                                  minWidth: 100,
+                                  splashColor: Theme.of(context).primaryColor,
+                                  enableFeedback: true,
+                                  // shape: ShapeBorder.lerp(S, b, t),
+                                  color: Theme.of(context).accentColor,
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.email_outlined),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text('Email'),
+                                    ],
+                                  ),
+                                ),
+                                MaterialButton(
+                                  onPressed: () {},
+                                  height: 50,
+                                  splashColor: Theme.of(context).primaryColor,
+                                  enableFeedback: true,
+                                  // shape: ShapeBorder.lerp(S, b, t),
+                                  color: Theme.of(context).accentColor,
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.phone),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text('Phone'),
+                                    ],
+                                  ),
+                                ),
+                                MaterialButton(
+                                  onPressed: () {},
+                                  height: 50,
+                                  splashColor: Theme.of(context).primaryColor,
+                                  enableFeedback: true,
+                                  // shape: ShapeBorder.lerp(S, b, t),
+                                  color: Theme.of(context).accentColor,
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.chat),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text('Chat'),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                            Custombutton1(() async {
-                              await FlutterEmailSender.send(email);
-                            }, "Email"),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Custombutton1(() async {
-                              bool res =
-                                  await FlutterPhoneDirectCaller.callNumber(
-                                      snapshot.data.data()['phoneNo']);
-
-                              print('calling this number');
-                              print(snapshot.data.data()['phoneNo']);
-                            }, "Call"),
                             SizedBox(
                               height: 20,
                             ),

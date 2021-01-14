@@ -27,7 +27,7 @@ ThemeData appTheme() {
           fontFamily: 'Roboto',
           fontWeight: FontWeight.w300),
       bodyText2: TextStyle(
-        color: Color(0xffFFFFFF),
+        color: Colors.white70,
         fontSize: 15,
         fontFamily: 'Roboto',
       ),

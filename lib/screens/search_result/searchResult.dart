@@ -94,7 +94,7 @@ class SearchResult extends StatelessWidget {
                                 ),
                                 Container(
                                   width: MediaQuery.of(context).size.width,
-                                  height: 200,
+                                  height: 180,
                                   padding: EdgeInsets.all(10),
                                   margin: EdgeInsets.only(
                                       bottom: 20, left: 20, top: 10),
@@ -193,7 +193,7 @@ class SearchResult extends StatelessWidget {
                                           snapshot.data.docs[item]
                                                   .data()['bio']
                                                   .toString()
-                                                  .substring(0, 100) +
+                                                  .substring(0, 70) +
                                               "...",
 
                                           style: Theme.of(context)

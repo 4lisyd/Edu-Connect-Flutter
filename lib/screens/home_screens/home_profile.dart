@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:edu_connect/components/buttons.dart';
 import 'package:edu_connect/components/dialog_box.dart';
 import 'package:edu_connect/models/user.dart';
+import 'package:edu_connect/screens/my_tutorprofile.dart';
 import 'package:edu_connect/screens/sign_up_user/tutor_signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:edu_connect/models/storage.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
+import 'package:edu_connect/screens/my_tutorprofile.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeProfile extends StatefulWidget {
   @override
@@ -163,29 +166,33 @@ class _HomeProfileState extends State<HomeProfile> {
                   height: 50,
                 ),
 
+                // if its already tutor itll go there to update info else it will sign up new user.
+
+                Provider.of<UserCurrent>(context).isTutor
+                    ? Custombutton1(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    MyTutorProfile(currentUser_bloc_NL.uid)));
+                        // MyTutorProfile(currentUser_bloc_NL.uid)
+                      }, "My Tutor profile")
+                    : Custombutton1(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TutorSignUp(false)));
+                      }, "Register As A Tutor"),
+                SizedBox(
+                  height: 20,
+                ),
+
                 Custombutton1(() async {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   prefs.setBool('login', false);
                   Navigator.pushNamed(context, "/welcome");
                 }, "Sign Out"),
-
-                SizedBox(
-                  height: 20,
-                ),
-                Custombutton1(() async {
-                  // if (currentUser_bloc.profilePhotoAsset == null) {
-                  //   print('ok');
-                  //   showDialog(
-                  //     context: context,
-                  //     builder: (_) =>
-                  //         customDialogBox1("please upload your profile picture"),
-                  //   );
-                  //   return;
-                  // }
-
-                  Navigator.pushNamed(context, "/tutorsignup");
-                }, "Register As A Tutor"),
               ],
             ),
           ),

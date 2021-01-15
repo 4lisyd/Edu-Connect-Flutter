@@ -15,6 +15,7 @@ class ChatService {
       return firestoreInstance
           .collection('messages')
           .where("chatID", arrayContains: uid)
+          // .orderBy('messages.time', descending: true)
           .snapshots();
     } else {
       print('is tutor nt exe');

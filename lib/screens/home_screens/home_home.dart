@@ -363,7 +363,7 @@ class _HomeHomeState extends State<HomeHome> {
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 ////////////////////////////////////////////////////////////
 

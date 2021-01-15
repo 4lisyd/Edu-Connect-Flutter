@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/welcome': (context) => WelcomeScreen(),
         '/signup': (context) => SignUp(),
-        '/tutorsignup': (context) => TutorSignUp(),
+        // '/tutorsignup': (context) => TutorSignUp(),
         //  '/profileview': (context) => ProfileView(),
       },
     );

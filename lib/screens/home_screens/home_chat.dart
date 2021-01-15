@@ -35,21 +35,6 @@ class _HomeChatState extends State<HomeChat> {
           stream: chatservice.returnActiveChatsOfUser(
               Provider.of<UserCurrent>(context, listen: false).uid),
           builder: (BuildContext context, snapshot) {
-            // List lastmessage_temp =
-            //     snapshot.data.docs.single.data()['messages'];
-            // String lastmessage = lastmessage_temp.last['message'];
-
-            // if sender is  currentuser then first one is SenderID else vice versa
-
-            // String senderID = Provider.of<UserCurrent>(context).uid ==
-            //         snapshot.data.docs.single.data()['chatID'][0]
-            //     ? snapshot.data.docs.single.data()['chatID'][0]
-            //     : snapshot.data.docs.single.data()['chatID'][1];
-            // String receiverID = Provider.of<UserCurrent>(context).uid ==
-            //         snapshot.data.docs.single.data()['chatID'][0]
-            //     ? snapshot.data.docs.single.data()['chatID'][1]
-            //     : snapshot.data.docs.single.data()['chatID'][0];
-
             return Column(
               children: [
                 for (var item in snapshot.data.docs)
@@ -86,7 +71,12 @@ class _HomeChatState extends State<HomeChat> {
                         children: [
                           // Image.network('src'),
                           Text(
+                            //Todo: last message must be shown
+
                             item.data()['messages'][0]['message'],
+                            // "item.data().entries.last.value['message'].toString()",
+                            // item.data()['messages'][0]['message'],
+
                             style: Theme.of(context).textTheme.bodyText2,
                           ),
                         ],

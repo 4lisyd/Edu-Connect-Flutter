@@ -16,6 +16,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_connect/models/tutor.dart';
 
 class TutorSignUp extends StatefulWidget {
+  TutorSignUp(this.alreadyTutor);
+  bool alreadyTutor;
+
   @override
   _TutorSignUpState createState() => _TutorSignUpState();
 }
@@ -23,21 +26,16 @@ class TutorSignUp extends StatefulWidget {
 class _TutorSignUpState extends State<TutorSignUp> {
   File _image;
   Storage _storage = Storage();
+
   TextEditingController textEditingController_name;
   TextEditingController textEditingController_email;
   TextEditingController textEditingController_bio;
 
-  // Map<String, bool> daysAvailable = {
-  //   "Monday": false,
-  //   "Tuesday": false,
-  //   "Wednesday": false,
-  //   "Thursday": false,
-  //   "Friday": false,
-  //   "Saturday": false,
-  //   "Sunday": false,
-  // };
+  final CollectionReference ParentsCollection =
+      FirebaseFirestore.instance.collection("parents");
+  final CollectionReference TutorsCollection =
+      FirebaseFirestore.instance.collection("tutors");
 
-  var locations = ['rawalpindi', 'islamabad', 'peshawar'];
   var _selectedLocation;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   CollectionReference locations_firestore =
@@ -57,6 +55,17 @@ class _TutorSignUpState extends State<TutorSignUp> {
     setState(() {
       _image = image;
     });
+  }
+
+  Future<DocumentSnapshot> getAlreadyTutorInfo(BuildContext context) async {
+    var TutorsCollection_temp;
+    TutorsCollection_temp = await TutorsCollection.doc(
+            Provider.of<UserCurrent>(context, listen: false).uid)
+        .get();
+    print('oasodoasdasdasodaosdaosdosa');
+    print('oasodoasdasdasodaosdaosdosa');
+    return TutorsCollection_temp;
+    print(TutorsCollection_temp.toString());
   }
 
   @override
@@ -87,7 +96,9 @@ class _TutorSignUpState extends State<TutorSignUp> {
                 ),
                 Center(
                   child: Text(
-                    'Sign Up as a tutor Today! ',
+                    widget.alreadyTutor
+                        ? 'Edit Your information'
+                        : ' Sign Up as a tutor Today!',
                     style: Theme.of(context).textTheme.headline1,
                   ),
                 ),
@@ -314,7 +325,15 @@ class _TutorSignUpState extends State<TutorSignUp> {
                     // print(tutor_bloc_NL.area);
 
                     userSign_Tutor.registerNewUser(tutor_bloc_NL);
+                    Provider.of<UserCurrent>(context, listen: false).isTutor =
+                        true;
+                    ParentsCollection.doc(
+                            Provider.of<UserCurrent>(context, listen: false)
+                                .uid)
+                        .update({"tutor": true});
                     Navigator.pop(context);
+
+                    // any tutor is also a parent
                   },
                   "Submit",
                   // buttonColor: Theme.of(context).accentColor.withOpacity(0.5),

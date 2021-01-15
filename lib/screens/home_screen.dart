@@ -37,6 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
     SharedPref sharedpref = SharedPref();
     User user = FirebaseAuth.instance.currentUser;
 
+    // hello the user after a session starts
+
     hello() async {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.white,
@@ -89,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
         index: 1,
         color: Theme.of(context).accentColor,
         backgroundColor: Color(0xfffffff),
-        height: 45,
+        height: 60,
 
         onTap: (index) {
           setState(() {

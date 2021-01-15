@@ -46,7 +46,6 @@ class UserSign_Tutor {
     print('printing tutor name');
     print(tutor.name);
     print('printing tutor name');
-
     return await TutorCollection.doc(uid).set({
       "name": tutor.name,
       "uid": uid,

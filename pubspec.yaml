@@ -54,6 +54,7 @@ flutter:
     - lib/assets/animations/lotties/swipe_left.json
     - lib/assets/userData/defaultUserAvatar.png
     - lib/assets/UI_pictures/subject_icons/
+    - lib/assets/UI_pictures/background_pictures/
     - lib/assets/background_img/
 
 

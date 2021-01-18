@@ -16,40 +16,72 @@ class _Welcome3State extends State<Welcome3> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Text(
-                "Lets Get Started?",
-                textAlign: TextAlign.center,
+      body: Stack(
+        children: [
+          Positioned(
+            top: -60,
+            right: -80,
+            child: RotatedBox(
+              quarterTurns: 1,
+              child: Image.asset(
+                "lib/assets/UI_pictures/background_pictures/signup_top.png",
               ),
-              Text(
-                "Lets Get Started?",
-                style: Theme.of(context).textTheme.headline1,
-                textAlign: TextAlign.center,
-              ),
-              Lottie.asset("lib/assets/animations/lotties/welcome_email.json",
-                  reverse: true, height: 400),
-              // Custombutton1(() {
-              //   Navigator.pushNamed(context, '/signup');
-              // }, "i am a Parent/Guardian."),
-              SizedBox(
-                height: 30,
-              ),
-              Hero(
-                tag: 'lets find some tutors',
-                child: Custombutton1(() {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PhoneSignUp()),
-                  );
-                }, "Let's find some Tutors"),
-              ),
-            ],
+            ),
           ),
-        ),
+          // Positioned(
+          //   // bottom: -138,
+          //   bottom: -80,
+          //   left: -60,
+          //   child: RotatedBox(
+          //     quarterTurns: 1,
+          //     child: Image.asset(
+          //         "lib/assets/UI_pictures/background_pictures/welcome_bottom.png"),
+          //   ),
+          // ),
+          Positioned(
+            bottom: -60,
+            left: -30,
+            child: RotatedBox(
+              quarterTurns: 1,
+              child: Image.asset(
+                  "lib/assets/UI_pictures/background_pictures/welcome_bottom.png"),
+            ),
+          ),
+          Positioned(
+            bottom: -60,
+            right: -30,
+            child: Image.asset(
+                "lib/assets/UI_pictures/background_pictures/welcome_bottom.png"),
+          ),
+          SafeArea(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: [
+                  Lottie.asset(
+                      "lib/assets/animations/lotties/welcome_email.json",
+                      reverse: true,
+                      height: 400),
+                  // Custombutton1(() {
+                  //   Navigator.pushNamed(context, '/signup');
+                  // }, "i am a Parent/Guardian."),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Hero(
+                    tag: 'lets find some tutors',
+                    child: Custombutton1(() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PhoneSignUp()),
+                      );
+                    }, "Let's find some Tutors"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

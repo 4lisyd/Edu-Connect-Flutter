@@ -41,24 +41,32 @@ class _HomeProfileState extends State<HomeProfile> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(
-                'https://png.pngtree.com/thumb_back/fh260/background/20190430/pngtree-vector-abstract-perspective-flyer-or-banner-with-white-backgroun-image_110332.jpg'),
-          ),
-        ),
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //     fit: BoxFit.cover,
+        //     image: NetworkImage(
+        //         'https://png.pngtree.com/thumb_back/fh260/background/20190430/pngtree-vector-abstract-perspective-flyer-or-banner-with-white-backgroun-image_110332.jpg'),
+        //   ),
+        // ),
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
+                Text(
+                  'Profile',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline2
+                      .copyWith(fontSize: 30),
+                ),
                 Stack(
-                  alignment: Alignment.bottomRight,
+                  alignment: Alignment.center,
                   children: [
                     Container(
                       margin: EdgeInsets.only(bottom: 40),
                       width: MediaQuery.of(context).size.width / 1.7,
                       height: MediaQuery.of(context).size.height / 3.7,
+                      decoration: BoxDecoration(),
                       child: ClipOval(
                           child: FutureBuilder(
                               future: _storage.getImage(currentUser_bloc.uid),
@@ -69,7 +77,8 @@ class _HomeProfileState extends State<HomeProfile> {
                                     backgroundColor: Colors.white,
                                     child: Image.network(
                                       snapshot.data,
-                                      fit: BoxFit.fill,
+                                      width: 1000,
+                                      fit: BoxFit.cover,
                                       height: 500,
                                     ),
                                   );
@@ -88,7 +97,8 @@ class _HomeProfileState extends State<HomeProfile> {
                               })),
                     ),
                     Positioned(
-                      bottom: 0,
+                      bottom: 40,
+                      right: -20,
                       child: Column(
                         children: [
                           FlatButton(
@@ -104,89 +114,166 @@ class _HomeProfileState extends State<HomeProfile> {
                             },
                             child: Icon(
                               Icons.add_a_photo,
-                              color: Colors.black45,
-                              size: 40,
+                              color: Colors.black38,
+                              size: 30,
                             ),
                           ),
-                          Text(
-                            "Add photo",
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
                         ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 8,
+                      child: Text(
+                        currentUser_bloc.name,
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
                   ],
                 ),
                 Container(
-                  child: Text(
-                    currentUser_bloc.name,
-                    style: Theme.of(context).textTheme.headline1,
+                  padding: EdgeInsets.all(20),
+                  margin: EdgeInsets.only(left: 0, right: 20),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).accentColor.withOpacity(.2),
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      Wrap(
+                        children: [
+                          Chip(
+                            backgroundColor: Theme.of(context).accentColor,
+                            label: Text(
+                              currentUser_bloc != null
+                                  ? currentUser_bloc_NL.phoneNo.toString()
+                                  : "null",
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                            avatar: Icon(
+                              Icons.phone_forwarded_outlined,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Chip(
+                            backgroundColor: Theme.of(context).accentColor,
+                            label: Provider.of<UserCurrent>(context,
+                                        listen: false)
+                                    .isTutor
+                                ? Text(
+                                    'im a tutor, looking for students.',
+                                    style:
+                                        Theme.of(context).textTheme.bodyText2,
+                                    textAlign: TextAlign.center,
+                                  )
+                                : Text(
+                                    'im a Guardian, looking for a Tutor.',
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                    textAlign: TextAlign.center,
+                                  ),
+                            avatar: Icon(
+                              Icons.supervised_user_circle,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                        alignment: WrapAlignment.start,
+                      ),
+                      Divider(),
+
+                      FlatButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: () {},
+                          child: Container(
+                            // margin: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.black26,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('About'),
+                                Icon(Icons.navigate_next),
+                              ],
+                            ),
+                          )),
+                      FlatButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: () {},
+                          child: Container(
+                            // margin: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.black26,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('About'),
+                                Icon(Icons.navigate_next),
+                              ],
+                            ),
+                          )),
+                      FlatButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: () {},
+                          child: Container(
+                            // margin: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.black26,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('About'),
+                                Icon(Icons.navigate_next),
+                              ],
+                            ),
+                          )),
+                      Divider(),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      // if its already tutor itll go there to update info else it will sign up new user.
+
+                      Provider.of<UserCurrent>(context).isTutor
+                          ? Custombutton1(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyTutorProfile(
+                                          currentUser_bloc_NL.uid)));
+                              // MyTutorProfile(currentUser_bloc_NL.uid)
+                            }, "My Tutor profile")
+                          : Custombutton1(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          TutorSignUp(false)));
+                            }, "Register As A Tutor"),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
                   ),
                 ),
-                // Consumer<UserCurrent>(
-                //   builder: (context, user, child) => Text(
-                //     currentUser1.name != null
-                //         ? currentUser1.name.toString()
-                //         : "null",
-                //     style: Theme.of(context).textTheme.headline1,
-                //   ),
-                // ),
-
-                Text(
-                  currentUser_bloc != null
-                      ? currentUser_bloc.uid.toString()
-                      : "nugll",
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-                // Text(
-                //   currentUser_bloc != null
-                //       ? currentUser_bloc_NL.phoneNo.toString()
-                //       : "null",
-                //   style: Theme.of(context).textTheme.bodyText1,
-                // ),
-
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Provider.of<UserCurrent>(context, listen: false).isTutor
-                        ? Text(
-                            'im a tutor looking for students',
-                            style: Theme.of(context).textTheme.bodyText1,
-                            textAlign: TextAlign.center,
-                          )
-                        : Text(
-                            'im a Guardian looking for a Tutor',
-                            style: Theme.of(context).textTheme.bodyText1,
-                            textAlign: TextAlign.center,
-                          )
-                  ],
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-
-                // if its already tutor itll go there to update info else it will sign up new user.
-
-                Provider.of<UserCurrent>(context).isTutor
-                    ? Custombutton1(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    MyTutorProfile(currentUser_bloc_NL.uid)));
-                        // MyTutorProfile(currentUser_bloc_NL.uid)
-                      }, "My Tutor profile")
-                    : Custombutton1(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TutorSignUp(false)));
-                      }, "Register As A Tutor"),
                 SizedBox(
                   height: 20,
                 ),
-
                 Custombutton1(() async {
                   SharedPreferences prefs =
                       await SharedPreferences.getInstance();

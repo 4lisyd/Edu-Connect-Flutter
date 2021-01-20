@@ -37,6 +37,8 @@ dependencies:
   fluttertoast: ^7.1.6
   cached_network_image: ^2.5.0
   bubble: ^1.1.9+1
+  just_audio: ^0.6.5
+
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +54,7 @@ flutter:
     - lib/assets/animations/lotties/welcome_email.json
     - lib/assets/animations/lotties/welcome_confused.json
     - lib/assets/animations/lotties/swipe_left.json
+    - lib/assets/animations/lotties/
     - lib/assets/userData/defaultUserAvatar.png
     - lib/assets/UI_pictures/subject_icons/
     - lib/assets/UI_pictures/background_pictures/

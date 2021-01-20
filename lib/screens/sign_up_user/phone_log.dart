@@ -9,6 +9,7 @@ import 'package:edu_connect/services/auth_phone.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:edu_connect/components/dialog_box.dart';
+import 'package:lottie/lottie.dart';
 
 class PhoneSignUp extends StatelessWidget {
   //String phonenumber;
@@ -21,46 +22,28 @@ class PhoneSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      extendBody: true,
       appBar: AppBar(
         backgroundColor: Theme.of(context).accentColor,
         title: Text("Phone number login"),
       ),
       body: Container(
         child: SafeArea(
-          child: Stack(alignment: Alignment.center, children: [
-            Container(
-              decoration: BoxDecoration(
-                // color: Color.fromRGBO(255, 255, 255, 1),
-                image: DecorationImage(
-                  image: AssetImage("lib/assets/background_img/tiles_bg2.jpg"),
-                  colorFilter: ColorFilter.mode(
-                      Theme.of(context).accentColor.withOpacity(.8),
-                      BlendMode.hardLight),
-                  fit: BoxFit.fill,
-                ),
-              ),
+          child: Column(children: [
+            Positioned(
+              top: 20,
+              child: Lottie.asset(
+                  "lib/assets/animations/lotties/phone_login.json",
+                  reverse: true,
+                  height: 300),
             ),
-            // Positioned(
-            //   top: 80,
-            //   child: Center(
-            //     child: Container(
-            //       margin: EdgeInsets.only(right: 40),
-            //       width: MediaQuery.of(context).size.width,
-            //       height: 194,
-            //       decoration: BoxDecoration(
-            //           color: Theme.of(context).accentColor.withOpacity(0.4),
-            //           borderRadius: BorderRadius.only(
-            //               bottomRight: Radius.circular(40),
-            //               topRight: Radius.circular(40))),
-            //     ),
-            //   ),
-            // ),
             Container(
-              height: 300,
+              height: 370,
               // color: Colors.white,
               margin: EdgeInsets.only(right: 20),
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).accentColor.withOpacity(.3),
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(40),
                       bottomRight: Radius.circular(40))),
@@ -86,7 +69,8 @@ class PhoneSignUp extends StatelessWidget {
                         controller: _phoneformcontroller,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           icon: Icon(Icons.phone_android),
                           hintText: "Enter phone number",
                         ),

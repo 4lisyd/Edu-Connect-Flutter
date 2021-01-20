@@ -57,7 +57,7 @@ Future<bool> loginUserPhone(
           useSafeArea: true,
           builder: (context) {
             return customDialogBox2(
-              "please enter the OTP code",
+              "enter the OTP code",
               (String string) async {
                 ////////////////////////////////////important//////////////////////////////////////////////
 
@@ -110,69 +110,3 @@ Future<bool> loginUserPhone(
     },
   );
 }
-
-// () async {
-// AuthCredential credential = PhoneAuthProvider.credential(
-//     verificationId: verificationID,
-//     smsCode: _codeformcontroller.text);
-// UserCredential response =
-//     await _auth.signInWithCredential(credential);
-// User user = response.user;
-//
-// if (user != null) {
-// //print(response.user.phoneNumber);
-// print("success!");
-// //print(user.phoneNumber);
-// //print(user.displayName);
-// //print(user.uid);
-// User user1 = await FirebaseAuth.instance.currentUser;
-// print(user1.phoneNumber);
-// print(user.displayName);
-// print(user.uid);
-//
-// Navigator.pop(context);
-//
-// // gets called when the verification is done automatically by auto code retrieval
-// }
-// },
-//
-//
-//
-// return AlertDialog(
-// title: Text("enter the code you just received"),
-// content: Column(
-// children: [
-// TextField(
-// controller: _codeformcontroller,
-// ),
-// ],
-// ),
-// actions: [
-// FlatButton(
-// onPressed: () async {
-// AuthCredential credential = PhoneAuthProvider.credential(
-//     verificationId: verificationID,
-//     smsCode: _codeformcontroller.text);
-// UserCredential response =
-//     await _auth.signInWithCredential(credential);
-// User user = response.user;
-//
-// if (user != null) {
-// //print(response.user.phoneNumber);
-// print("success!");
-// //print(user.phoneNumber);
-// //print(user.displayName);
-// //print(user.uid);
-// User user1 = await FirebaseAuth.instance.currentUser;
-// print(user1.phoneNumber);
-// print(user.displayName);
-// print(user.uid);
-//
-// Navigator.pop(context);
-//
-// // gets called when the verification is done automatically by auto code retrieval
-// }
-// },
-// child: Text("confirm"))
-// ],
-// );

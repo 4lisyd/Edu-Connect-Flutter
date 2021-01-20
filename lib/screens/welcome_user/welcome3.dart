@@ -25,38 +25,26 @@ class _Welcome3State extends State<Welcome3> {
               quarterTurns: 1,
               child: Image.asset(
                 "lib/assets/UI_pictures/background_pictures/signup_top.png",
+                // scale: 0?,
               ),
             ),
           ),
-          // Positioned(
-          //   // bottom: -138,
-          //   bottom: -80,
-          //   left: -60,
-          //   child: RotatedBox(
-          //     quarterTurns: 1,
-          //     child: Image.asset(
-          //         "lib/assets/UI_pictures/background_pictures/welcome_bottom.png"),
-          //   ),
-          // ),
           Positioned(
             bottom: -60,
-            left: -30,
+            left: 0,
             child: RotatedBox(
               quarterTurns: 1,
               child: Image.asset(
-                  "lib/assets/UI_pictures/background_pictures/welcome_bottom.png"),
+                "lib/assets/UI_pictures/background_pictures/welcome_bottom.png",
+                scale: 1.35,
+              ),
             ),
-          ),
-          Positioned(
-            bottom: -60,
-            right: -30,
-            child: Image.asset(
-                "lib/assets/UI_pictures/background_pictures/welcome_bottom.png"),
           ),
           SafeArea(
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Lottie.asset(
                       "lib/assets/animations/lotties/welcome_email.json",

@@ -84,7 +84,7 @@ class customDialogBox2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       ),
       elevation: 0,
       backgroundColor: Colors.transparent,

@@ -197,7 +197,7 @@ class _HomeProfileState extends State<HomeProfile> {
                         alignment: WrapAlignment.start,
                       ),
                       SizedBox(
-                        height: 40,
+                        height: 10,
                       ),
                       Divider(),
                       FlatButton(

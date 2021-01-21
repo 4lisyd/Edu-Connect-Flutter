@@ -40,6 +40,12 @@ class _OngoingChatState extends State<OngoingChat> {
             return Text(snapshot.data.data()['name']);
           },
         ),
+        actions: [
+          MaterialButton(
+            onPressed: null,
+            child: Icon(Icons.call),
+          )
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
           stream: chatRef.snapshots(),

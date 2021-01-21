@@ -35,60 +35,64 @@ class _HomeChatState extends State<HomeChat> {
           stream: chatservice.returnActiveChatsOfUser(
               Provider.of<UserCurrent>(context, listen: false).uid),
           builder: (BuildContext context, snapshot) {
-            return Column(
-              children: [
-                for (var item in snapshot.data.docs)
-                  FlatButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OngoingChat(
-                                    item.data()['chatID'][0] ==
-                                            Provider.of<UserCurrent>(context)
-                                                .uid
-                                        ? item.data()['chatID'][0]
-                                        : item.data()['chatID'][1],
-                                    item.data()['chatID'][0] ==
-                                            Provider.of<UserCurrent>(context)
-                                                .uid
-                                        ? item.data()['chatID'][1]
-                                        : item.data()['chatID'][0],
-                                  )));
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(10),
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                          color: Theme.of(context).primaryColor),
-                      child: Row(
-                        children: [
-                          // Image.network('src'),
-                          Text(
-                            //Todo: last message must be shown
+            if (snapshot.hasData) {
+              return Column(
+                children: [
+                  for (var item in snapshot.data.docs)
+                    FlatButton(
+                      padding: EdgeInsets.zero,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OngoingChat(
+                                      item.data()['chatID'][0] ==
+                                              Provider.of<UserCurrent>(context)
+                                                  .uid
+                                          ? item.data()['chatID'][0]
+                                          : item.data()['chatID'][1],
+                                      item.data()['chatID'][0] ==
+                                              Provider.of<UserCurrent>(context)
+                                                  .uid
+                                          ? item.data()['chatID'][1]
+                                          : item.data()['chatID'][0],
+                                    )));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(10),
+                        height: 100,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                            color: Theme.of(context).primaryColor),
+                        child: Row(
+                          children: [
+                            // Image.network('src'),
+                            Text(
+                              //Todo: last message must be shown
 
-                            item.data()['messages'][0]['message'],
-                            // "item.data().entries.last.value['message'].toString()",
-                            // item.data()['messages'][0]['message'],
+                              item.data()['messages'][0]['message'],
+                              // "item.data().entries.last.value['message'].toString()",
+                              // item.data()['messages'][0]['message'],
 
-                            style: Theme.of(context).textTheme.bodyText2,
-                          ),
-                        ],
+                              style: Theme.of(context).textTheme.bodyText2,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                Text(
-                  "receiverID",
-                  style: Theme.of(context).textTheme.bodyText1,
-                )
-              ],
-            );
+                  Text(
+                    "receiverID",
+                    style: Theme.of(context).textTheme.bodyText1,
+                  )
+                ],
+              );
+            } else {
+              return Container();
+            }
           },
         ),
       ),

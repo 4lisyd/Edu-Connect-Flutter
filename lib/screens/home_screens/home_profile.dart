@@ -56,16 +56,17 @@ class _HomeProfileState extends State<HomeProfile> {
                   'Profile',
                   style: Theme.of(context)
                       .textTheme
-                      .headline2
+                      .headline1
                       .copyWith(fontSize: 30),
                 ),
+                Divider(),
                 Stack(
                   alignment: Alignment.center,
                   children: [
                     Container(
                       margin: EdgeInsets.only(bottom: 40),
-                      width: MediaQuery.of(context).size.width / 1.7,
-                      height: MediaQuery.of(context).size.height / 3.7,
+                      width: MediaQuery.of(context).size.width / 2.1,
+                      height: MediaQuery.of(context).size.height / 4.7,
                       decoration: BoxDecoration(),
                       child: ClipOval(
                           child: FutureBuilder(
@@ -97,7 +98,7 @@ class _HomeProfileState extends State<HomeProfile> {
                               })),
                     ),
                     Positioned(
-                      bottom: 40,
+                      bottom: 20,
                       right: -20,
                       child: Column(
                         children: [
@@ -121,30 +122,41 @@ class _HomeProfileState extends State<HomeProfile> {
                         ],
                       ),
                     ),
-                    Positioned(
-                      bottom: 8,
-                      child: Text(
-                        currentUser_bloc.name,
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                    ),
                   ],
                 ),
                 Container(
                   padding: EdgeInsets.all(20),
-                  margin: EdgeInsets.only(left: 0, right: 20),
+                  margin: EdgeInsets.only(left: 15, right: 15),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: Theme.of(context).accentColor.withOpacity(.2),
                     borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
+                        topRight: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(20),
+                        topLeft: Radius.circular(20)),
                   ),
                   alignment: Alignment.center,
                   child: Column(
                     children: [
+                      // Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Hi,',
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                          Text(
+                            currentUser_bloc.name,
+                            style: Theme.of(context).textTheme.headline1,
+                          ),
+                        ],
+                      ),
                       Wrap(
+                        runSpacing: 0,
+                        spacing: 0,
+                        runAlignment: WrapAlignment.start,
                         children: [
                           Chip(
                             backgroundColor: Theme.of(context).accentColor,
@@ -165,13 +177,13 @@ class _HomeProfileState extends State<HomeProfile> {
                                         listen: false)
                                     .isTutor
                                 ? Text(
-                                    'im a tutor, looking for students.',
+                                    'looking for students',
                                     style:
                                         Theme.of(context).textTheme.bodyText2,
                                     textAlign: TextAlign.center,
                                   )
                                 : Text(
-                                    'im a Guardian, looking for a Tutor.',
+                                    'looking for a Tutor.',
                                     style:
                                         Theme.of(context).textTheme.bodyText1,
                                     textAlign: TextAlign.center,
@@ -184,65 +196,77 @@ class _HomeProfileState extends State<HomeProfile> {
                         ],
                         alignment: WrapAlignment.start,
                       ),
+                      SizedBox(
+                        height: 40,
+                      ),
                       Divider(),
+                      FlatButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: () {},
+                          child: Container(
+                            // margin: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              color: Colors.white,
+                              border: Border.all(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Account Preferences'),
+                                Icon(Icons.navigate_next),
+                              ],
+                            ),
+                          )),
+                      FlatButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: () {},
+                          child: Container(
+                            // margin: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              color: Colors.white,
+                              border: Border.all(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Terms and Support'),
+                                Icon(Icons.navigate_next),
+                              ],
+                            ),
+                          )),
+                      FlatButton(
+                          padding: EdgeInsets.all(0),
+                          onPressed: () {},
+                          child: Container(
+                            // margin: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              color: Colors.white,
+                              border: Border.all(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('About'),
+                                Icon(Icons.navigate_next),
+                              ],
+                            ),
+                          )),
 
-                      FlatButton(
-                          padding: EdgeInsets.all(0),
-                          onPressed: () {},
-                          child: Container(
-                            // margin: EdgeInsets.all(20),
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.black26,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('About'),
-                                Icon(Icons.navigate_next),
-                              ],
-                            ),
-                          )),
-                      FlatButton(
-                          padding: EdgeInsets.all(0),
-                          onPressed: () {},
-                          child: Container(
-                            // margin: EdgeInsets.all(20),
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.black26,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('About'),
-                                Icon(Icons.navigate_next),
-                              ],
-                            ),
-                          )),
-                      FlatButton(
-                          padding: EdgeInsets.all(0),
-                          onPressed: () {},
-                          child: Container(
-                            // margin: EdgeInsets.all(20),
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.black26,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('About'),
-                                Icon(Icons.navigate_next),
-                              ],
-                            ),
-                          )),
                       Divider(),
                       SizedBox(
                         height: 30,

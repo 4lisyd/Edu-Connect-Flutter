@@ -22,14 +22,17 @@ ThemeData appTheme() {
         fontWeight: FontWeight.w900,
       ),
       bodyText1: TextStyle(
-          color: Color(0xff4A6572),
-          fontSize: 14,
-          fontFamily: 'Roboto',
-          fontWeight: FontWeight.w300),
+        color: Color(0xff4A6572),
+        fontSize: 14,
+        fontFamily: 'Roboto',
+        fontWeight: FontWeight.w300,
+        // shadows: [Shadow(color: Colors.white, blurRadius: 5)],
+      ),
       bodyText2: TextStyle(
         color: Colors.white70,
         fontSize: 15,
         fontFamily: 'Roboto',
+        // shadows: [Shadow(color: Colors.black54, blurRadius: 5)],
       ),
     ),
   );

@@ -27,22 +27,32 @@ class ChatService {
     // firestoreInstance.collection(collectionPath)
   }
 
-  sendMessage(String senderID, String message) {
+  sendMessage(String senderID, String receiverID, String message) {
+    print('sd');
+    print('sd');
+
+    print(senderID);
+    print(receiverID);
+    print(message);
+
+    print('sd');
     print('sd');
     var temp = firestoreInstance
         .collection('messages')
         // .where('senderID', arrayContains: [senderID])
-        .doc('1V1CKAsyUOtAMGwLPPYP Uvwb4fAWuyRnWyKB2rarRnD8DBH2')
-        .update({
+        .doc('$senderID $receiverID')
+
+        // .doc('1V1CKAsyUOtAMGwLPPYP Uvwb4fAWuyRnWyKB2rarRnD8DBH2')
+        .set({
       "messages": FieldValue.arrayUnion([
         {
           "message": message,
-          "seen": true,
+          "seen": false,
           'time': Timestamp.now(),
           "senderID": senderID,
         }
       ])
-    });
+    }, SetOptions(merge: true));
 
     // print("temp.whenComplete(() => temp.toString())");
   }

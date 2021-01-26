@@ -1,5 +1,7 @@
 import 'package:edu_connect/components/buildTogglesW.dart';
 import 'package:edu_connect/components/buttons.dart';
+import 'package:edu_connect/models/user.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_connect/models/storage.dart';
@@ -7,7 +9,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 //https://pub.dev/packages/flutter_phone_direct_caller
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:edu_connect/screens/chat_screen/ongoing_chat.dart';
 //https://pub.dev/packages/flutter_email_sender/install
+import 'package:provider/provider.dart';
 
 class ProfileView extends StatelessWidget {
   String tid;
@@ -21,6 +25,8 @@ class ProfileView extends StatelessWidget {
     attachmentPaths: [],
     isHTML: true,
   );
+
+  FirebaseFirestore parentRef = FirebaseFirestore.instance;
 
   //
   // for (var i = cal_stars(snapshot
@@ -41,6 +47,7 @@ class ProfileView extends StatelessWidget {
     }
     return (temp_counter1 / temp_counter2);
   }
+// todo: as every tutor is a parent show the name from parent
 
   @override
   Widget build(BuildContext context) {
@@ -124,12 +131,25 @@ class ProfileView extends StatelessWidget {
                             Positioned(
                               top: 35,
                               left: 170,
-                              child: Text(
-                                snapshot.data.data()['name'],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(fontSize: 25),
+                              // child: Text(
+                              //   snapshot.data.data()['name'],
+                              //   style: Theme.of(context)
+                              //       .textTheme
+                              //       .headline2
+                              //       .copyWith(fontSize: 25),
+                              // ),
+                              child: FutureBuilder(
+                                future: parentRef
+                                    .collection('parents')
+                                    .doc(snapshot.data.data()['uid'])
+                                    .get(),
+                                builder: (context, snapshot) => Text(
+                                  snapshot.data.data()['name'],
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline2
+                                      .copyWith(fontSize: 23),
+                                ),
                               ),
                             ),
                             Positioned(
@@ -233,27 +253,6 @@ class ProfileView extends StatelessWidget {
                                 snapshot.data.data()['testsPreferred'],
                               ),
                             ),
-                            // SizedBox(
-                            //   height: 20,
-                            // ),
-                            // Custombutton1(() {}, "Chat"),
-                            // SizedBox(
-                            //   height: 20,
-                            // ),
-                            // Custombutton1(() async {
-                            //   await FlutterEmailSender.send(email);
-                            // }, "Email"),
-                            // SizedBox(
-                            //   height: 20,
-                            // ),
-                            // Custombutton1(() async {
-                            //   bool res =
-                            //       await FlutterPhoneDirectCaller.callNumber(
-                            //           snapshot.data.data()['phoneNo']);
-                            //
-                            //   print('calling this number');
-                            //   print(snapshot.data.data()['phoneNo']);
-                            // }, "Call"),
                             SizedBox(
                               width: 5,
                             ),
@@ -296,7 +295,18 @@ class ProfileView extends StatelessWidget {
                                   ),
                                 ),
                                 MaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    print('chat');
+
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => OngoingChat(
+                                                Provider.of<UserCurrent>(
+                                                        context)
+                                                    .uid,
+                                                snapshot.data.data()['uid'])));
+                                  },
                                   height: 50,
                                   splashColor: Theme.of(context).primaryColor,
                                   enableFeedback: true,

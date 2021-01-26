@@ -18,6 +18,8 @@ class _HomeChatState extends State<HomeChat> {
 
   @override
   Widget build(BuildContext context) {
+    var firestoreInstance = FirebaseFirestore.instance;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Active Chats"),
@@ -58,36 +60,84 @@ class _HomeChatState extends State<HomeChat> {
                                           : item.data()['chatID'][0],
                                     )));
                       },
-                      child: Container(
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.all(10),
-                        height: 100,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
+                      child: Row(
+                        children: [
+                          ClipOval(
+                            child: Image.asset(
+                              'lib/assets/userData/defaultUserAvatar.png',
+                              // color: Colors.transparent,
+                              fit: BoxFit.contain,
+                              height: 70,
+                              width: 70,
                             ),
-                            color: Theme.of(context).primaryColor),
-                        child: Row(
-                          children: [
-                            // Image.network('src'),
-                            Text(
-                              //Todo: last message must be shown
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              padding: EdgeInsets.all(10),
+                              height: 80,
+                              // width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                  color: Theme.of(context).primaryColor),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Image.network('src'),
+                                  // Text(
+                                  //   //Todo: last message must be shown
+                                  //
+                                  //   ,
+                                  //
+                                  //   style: Theme.of(context).textTheme.bodyText2,
+                                  // ),
 
-                              item.data()['messages'][0]['message'],
-                              // "item.data().entries.last.value['message'].toString()",
-                              // item.data()['messages'][0]['message'],
+                                  FutureBuilder<DocumentSnapshot>(
+                                    future: firestoreInstance
+                                        .collection('parents')
+                                        .doc(item.data()['chatID'][0] ==
+                                                Provider.of<UserCurrent>(
+                                                        context)
+                                                    .uid
+                                            ? item.data()['chatID'][1]
+                                            : item.data()['chatID'][0])
+                                        .get(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        return Text(
+                                          snapshot.data.data()['name'],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1
+                                              .copyWith(fontSize: 20),
+                                        );
+                                      } else {
+                                        return Container();
+                                      }
+                                    },
+                                  ),
+                                  Text(
+                                    //Todo: last message must be shown
 
-                              style: Theme.of(context).textTheme.bodyText2,
+                                    item.data()['messages']
+                                            [item.data()['messages'].length - 1]
+                                        ['message'],
+                                    // "item.data().entries.last.value['message'].toString()",
+                                    // item.data()['messages'][0]['message'],
+
+                                    style:
+                                        Theme.of(context).textTheme.bodyText2,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  Text(
-                    "receiverID",
-                    style: Theme.of(context).textTheme.bodyText1,
-                  )
                 ],
               );
             } else {

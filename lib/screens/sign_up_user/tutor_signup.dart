@@ -81,6 +81,8 @@ class _TutorSignUpState extends State<TutorSignUp> {
       currentUser_bloc_NL.uid,
     );
 
+    // todo: make sure that bio is more than 70 words
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).accentColor,

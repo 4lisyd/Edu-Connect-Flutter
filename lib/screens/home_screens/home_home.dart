@@ -98,180 +98,6 @@ class _HomeHomeState extends State<HomeHome> {
                 ),
                 //animationText_Gradient("You Always Wanted."),
 
-                // area search...
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   children: [
-                //     // Icon(Icons.location_on_outlined),
-                //     Container(
-                //       height: 50,
-                //       child: FutureBuilder<DocumentSnapshot>(
-                //         future: FirebaseFirestore.instance
-                //             .collection('location')
-                //             .doc('qatar')
-                //             .get(),
-                //         builder: (context, snapshot) {
-                //           // print(snapshot.data['locations'].toString());
-                //
-                //           if (snapshot.hasData) {
-                //             var dropdownList = snapshot.data['locations'];
-                //             print(dropdownList);
-                //             List<dynamic> _locations = dropdownList;
-                //
-                //             return Row(
-                //               mainAxisSize: MainAxisSize.max,
-                //               children: [
-                //                 FlatButton(
-                //                   materialTapTargetSize:
-                //                       MaterialTapTargetSize.shrinkWrap,
-                //                   padding: EdgeInsets.zero,
-                //                   child: Icon(Icons.cancel),
-                //                   onPressed: () {
-                //                     setState(() {
-                //                       _selectedLocation = null;
-                //                       _location = null;
-                //                       currentUser_bloc_NL.locationString = null;
-                //                     });
-                //                   },
-                //                 ),
-                //                 DropdownButton(
-                //                   onChanged: (value) {
-                //                     setState(() {
-                //                       _selectedLocation = value;
-                //                       _location = value;
-                //                       currentUser_bloc_NL.locationString =
-                //                           value;
-                //                     });
-                //                   },
-                //                   hint: Text(
-                //                     "Choose Area",
-                //                     style:
-                //                         Theme.of(context).textTheme.bodyText1,
-                //                   ),
-                //                   icon: Icon(Icons.location_on_outlined),
-                //                   value: _selectedLocation,
-                //                   items: _locations.map((location) {
-                //                     return DropdownMenuItem(
-                //                       child: Text(location),
-                //                       value: location,
-                //                     );
-                //                   }).toList(),
-                //                 ),
-                //               ],
-                //             );
-                //           } else
-                //             return Text('');
-                //         },
-                //       ),
-                //     )
-                //   ],
-                // ),
-
-                // Container(
-                //   padding: EdgeInsets.only(left: 20),
-                //   width: MediaQuery.of(context).size.width,
-                //   child: Text(
-                //     "By City.",
-                //     style: Theme.of(context)
-                //         .textTheme
-                //         .headline1
-                //         .copyWith(shadows: [
-                //       Shadow(
-                //           blurRadius: 40,
-                //           offset: Offset(0, 10),
-                //           color: Colors.amberAccent),
-                //     ]),
-                //     textAlign: TextAlign.left,
-                //   ),
-                // ),
-                // Container(
-                //   height: 200,
-                //   //margin: EdgeInsets.symmetric(vertical: 20.0),
-                //   child: StreamBuilder<Object>(
-                //       stream: null,
-                //       builder: (context, snapshot) {
-                //         return ListView.builder(
-                //           scrollDirection: Axis.horizontal,
-                //           itemCount: list_searchbycityblock.length,
-                //           itemBuilder: (context, index) {
-                //             final item = list_searchbycityblock[index];
-                //
-                //             return FlatButton(
-                //               onPressed:
-                //                   list_searchbycityblock[index].onPressFunc,
-                //               child: Container(
-                //                 margin: EdgeInsets.all(20),
-                //                 decoration: BoxDecoration(
-                //                   color: Theme.of(context).primaryColor,
-                //                   borderRadius: BorderRadius.circular(15),
-                //                 ),
-                //                 width: 220,
-                //                 height: 500,
-                //                 child: ClipRRect(
-                //                   child: Column(
-                //                     mainAxisAlignment: MainAxisAlignment.center,
-                //                     crossAxisAlignment:
-                //                         CrossAxisAlignment.center,
-                //                     children: [
-                //                       Flexible(
-                //                         child: Stack(
-                //                           alignment: Alignment.topRight,
-                //                           children: [
-                //                             Center(
-                //                               child: Container(
-                //                                 color: Theme.of(context)
-                //                                     .primaryColor,
-                //                                 height: 10,
-                //                               ),
-                //                             ),
-                //                             Image.asset(
-                //                               list_searchbycityblock[index]
-                //                                   .imageAsset,
-                //                               fit: BoxFit.fill,
-                //                             ),
-                //                             Center(
-                //                               child: Text(
-                //                                 list_searchbycityblock[index]
-                //                                     .title,
-                //                                 style: Theme.of(context)
-                //                                     .textTheme
-                //                                     .headline1,
-                //                                 textAlign: TextAlign.start,
-                //                               ),
-                //                             )
-                //                           ],
-                //                         ),
-                //                       ),
-                //                       // SizedBox(
-                //                       //   height: 50,
-                //                       // ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ),
-                //             );
-                //           },
-                //           // children: [
-                //           //   Row(
-                //           //     children: [
-                //           //       Container(
-                //           //         child: Text('test'),
-                //           //         color: Colors.blue,
-                //           //         width: 400,
-                //           //         height: 100,
-                //           //       ),
-                //           //       Container(
-                //           //         child: Text('test'),
-                //           //         color: Colors.green,
-                //           //         width: 400,
-                //           //         height: 100,
-                //           //       ),
-                //           //     ],
-                //           //   ),
-                //           // ],
-                //         );
-                //       }),
-                // ),
                 SizedBox(
                   height: 40,
                 ),
@@ -320,8 +146,10 @@ class _HomeHomeState extends State<HomeHome> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SearchResult(_location,
-                                      list_searchbysubjectblock[index].title)));
+                                  builder: (context) => SearchResult(
+                                      _location,
+                                      list_searchbysubjectblock[index].title,
+                                      'subject')));
                         },
                         child: ClipRRect(
                           //  borderRadius: BorderRadius.circular(100),
@@ -404,23 +232,37 @@ class _HomeHomeState extends State<HomeHome> {
                       // print(list_searchbycityblock[0]);
                       final item = list_searchbytestprepblock[index];
 
-                      return Container(
-                        margin: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        width: 220,
-                        height: 500,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              list_searchbytestprepblock[index].title,
-                              style: Theme.of(context).textTheme.headline1,
+                      return FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SearchResult(
+                                  _location,
+                                  list_searchbytestprepblock[index].title,
+                                  'test'),
                             ),
-                          ],
+                          );
+                        },
+                        padding: EdgeInsets.zero,
+                        child: Container(
+                          margin: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          width: 220,
+                          height: 500,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                list_searchbytestprepblock[index].title,
+                                style: Theme.of(context).textTheme.headline1,
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },

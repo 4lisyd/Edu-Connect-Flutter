@@ -39,6 +39,8 @@ class UserSign_Tutor {
 
   final CollectionReference TutorCollection =
       FirebaseFirestore.instance.collection("tutors");
+  final CollectionReference ParentCollection =
+      FirebaseFirestore.instance.collection("parents");
 
   Future registerNewUser(
     Tutor tutor,
@@ -46,8 +48,11 @@ class UserSign_Tutor {
     print('printing tutor name');
     print(tutor.name);
     print('printing tutor name');
+
+    ParentCollection.doc(uid).set({'name': tutor.name});
+
     return await TutorCollection.doc(uid).set({
-      "name": tutor.name,
+      // "name": tutor.name,
       "uid": uid,
       "phoneNo": tutor.name,
       "gender": tutor.gender,

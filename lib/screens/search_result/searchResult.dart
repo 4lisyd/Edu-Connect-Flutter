@@ -10,8 +10,9 @@ class SearchResult extends StatelessWidget {
 
   String location;
   String subject;
+  String searchBy;
 
-  SearchResult(this.location, this.subject) {}
+  SearchResult(this.location, this.subject, this.searchBy);
 
   cal_days_avail(Map<String, bool> daysAvailable) {
     int counter = 0;
@@ -23,6 +24,8 @@ class SearchResult extends StatelessWidget {
     }
     return counter;
   }
+
+  FirebaseFirestore parentRef = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,8 @@ class SearchResult extends StatelessWidget {
                 child: StreamBuilder(
                   stream: firestoreInstance
                       .collection("tutors")
-                      .where("subjectsPreferred.$subject", isEqualTo: true)
+                      .where("${searchBy}sPreferred.${subject}",
+                          isEqualTo: true)
                       .where("area", isEqualTo: location)
                       .get()
                       .asStream(),
@@ -60,9 +64,9 @@ class SearchResult extends StatelessWidget {
                       return ListView.builder(
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, item) {
-                          // print('lll');
-                          // print(snapshot.data.docs.length);
-                          // print('lll');
+                          print('lll');
+                          print(snapshot.data.docs.first.data()['name']);
+                          print('lll');
                           return MaterialButton(
                             padding: EdgeInsets.zero,
                             splashColor: Theme.of(context).accentColor,
@@ -158,14 +162,29 @@ class SearchResult extends StatelessWidget {
                                             width: 10,
                                           ),
                                           Container(
-                                            child: Text(
-                                              // snapshot.data.docs[item].id,
-                                              snapshot.data.docs[item]
-                                                  .data()['name'],
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline1,
-                                              // textAlign: TextAlign.start,
+                                            // child: Text(
+                                            //   // snapshot.data.docs[item].id,
+                                            //   snapshot.data.docs[item]
+                                            //       .data()['name'],
+                                            //   style: Theme.of(context)
+                                            //       .textTheme
+                                            //       .headline1,
+                                            //   // textAlign: TextAlign.start,
+                                            // ),
+                                            child: FutureBuilder(
+                                              future: parentRef
+                                                  .collection('parents')
+                                                  .doc(snapshot.data.docs[item]
+                                                      .data()['uid'])
+                                                  .get(),
+                                              builder: (context, snapshot) =>
+                                                  Text(
+                                                snapshot.data.data()['name'],
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline1,
+                                                textAlign: TextAlign.start,
+                                              ),
                                             ),
                                           ),
                                           SizedBox(

@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>You may need to use your microphone for better experience.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>You may need to take photos for better experience.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You may need to upload for photos for better experience.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -43,8 +37,23 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tel</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>You may need to take photos for better experience.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>You may need to use your microphone for better experience.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You may need to upload for photos for better experience.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -64,10 +73,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-      <string>tel</string>
-    </array>
-
 </dict>
 </plist>

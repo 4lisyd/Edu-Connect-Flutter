@@ -76,12 +76,22 @@ class _HomeProfileState extends State<HomeProfile> {
                                 if (snapshot.hasData) {
                                   return CircleAvatar(
                                     backgroundColor: Colors.white,
-                                    child: Image.network(
-                                      snapshot.data,
+                                    child: CachedNetworkImage(
+                                      imageUrl: snapshot.data,
+                                      placeholder: (context, url) =>
+                                          CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
                                       width: 1000,
                                       fit: BoxFit.cover,
                                       height: 500,
                                     ),
+                                    // child: Image.network(
+                                    //   snapshot.data,
+                                    //   width: 1000,
+                                    //   fit: BoxFit.cover,
+                                    //   height: 500,
+                                    // ),
                                   );
                                 } else {
                                   return Stack(
@@ -155,7 +165,7 @@ class _HomeProfileState extends State<HomeProfile> {
                       ),
                       Wrap(
                         runSpacing: 0,
-                        spacing: 0,
+                        spacing: 1,
                         runAlignment: WrapAlignment.start,
                         children: [
                           Chip(
@@ -199,6 +209,22 @@ class _HomeProfileState extends State<HomeProfile> {
                       SizedBox(
                         height: 10,
                       ),
+                      Provider.of<UserCurrent>(context).isTutor
+                          ? Custombutton1(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyTutorProfile(
+                                          currentUser_bloc_NL.uid)));
+                              // MyTutorProfile(currentUser_bloc_NL.uid)
+                            }, "My Tutor profile")
+                          : Custombutton1(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          TutorSignUp(false)));
+                            }, "Register As A Tutor"),
                       Divider(),
                       FlatButton(
                           padding: EdgeInsets.all(0),
@@ -273,22 +299,6 @@ class _HomeProfileState extends State<HomeProfile> {
                       ),
                       // if its already tutor itll go there to update info else it will sign up new user.
 
-                      Provider.of<UserCurrent>(context).isTutor
-                          ? Custombutton1(() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MyTutorProfile(
-                                          currentUser_bloc_NL.uid)));
-                              // MyTutorProfile(currentUser_bloc_NL.uid)
-                            }, "My Tutor profile")
-                          : Custombutton1(() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          TutorSignUp(false)));
-                            }, "Register As A Tutor"),
                       SizedBox(
                         height: 20,
                       ),

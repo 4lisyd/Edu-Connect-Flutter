@@ -296,7 +296,7 @@ class ProfileView extends StatelessWidget {
                                 ),
                                 MaterialButton(
                                   onPressed: () {
-                                    print('chat');
+                                    print('chat1');
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

@@ -290,7 +290,7 @@ class ProfileView extends StatelessWidget {
                                       SizedBox(
                                         width: 5,
                                       ),
-                                      Text('Phone'),
+                                      Text('Phonde'),
                                     ],
                                   ),
                                 ),

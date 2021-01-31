@@ -317,7 +317,7 @@ class ProfileView extends StatelessWidget {
                                       SizedBox(
                                         width: 5,
                                       ),
-                                      Text('Chast'),
+                                      Text('Chat'),
                                     ],
                                   ),
                                 ),

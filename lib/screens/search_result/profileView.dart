@@ -304,7 +304,7 @@ class ProfileView extends StatelessWidget {
                                                 Provider.of<UserCurrent>(
                                                         context)
                                                     .uid,
-                                                snapshot.data.data()['ud'])));
+                                                snapshot.data.data()['uid'])));
                                   },
                                   height: 50,
                                   splashColor: Theme.of(context).primaryColor,

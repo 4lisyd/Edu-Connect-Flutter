@@ -58,6 +58,7 @@ flutter:
     - lib/assets/animations/lotties/welcome_confused.json
     - lib/assets/animations/lotties/swipe_left.json
     - lib/assets/animations/lotties/
+    - lib/assets/animations/lotties/coming_soon.json
     - lib/assets/userData/defaultUserAvatar.png
     - lib/assets/UI_pictures/subject_icons/
     - lib/assets/UI_pictures/background_pictures/

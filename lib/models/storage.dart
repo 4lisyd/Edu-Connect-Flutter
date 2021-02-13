@@ -6,6 +6,7 @@ import 'dart:io';
 
 class Storage {
   firebase_storage.FirebaseStorage _storage;
+  String imageURLtemp;
 
   Storage() {
     this._storage = firebase_storage.FirebaseStorage.instance;
@@ -34,6 +35,28 @@ class Storage {
       // print(downloadimageURL);
       // print("downURL");
       return (downloadimageURL);
+    } on firebase_core.FirebaseException catch (e) {
+      // e.g, e.code == 'canceled
+      print(e);
+    }
+  }
+
+  String getImageCached(fileName) {
+    try {
+      print(fileName);
+
+      String downloadimageURL;
+      Future<String> getimagesync() async {
+        imageURLtemp = await _storage
+            .ref('images/profileimages/$fileName.png')
+            .getDownloadURL();
+
+        // DataRequiredForimage.imagesPath = downloadimageURL;
+      }
+
+      getimagesync();
+      return imageURLtemp;
+      // return "downloadimageURL";
     } on firebase_core.FirebaseException catch (e) {
       // e.g, e.code == 'canceled
       print(e);

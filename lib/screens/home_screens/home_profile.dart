@@ -37,6 +37,8 @@ class _HomeProfileState extends State<HomeProfile> {
           source: ImageSource.gallery, imageQuality: 10);
     }
 
+    _storage.getImageCached(currentUser_bloc_NL.uid);
+
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -63,6 +65,28 @@ class _HomeProfileState extends State<HomeProfile> {
                 Stack(
                   alignment: Alignment.center,
                   children: [
+                    // todo: make this PP cached using a string somehow from _storage.getimage we have to get a string future builder messes it up.
+
+                    // Container(
+                    //   margin: EdgeInsets.only(bottom: 500),
+                    //   width: MediaQuery.of(context).size.width / 2.1,
+                    //   height: MediaQuery.of(context).size.height / 4.7,
+                    //   decoration: BoxDecoration(),
+                    //   child: ClipOval(
+                    //       child: CachedNetworkImage(
+                    //     // imageUrl:
+                    //     _storage.getImageCached(currentUser_bloc_NL.uid),
+                    //     // "https://firebasestorage.googleapis.com/v0/b/edu-connect-ee289.appspot.com/o/images%2Fprofileimages%2FUvwb4fAWuyRnWyKB2rarRnD8DBH2.png?alt=media&token=6716dee5-1837-4a5a-b4fb-159e18ed2b51",
+                    //     // fadeInDuration: Duration(seconds: 2),
+                    //     placeholder: (context, url) =>
+                    //         CircularProgressIndicator(),
+                    //     errorWidget: (context, url, error) => Icon(Icons.error),
+                    //     width: 1000,
+                    //     fit: BoxFit.cover,
+                    //     height: 500,
+                    //   )),
+                    // ),
+                    //////////////////////////end of the beta PP
                     Container(
                       margin: EdgeInsets.only(bottom: 40),
                       width: MediaQuery.of(context).size.width / 2.1,
@@ -78,6 +102,7 @@ class _HomeProfileState extends State<HomeProfile> {
                                     backgroundColor: Colors.white,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data,
+                                      // fadeInDuration: Duration(seconds: 2),
                                       placeholder: (context, url) =>
                                           CircularProgressIndicator(),
                                       errorWidget: (context, url, error) =>
@@ -138,6 +163,7 @@ class _HomeProfileState extends State<HomeProfile> {
                   padding: EdgeInsets.all(20),
                   margin: EdgeInsets.only(left: 15, right: 15),
                   width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 1.8,
                   decoration: BoxDecoration(
                     color: Theme.of(context).accentColor.withOpacity(.2),
                     borderRadius: BorderRadius.only(
@@ -148,6 +174,7 @@ class _HomeProfileState extends State<HomeProfile> {
                   ),
                   alignment: Alignment.center,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       // Divider(),
                       Row(
@@ -250,7 +277,27 @@ class _HomeProfileState extends State<HomeProfile> {
                           )),
                       FlatButton(
                           padding: EdgeInsets.all(0),
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return SimpleDialog(
+                                    title: Text(
+                                      'Term and Conditons',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    contentPadding: EdgeInsets.all(50),
+                                    children: [
+                                      Text(
+                                        "You must obey US so we hide these under long pieces of boring texts, You must obey US so we hide these under long pieces of boring texts, You must obey US so we hide these under long pieces of boring texts , You must obey US so we hide these under long pieces of boring texts",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      )
+                                    ],
+                                  );
+                                });
+                          },
                           child: Container(
                             // margin: EdgeInsets.all(20),
                             padding: EdgeInsets.all(10),
@@ -272,7 +319,27 @@ class _HomeProfileState extends State<HomeProfile> {
                           )),
                       FlatButton(
                           padding: EdgeInsets.all(0),
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return SimpleDialog(
+                                    title: Text(
+                                      'About',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    contentPadding: EdgeInsets.all(50),
+                                    children: [
+                                      Text(
+                                        'tell me something about the app i really believe in your idea!tell me something about the app i really believe in your idea!tell me something about the app i really believe in your idea!tell me something about the app i really believe in your idea!',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      )
+                                    ],
+                                  );
+                                });
+                          },
                           child: Container(
                             // margin: EdgeInsets.all(20),
                             padding: EdgeInsets.all(10),

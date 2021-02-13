@@ -88,7 +88,6 @@ class _HomeChatState extends State<HomeChat> {
                                 children: [
                                   // Image.network('src'),
                                   // Text(
-                                  //   //Todo: last message must be shown
                                   //
                                   //   ,
                                   //
@@ -119,17 +118,17 @@ class _HomeChatState extends State<HomeChat> {
                                       }
                                     },
                                   ),
-                                  Text(
-                                    //Todo: last message must be shown
+                                  Expanded(
+                                    child: Text(
+                                      item.data()['messages'][
+                                          item.data()['messages'].length -
+                                              1]['message'],
+                                      // "item.data().entries.last.value['message'].toString()",
+                                      // item.data()['messages'][0]['message'],
 
-                                    item.data()['messages']
-                                            [item.data()['messages'].length - 1]
-                                        ['message'],
-                                    // "item.data().entries.last.value['message'].toString()",
-                                    // item.data()['messages'][0]['message'],
-
-                                    style:
-                                        Theme.of(context).textTheme.bodyText2,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2,
+                                    ),
                                   ),
                                 ],
                               ),

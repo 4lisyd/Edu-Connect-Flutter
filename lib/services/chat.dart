@@ -27,23 +27,27 @@ class ChatService {
     // firestoreInstance.collection(collectionPath)
   }
 
-  sendMessage(String senderID, String receiverID, String message) {
+  sendMessage(String senderID, String receiverID, String message) async {
     print('sd');
-    print('sd');
-
     print(senderID);
     print(receiverID);
     print(message);
+    print('sd');
 
-    print('sd');
-    print('sd');
-    var temp = firestoreInstance
+    var messageID_inCloud = firestoreInstance
         .collection('messages')
-        // .where('senderID', arrayContains: [senderID])
-        .doc('$senderID $receiverID')
+        .where('chatID', arrayContainsAny: [senderID, receiverID])
+        .get()
+        .then((value) => value.docs.first.id);
+    // String mmessageID_inCloud = messageID_inCloud.then((value) => value.docs.first.id);// print('sdssss');
+    print(await messageID_inCloud);
+    print('666666');
 
-        // .doc('1V1CKAsyUOtAMGwLPPYP Uvwb4fAWuyRnWyKB2rarRnD8DBH2')
-        .set({
+    var temp =
+        firestoreInstance.collection('messages').doc(await messageID_inCloud)
+
+            // .doc('1V1CKAsyUOtAMGwLPPYP Uvwb4fAWuyRnWyKB2rarRnD8DBH2')
+            .set({
       "messages": FieldValue.arrayUnion([
         {
           "message": message,

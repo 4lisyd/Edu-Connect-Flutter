@@ -22,6 +22,11 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool login = prefs.getBool("login");
   print("login:" + login.toString());
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   statusBarColor: Colors.amberAccent,
+  //   statusBarBrightness: Brightness.dark,
+  // ));
   runApp(
     MultiProvider(
       providers: [

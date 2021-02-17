@@ -11,8 +11,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -36,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     SharedPref sharedpref = SharedPref();
     User user = FirebaseAuth.instance.currentUser;
+    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
     // hello the user after a session starts
 
@@ -43,6 +45,20 @@ class _HomeScreenState extends State<HomeScreen> {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Colors.white,
       ));
+      _firebaseMessaging.getToken().then((value) => print(value));
+      _firebaseMessaging.requestNotificationPermissions();
+      _firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) async {
+          print("$message onMessage");
+        },
+        onLaunch: (Map<String, dynamic> message) async {
+          print("$message onLaunch");
+        },
+        onResume: (Map<String, dynamic> message) async {
+          print("$message onResume");
+        },
+      );
+
       //print(await sharedpref.read('user'));
       Provider.of<UserCurrent>(context, listen: false).fromJson(
         await sharedpref.read('user'),
@@ -84,41 +100,49 @@ class _HomeScreenState extends State<HomeScreen> {
       // animationController.dispose() instead of your controller.dispose
     }
 
-    return Scaffold(
-      //https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
+    return Container(
+      // color: Colors.pinkAccent,
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomPadding: false,
+//https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
+          extendBodyBehindAppBar: true,
+          // backgroundColor: Colors.pink,
 
-      bottomNavigationBar: CurvedNavigationBar(
-        index: 1,
-        color: Theme.of(context).accentColor,
-        backgroundColor: Color(0xfffffff),
-        height: 60,
+          bottomNavigationBar: CurvedNavigationBar(
+            index: 1,
+            color: Theme.of(context).accentColor,
+            backgroundColor: Color(0xfffffff),
+            height: 60,
 
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        //type: BottomNavigationBarType.fixed,
+            onTap: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            //type: BottomNavigationBarType.fixed,
 
-        items: [
-          Container(
-            child: Icon(Icons.chat),
+            items: [
+              Container(
+                child: Icon(Icons.chat),
+              ),
+              Container(
+                child: Icon(Icons.home),
+              ),
+              Container(
+                child: Icon(Icons.group_add_sharp),
+              ),
+              Container(
+                child: Icon(Icons.face),
+              ),
+            ],
           ),
-          Container(
-            child: Icon(Icons.home),
-          ),
-          Container(
-            child: Icon(Icons.group_add_sharp),
-          ),
-          Container(
-            child: Icon(Icons.face),
-          ),
-        ],
+          body: navbarWidgets.elementAt(_selectedIndex),
+          extendBody: true,
+
+          // backgroundColor: Colors.transparent,
+        ),
       ),
-      body: navbarWidgets.elementAt(_selectedIndex),
-      extendBody: true,
-
-      // backgroundColor: Colors.transparent,
     );
   }
 }

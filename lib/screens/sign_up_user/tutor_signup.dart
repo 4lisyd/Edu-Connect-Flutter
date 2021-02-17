@@ -123,6 +123,8 @@ class _TutorSignUpState extends State<TutorSignUp> {
                                 backgroundColor: Colors.white,
                                 child: Image.network(
                                   snapshot.data,
+                                  fit: BoxFit.fill,
+                                  height: 500,
                                 ),
                               );
                             } else {
@@ -325,15 +327,52 @@ class _TutorSignUpState extends State<TutorSignUp> {
                     // print(tutor_bloc_NL.area);
                     // tutor_bloc_NL.area = _location;
                     // print(tutor_bloc_NL.area);
+                    //
 
-                    userSign_Tutor.registerNewUser(tutor_bloc_NL);
-                    Provider.of<UserCurrent>(context, listen: false).isTutor =
-                        true;
-                    ParentsCollection.doc(
-                            Provider.of<UserCurrent>(context, listen: false)
-                                .uid)
-                        .update({"tutor": true});
-                    Navigator.pop(context);
+                    print('lololol');
+                    print('lololol');
+                    print(tutor_bloc_NL.name);
+                    print(tutor_bloc_NL.bio);
+                    print(tutor_bloc_NL.email);
+                    print('lololol');
+                    print('lololol');
+                    if (tutor_bloc_NL.name.isEmpty ||
+                        tutor_bloc_NL.bio.isEmpty ||
+                        tutor_bloc_NL.email.isEmpty ||
+                        _selectedLocation == null ||
+                        Provider.of<Tutor>(context, listen: false).gender ==
+                            null) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Text('s');
+                          });
+                    } else if (tutor_bloc_NL.name.length > 15 ||
+                        tutor_bloc_NL.name.length < 3 ||
+                        tutor_bloc_NL.bio.length < 90 ||
+                        tutor_bloc_NL.email.isEmpty ||
+                        _selectedLocation == null ||
+                        Provider.of<Tutor>(context, listen: false).gender ==
+                            null) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return SimpleDialog(
+                              backgroundColor: Colors.amberAccent,
+                              title:
+                                  Text('make sure you enter all the details'),
+                            );
+                          });
+                    }
+
+                    // userSign_Tutor.registerNewUser(tutor_bloc_NL);
+                    // Provider.of<UserCurrent>(context, listen: false).isTutor =
+                    //     true;
+                    // ParentsCollection.doc(
+                    //         Provider.of<UserCurrent>(context, listen: false)
+                    //             .uid)
+                    //     .update({"tutor": true});
+                    // Navigator.pop(context);
 
                     // any tutor is also a parent
                   },

@@ -143,13 +143,18 @@ class ProfileView extends StatelessWidget {
                                     .collection('parents')
                                     .doc(snapshot.data.data()['uid'])
                                     .get(),
-                                builder: (context, snapshot) => Text(
-                                  snapshot.data.data()['name'],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline2
-                                      .copyWith(fontSize: 23),
-                                ),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data.data()['name'],
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline2
+                                          .copyWith(fontSize: 23),
+                                    );
+                                  } else
+                                    return Container();
+                                },
                               ),
                             ),
                             Positioned(

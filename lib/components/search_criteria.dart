@@ -1,5 +1,6 @@
 import 'package:edu_connect/components/buildTogglesW.dart';
 import 'package:edu_connect/components/buttons.dart';
+import 'package:edu_connect/screens/search_result/searchResult.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_connect/models/tutor.dart';
@@ -145,6 +146,13 @@ class _SearchCriteriaState extends State<SearchCriteria> {
           FlatButton(
             onPressed: () {
               print('"seached..');
+              //
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) =>
+              //           SearchResult(location, subject, searchBy)),
+              // );
             },
             child: Container(
               width: 100,
@@ -159,7 +167,7 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
-                      .copyWith(fontSize: 18),
+                      .copyWith(fontSize: 16),
                 ),
               ),
             ),
@@ -167,7 +175,7 @@ class _SearchCriteriaState extends State<SearchCriteria> {
         ],
         title: Text(
           'Search',
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context).textTheme.headline2.copyWith(fontSize: 26),
         ),
       ),
     );

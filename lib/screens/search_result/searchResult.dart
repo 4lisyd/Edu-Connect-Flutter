@@ -12,6 +12,10 @@ class SearchResult extends StatelessWidget {
   String subject;
   String searchBy;
 
+  var locationList = [];
+  var subjectList = [];
+  var SearchByList = [];
+
   SearchResult(this.location, this.subject, this.searchBy);
 
   cal_days_avail(Map<String, bool> daysAvailable) {
@@ -45,12 +49,6 @@ class SearchResult extends StatelessWidget {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                // padding: EdgeInsets.all(20),
-                // margin: EdgeInsets.all(10),
-                // decoration: BoxDecoration(
-                //   color: Theme.of(context).primaryColorDark,
-                //   borderRadius: BorderRadius.circular(20),
-                // ),
                 child: StreamBuilder(
                   stream: firestoreInstance
                       .collection("tutors")
@@ -64,9 +62,6 @@ class SearchResult extends StatelessWidget {
                       return ListView.builder(
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, item) {
-                          print('lll');
-                          print(snapshot.data.docs.first.data()['name']);
-                          print('lll');
                           return MaterialButton(
                             padding: EdgeInsets.zero,
                             splashColor: Theme.of(context).accentColor,
@@ -172,20 +167,26 @@ class SearchResult extends StatelessWidget {
                                             //   // textAlign: TextAlign.start,
                                             // ),
                                             child: FutureBuilder(
-                                              future: parentRef
-                                                  .collection('parents')
-                                                  .doc(snapshot.data.docs[item]
-                                                      .data()['uid'])
-                                                  .get(),
-                                              builder: (context, snapshot) =>
-                                                  Text(
-                                                snapshot.data.data()['name'],
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline1,
-                                                textAlign: TextAlign.start,
-                                              ),
-                                            ),
+                                                future: parentRef
+                                                    .collection('parents')
+                                                    .doc(snapshot
+                                                        .data.docs[item]
+                                                        .data()['uid'])
+                                                    .get(),
+                                                builder: (context, snapshot) {
+                                                  if (snapshot.hasData) {
+                                                    return Text(
+                                                      snapshot.data
+                                                          .data()['name'],
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headline1,
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                    );
+                                                  }
+                                                  return Container();
+                                                }),
                                           ),
                                           SizedBox(
                                             width: 10,

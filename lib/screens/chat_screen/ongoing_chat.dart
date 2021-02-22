@@ -30,9 +30,12 @@ class _OngoingChatState extends State<OngoingChat> {
         firestoreInstance.collection('parents').doc(widget.receiverID);
     var senderRef = firestoreInstance
       ..collection('parents').doc(widget.senderID);
-    var chatRef = firestoreInstance.collection('messages');
-    //.orderBy('time', descending: true);
-    // .where('chatID', arrayContains: [widget.senderID]);
+    
+    var chatRef = firestoreInstance.collection('messages')
+    // .orderBy('time', descending: true)
+    .where('chatID', arrayContainsAny: [widget.senderID,widget.receiverID]);
+
+    // if ChatID has any ()
 
     ScrollController chatscrollcontroller = ScrollController();
 
@@ -94,6 +97,7 @@ class _OngoingChatState extends State<OngoingChat> {
             child: SingleChildScrollView(
               // reverse: true,
               dragStartBehavior: DragStartBehavior.down,
+              reverse: true,
               controller: chatscrollcontroller,
               child: Container(
                 // height: MediaQuery.of(context).size.height,
@@ -161,9 +165,9 @@ class _OngoingChatState extends State<OngoingChat> {
             ),
           ),
           Container(
-            height: 80,
+            height: 75,
             width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(bottom: 30, right: 10, left: 10),
+            margin: EdgeInsets.only(bottom: 10, right: 10, left: 10,top: 10),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
@@ -174,11 +178,11 @@ class _OngoingChatState extends State<OngoingChat> {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.71,
                   padding: EdgeInsets.zero,
-                  margin: EdgeInsets.zero,
+                  margin: EdgeInsets.all(3),
                   // height: 50,
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
                   child: TextFormField(
                     controller: messageController,
                   ),
@@ -189,7 +193,7 @@ class _OngoingChatState extends State<OngoingChat> {
                     onPressed: () {
                       chatscrollcontroller.jumpTo(0);
                       print("send message");
-                      if (messageController.text.trim().isNotEmpty) {
+                      if (messageController.text.trim().isNotEmpty)   {
                         //send messages
                         widget.chatservice.sendMessage(widget.senderID,
                             widget.receiverID, messageController.text);
@@ -198,7 +202,7 @@ class _OngoingChatState extends State<OngoingChat> {
                     },
                     child: Icon(
                       Icons.send,
-                      size: 35,
+                      size: 30,
                       color: Colors.white,
                     ),
                   ),

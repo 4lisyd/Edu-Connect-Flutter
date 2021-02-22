@@ -157,36 +157,36 @@ class SearchResult extends StatelessWidget {
                                             width: 10,
                                           ),
                                           Container(
-                                            // child: Text(
-                                            //   // snapshot.data.docs[item].id,
-                                            //   snapshot.data.docs[item]
-                                            //       .data()['name'],
-                                            //   style: Theme.of(context)
-                                            //       .textTheme
-                                            //       .headline1,
-                                            //   // textAlign: TextAlign.start,
-                                            // ),
-                                            child: FutureBuilder(
-                                                future: parentRef
-                                                    .collection('parents')
-                                                    .doc(snapshot
-                                                        .data.docs[item]
-                                                        .data()['uid'])
-                                                    .get(),
-                                                builder: (context, snapshot) {
-                                                  if (snapshot.hasData) {
-                                                    return Text(
-                                                      snapshot.data
-                                                          .data()['name'],
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline1,
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    );
-                                                  }
-                                                  return Container();
-                                                }),
+                                            child: Text(
+                                              // snapshot.data.docs[item].id,
+                                              snapshot.data.docs[item]
+                                                  .data()['name'],
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headline1,
+                                              textAlign: TextAlign.start,
+                                            ),
+                                            // child: FutureBuilder(
+                                            //     future: parentRef
+                                            //         .collection('parents')
+                                            //         .doc(snapshot
+                                            //             .data.docs[item]
+                                            //             .data()['uid'])
+                                            //         .get(),
+                                            //     builder: (context, snapshot) {
+                                            //       if (snapshot.hasData) {
+                                            //         return Text(
+                                            //           snapshot.data
+                                            //               .data()['name'],
+                                            //           style: Theme.of(context)
+                                            //               .textTheme
+                                            //               .headline1,
+                                            //           textAlign:
+                                            //               TextAlign.start,
+                                            //         );
+                                            //       }
+                                            //       return Container();
+                                            //     }),
                                           ),
                                           SizedBox(
                                             width: 10,

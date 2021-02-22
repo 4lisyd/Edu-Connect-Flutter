@@ -47,7 +47,7 @@ class ProfileView extends StatelessWidget {
     }
     return (temp_counter1 / temp_counter2);
   }
-// todo: as every tutor is a parent show the name from parent
+// todo: as every tutor is a parent showing name from tutor.
 
   @override
   Widget build(BuildContext context) {
@@ -131,32 +131,32 @@ class ProfileView extends StatelessWidget {
                             Positioned(
                               top: 35,
                               left: 170,
-                              // child: Text(
-                              //   snapshot.data.data()['name'],
-                              //   style: Theme.of(context)
-                              //       .textTheme
-                              //       .headline2
-                              //       .copyWith(fontSize: 25),
-                              // ),
-                              child: FutureBuilder(
-                                future: parentRef
-                                    .collection('parents')
-                                    .doc(snapshot.data.data()['uid'])
-                                    .get(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(
-                                      snapshot.data.data()['name'],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(fontSize: 23),
-                                    );
-                                  } else
-                                    return Container();
-                                },
+                              child: Text(
+                                snapshot.data.data()['name'],
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline2
+                                    .copyWith(fontSize: 25),
                               ),
-                            ),
+                              // child: FutureBuilder(
+                              //   future: parentRef
+                              //       .collection('parents')
+                              //       .doc(snapshot.data.data()['uid'])
+                              //       .get(),
+                              //   builder: (context, snapshot) {
+                              //     if (snapshot.hasData) {
+                              //       return Text(
+                              //         snapshot.data.data()['name'],
+                              //         style: Theme.of(context)
+                              //             .textTheme
+                              //             .headline2
+                              //             .copyWith(fontSize: 23),
+                              //       );
+                              //     } else
+                              //       return Container();
+
+                              ),
+
                             Positioned(
                               top: 75,
                               left: 170,

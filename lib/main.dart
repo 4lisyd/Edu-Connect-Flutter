@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/tutor.dart';
 import 'package:flutter/services.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +28,7 @@ void main() async {
   //   statusBarColor: Colors.amberAccent,
   //   statusBarBrightness: Brightness.dark,
   // ));
+
   runApp(
     MultiProvider(
       providers: [
@@ -34,6 +36,8 @@ void main() async {
         ChangeNotifierProvider<Tutor>(create: (context) => Tutor()),
       ],
       child: MyApp(login),
+
+
     ),
   );
 }

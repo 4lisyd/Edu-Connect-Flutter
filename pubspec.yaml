@@ -7,8 +7,12 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
+#environment:
+#  sdk: ">=2.7.0 <3.0.0"
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
+
+
 
 dependencies:
   flutter:
@@ -22,11 +26,13 @@ dependencies:
   cloud_firestore: ^0.14.0
   curved_navigation_bar: ^0.3.4
   shared_preferences: ^0.5.12+4
-  image_picker:
-    git:
-      url: https://github.com/cpboyd/plugins.git
-      ref: image_picker_workaround
-      path: packages/image_picker/image_picker
+  image_picker: ^0.6.7+22
+  splashscreen: ^1.3.5
+#  image_picker:
+#    git:
+#      url: https://github.com/cpboyd/plugins.git
+#      ref: image_picker_workaround
+#      path: packages/image_picker/image_picker
   firebase_storage: ^5.2.0
   geolocator: ^6.1.13
   flutter_email_sender: ^4.0.0

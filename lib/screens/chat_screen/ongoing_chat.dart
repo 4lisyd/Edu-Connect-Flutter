@@ -3,8 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
 import 'package:edu_connect/services/chat.dart';
-// import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 import '../../services/firestore_service.dart';
 
@@ -42,7 +41,6 @@ class _OngoingChatState extends State<OngoingChat> {
     //[widget.senderID,widget.receiverID]
 
     // .where('chatID', arrayContains:  widget.receiverID, ,);
-    //todo: fix this ^^
 
     ScrollController chatscrollcontroller = ScrollController();
 
@@ -75,26 +73,14 @@ class _OngoingChatState extends State<OngoingChat> {
                 if (snapshot.hasData) {
                   return MaterialButton(
                     onPressed: () {
-                      // _callNumber() async {
-                      //   bool res = await FlutterPhoneDirectCaller.callNumber(
-                      //       snapshot.data.data()['phoneNo']);
-                      // }
-                      //
-                      // _callNumber();
-                      // launch(('tel://+923149553559'));
-                      print("laucher");
-
-                      _launchcaller() async {
-                        const url = '719-282-2224';
-
-                        if (await canLaunch(url)) {
-                          await launch(url);
-                        } else {
-                          throw 'Could not launch $url';
-                        }
+                      _callNumber() async {
+                        bool res = await FlutterPhoneDirectCaller.callNumber(
+                            snapshot.data.data()['phoneNo']);
                       }
 
-                      _launchcaller();
+                      _callNumber();
+                      //
+
                     },
                     child: Icon(
                       Icons.call,

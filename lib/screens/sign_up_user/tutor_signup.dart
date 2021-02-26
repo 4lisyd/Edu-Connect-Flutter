@@ -238,6 +238,7 @@ class _TutorSignUpState extends State<TutorSignUp> {
                           setState(() {
                             _selectedLocation = value;
                             _location = value;
+                            tutor_bloc_NL.area = value;
                           });
                         },
                         hint: Text(

@@ -152,7 +152,7 @@ class _HomeProfileState extends State<HomeProfile> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Hi,',
+                            'Hi, ',
                             style: Theme.of(context).textTheme.headline1,
                           ),
                           Text(
@@ -167,6 +167,7 @@ class _HomeProfileState extends State<HomeProfile> {
                         runAlignment: WrapAlignment.start,
                         children: [
                           Chip(
+                            padding: EdgeInsets.all(10),
                             backgroundColor: Theme.of(context).accentColor,
                             label: Text(
                               currentUser_bloc != null
@@ -180,6 +181,7 @@ class _HomeProfileState extends State<HomeProfile> {
                             ),
                           ),
                           Chip(
+                            padding: EdgeInsets.all(10),
                             backgroundColor: Theme.of(context).accentColor,
                             label: Provider.of<UserCurrent>(context,
                                         listen: false)
@@ -193,7 +195,7 @@ class _HomeProfileState extends State<HomeProfile> {
                                 : Text(
                                     'looking for a Tutor.',
                                     style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                        Theme.of(context).textTheme.bodyText2,
                                     textAlign: TextAlign.center,
                                   ),
                             avatar: Icon(
@@ -215,19 +217,21 @@ class _HomeProfileState extends State<HomeProfile> {
                                       builder: (context) => MyTutorProfile(
                                           currentUser_bloc_NL.uid)));
                               // MyTutorProfile(currentUser_bloc_NL.uid)
-                            }, "My Tutor profile")
+                            }, "My Tutor Profile")
                           : Custombutton1(() {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           TutorSignUp(false)));
-                            }, "Register As A Tutor"),
-                      Divider(),
+                            }, "Register as a Tutor"),
+                      // Divider(),
+                      SizedBox(height: 20,),
                       FlatButton(
                           padding: EdgeInsets.all(0),
                           onPressed: () {},
                           child: Container(
+                            height: 60,
                             // margin: EdgeInsets.all(20),
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -271,6 +275,7 @@ class _HomeProfileState extends State<HomeProfile> {
                           },
                           child: Container(
                             // margin: EdgeInsets.all(20),
+                            height: 60,
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               borderRadius:
@@ -314,6 +319,7 @@ class _HomeProfileState extends State<HomeProfile> {
                           child: Container(
                             // margin: EdgeInsets.all(20),
                             padding: EdgeInsets.all(10),
+                             height: 60,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
@@ -331,15 +337,12 @@ class _HomeProfileState extends State<HomeProfile> {
                             ),
                           )),
 
-                      Divider(),
+                      // Divider(),
                       SizedBox(
-                        height: 30,
+                        height: 40,
                       ),
                       // if its already tutor itll go there to update info else it will sign up new user.
 
-                      SizedBox(
-                        height: 20,
-                      ),
                     ],
                   ),
                 ),
@@ -352,6 +355,9 @@ class _HomeProfileState extends State<HomeProfile> {
                   prefs.setBool('login', false);
                   Navigator.pushNamed(context, "/welcome");
                 }, "Sign Out"),
+                SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),

@@ -34,38 +34,38 @@ class _SearchCriteriaState extends State<SearchCriteria> {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
-                Text(
-                  'Days Availability',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(fontSize: 20),
-                ),
-                buildTogglesW(
-                  widget.tutor_search_temp.daysAvailable,
-                ),
-                // buildTogglesW(subjectsAvailable),
-                // location
-                Text(
-                  'Subjects',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(fontSize: 20),
-                ),
-                buildTogglesW(
-                  widget.tutor_search_temp.subjectPreferred,
-                ),
-                Text(
-                  'Tests Preparation',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(fontSize: 20),
-                ),
-                buildTogglesW(
-                  widget.tutor_search_temp.testPreferred,
-                ),
+                // Text(
+                //   'Days Availability',
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .headline1
+                //       .copyWith(fontSize: 20),
+                // ),
+                // buildTogglesW(
+                //   widget.tutor_search_temp.daysAvailable,
+                // ),
+                // // buildTogglesW(subjectsAvailable),
+                // // location
+                // Text(
+                //   'Subjects',
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .headline1
+                //       .copyWith(fontSize: 20),
+                // ),
+                // buildTogglesW(
+                //   widget.tutor_search_temp.subjectPreferred,
+                // ),
+                // Text(
+                //   'Tests Preparation',
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .headline1
+                //       .copyWith(fontSize: 20),
+                // ),
+                // buildTogglesW(
+                //   widget.tutor_search_temp.testPreferred,
+                // ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,

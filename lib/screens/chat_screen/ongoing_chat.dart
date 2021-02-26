@@ -6,6 +6,8 @@ import 'package:edu_connect/services/chat.dart';
 // import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../services/firestore_service.dart';
+
 class OngoingChat extends StatefulWidget {
   //var firestoreInstance = FirebaseFirestore.instance;
   //var chatRef = firestoreInstance.collection('tutors').doc(tid);
@@ -30,12 +32,17 @@ class _OngoingChatState extends State<OngoingChat> {
         firestoreInstance.collection('parents').doc(widget.receiverID);
     var senderRef = firestoreInstance
       ..collection('parents').doc(widget.senderID);
-    
-    var chatRef = firestoreInstance.collection('messages')
-    // .orderBy('time', descending: true)
-    .where('chatID', arrayContainsAny: [widget.senderID,widget.receiverID]);
 
-    // if ChatID has any ()
+
+    ChatService chatservice = ChatService();
+
+    var chatRef = chatservice.returnCurrentChatRef(widget.senderID, widget.receiverID);
+    // var chatRef = firestoreInstance.collection('messages').where('senderID',isEqualTo: widget.senderID).where("receiverID",isEqualTo: widget.receiverID);
+    // .orderBy('time', descending: true)
+    //[widget.senderID,widget.receiverID]
+
+    // .where('chatID', arrayContains:  widget.receiverID, ,);
+    //todo: fix this ^^
 
     ScrollController chatscrollcontroller = ScrollController();
 
@@ -46,7 +53,16 @@ class _OngoingChatState extends State<OngoingChat> {
           future: receiverRef.get(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Text(snapshot.data.data()['name']);
+              if (snapshot.data.data()['tutor'] == false) {
+                return Text(snapshot.data.data()['name']);
+              }
+              else
+                return FutureBuilder<DocumentSnapshot>(future: tutorCollection.doc(widget.receiverID).get(),builder: (context,snapshot) {if (snapshot.hasData) {return Text(snapshot.data.data()['name']);}
+
+
+                else{return Text('Tutor');}
+
+                },);
             } else {
               return Container();
             }
@@ -101,10 +117,18 @@ class _OngoingChatState extends State<OngoingChat> {
               controller: chatscrollcontroller,
               child: Container(
                 // height: MediaQuery.of(context).size.height,
-                child: StreamBuilder<QuerySnapshot>(
-                    stream: chatRef.snapshots(),
+                child: FutureBuilder<DocumentSnapshot>(
+                    future: chatRef,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
+                        print('has data');
+                        print('hashas has has ');
+                        print(snapshot.data.exists);
+                        print(snapshot.connectionState);
+                        print(snapshot.error);
+
+                        print('hashas has has ');
+
                         return Container(
                           // color: Colors.pinkAccent,
                           // height: MediaQuery.of(context).size.height * 0.94,
@@ -117,8 +141,11 @@ class _OngoingChatState extends State<OngoingChat> {
                                 child: Column(
                                   verticalDirection: VerticalDirection.down,
                                   children: [
-                                    for (var item in snapshot.data.docs[0]
-                                        .data()['messages'])
+                                    for (var item in snapshot.data.data()['messages'])
+                                    // for (var item in snapshot.data.docs[0]
+                                        // .data()['messages'])
+
+                                      // Text('as',style: TextStyle(color: Colors.black),),
                                       Bubble(
                                         margin: BubbleEdges.only(top: 10),
                                         padding: BubbleEdges.all(20),
@@ -158,6 +185,7 @@ class _OngoingChatState extends State<OngoingChat> {
                           ),
                         );
                       } else {
+                        print('doesnt have data');
                         return Container();
                       }
                     }),

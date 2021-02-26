@@ -28,16 +28,7 @@ class ProfileView extends StatelessWidget {
 
   FirebaseFirestore parentRef = FirebaseFirestore.instance;
 
-  //
-  // for (var i = cal_stars(snapshot
-  //     .data.docs[item]
-  //     .data()['ratings']);
-  // i >= 1;
-  // i--) {
-  // Icon(Icons.star);
-  // }
-  //
-  //
+
   cal_stars(List<dynamic> numbers) {
     int temp_counter1 = 0;
     int temp_counter2 = 0;
@@ -265,11 +256,13 @@ class ProfileView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 MaterialButton(
+
                                   onPressed: () {},
                                   height: 50,
-                                  minWidth: 100,
                                   splashColor: Theme.of(context).primaryColor,
                                   enableFeedback: true,
+                                  minWidth: MediaQuery.of(context).size.width/4,
+
                                   // shape: ShapeBorder.lerp(S, b, t),
                                   color: Theme.of(context).accentColor,
                                   child: Row(
@@ -287,6 +280,8 @@ class ProfileView extends StatelessWidget {
                                   height: 50,
                                   splashColor: Theme.of(context).primaryColor,
                                   enableFeedback: true,
+                                  minWidth: MediaQuery.of(context).size.width/4,
+
                                   // shape: ShapeBorder.lerp(S, b, t),
                                   color: Theme.of(context).accentColor,
                                   child: Row(
@@ -314,6 +309,7 @@ class ProfileView extends StatelessWidget {
                                   height: 50,
                                   splashColor: Theme.of(context).primaryColor,
                                   enableFeedback: true,
+                                  minWidth: MediaQuery.of(context).size.width/4,
                                   // shape: ShapeBorder.lerp(S, b, t),
                                   color: Theme.of(context).accentColor,
                                   child: Row(
@@ -339,7 +335,7 @@ class ProfileView extends StatelessWidget {
                 } else {
                   return Center(
                     child: CircularProgressIndicator(
-                      strokeWidth: 10,
+                      strokeWidth: 2,
                     ),
                   );
                 }

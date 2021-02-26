@@ -52,7 +52,7 @@ class UserSign_Tutor {
     ParentCollection.doc(uid).set({'name': tutor.name});
 
     return await TutorCollection.doc(uid).set({
-      // "name": tutor.name,
+      "name": tutor.name,
       "uid": uid,
       "phoneNo": tutor.name,
       "gender": tutor.gender,
@@ -63,6 +63,7 @@ class UserSign_Tutor {
       'subjectsPreferred': tutor.subjectPreferred,
       "testsPreferred": tutor.testPreferred,
       "employed": tutor.areYou["employed"],
+      "ratings": [0,5]
     });
   }
 

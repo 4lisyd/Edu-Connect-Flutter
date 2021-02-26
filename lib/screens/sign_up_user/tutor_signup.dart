@@ -365,14 +365,14 @@ class _TutorSignUpState extends State<TutorSignUp> {
                           });
                     }
 
-                    // userSign_Tutor.registerNewUser(tutor_bloc_NL);
-                    // Provider.of<UserCurrent>(context, listen: false).isTutor =
-                    //     true;
-                    // ParentsCollection.doc(
-                    //         Provider.of<UserCurrent>(context, listen: false)
-                    //             .uid)
-                    //     .update({"tutor": true});
-                    // Navigator.pop(context);
+                    userSign_Tutor.registerNewUser(tutor_bloc_NL);
+                    Provider.of<UserCurrent>(context, listen: false).isTutor =
+                        true;
+                    ParentsCollection.doc(
+                            Provider.of<UserCurrent>(context, listen: false)
+                                .uid)
+                        .update({"tutor": true});
+                    Navigator.pop(context);
 
                     // any tutor is also a parent
                   },

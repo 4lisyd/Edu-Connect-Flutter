@@ -41,7 +41,7 @@ class SearchResult extends StatelessWidget {
             children: [
               Container(
                 child: Text(
-                  "...showing results for tutors in $location who teach $subject.",
+                  "...showing results for tutors in ${location} who teach $subject.",
                   style: Theme.of(context).textTheme.bodyText1,
                   textAlign: TextAlign.center,
                 ),
@@ -274,8 +274,11 @@ class SearchResult extends StatelessWidget {
                         },
                       );
                     } else {
-                      return CircularProgressIndicator(
-                        strokeWidth: 7,
+                      return Center(
+                        child: CircularProgressIndicator(
+
+                          strokeWidth: 3,
+                        ),
                       );
                     }
                   },

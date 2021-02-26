@@ -67,70 +67,41 @@ class _HomeProfileState extends State<HomeProfile> {
                   children: [
                     // todo: make this PP cached using a string somehow from _storage.getimage we have to get a string future builder messes it up.
 
-                    // Container(
-                    //   margin: EdgeInsets.only(bottom: 500),
-                    //   width: MediaQuery.of(context).size.width / 2.1,
-                    //   height: MediaQuery.of(context).size.height / 4.7,
-                    //   decoration: BoxDecoration(),
-                    //   child: ClipOval(
-                    //       child: CachedNetworkImage(
-                    //     // imageUrl:
-                    //     _storage.getImageCached(currentUser_bloc_NL.uid),
-                    //     // "https://firebasestorage.googleapis.com/v0/b/edu-connect-ee289.appspot.com/o/images%2Fprofileimages%2FUvwb4fAWuyRnWyKB2rarRnD8DBH2.png?alt=media&token=6716dee5-1837-4a5a-b4fb-159e18ed2b51",
-                    //     // fadeInDuration: Duration(seconds: 2),
-                    //     placeholder: (context, url) =>
-                    //         CircularProgressIndicator(),
-                    //     errorWidget: (context, url, error) => Icon(Icons.error),
-                    //     width: 1000,
-                    //     fit: BoxFit.cover,
-                    //     height: 500,
-                    //   )),
-                    // ),
+
                     //////////////////////////end of the beta PP
                     Container(
                       margin: EdgeInsets.only(bottom: 40),
                       width: MediaQuery.of(context).size.width / 2.1,
-                      height: MediaQuery.of(context).size.height / 4.7,
-                      decoration: BoxDecoration(),
-                      child: ClipOval(
-                          child: FutureBuilder(
-                              future: _storage.getImage(currentUser_bloc.uid),
-                              builder: (context, snapshot) {
-                                // print("sdss");
-                                if (snapshot.hasData) {
-                                  return CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data,
-                                      // fadeInDuration: Duration(seconds: 2),
-                                      placeholder: (context, url) =>
-                                          CircularProgressIndicator(),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
-                                      width: 1000,
-                                      fit: BoxFit.cover,
-                                      height: 500,
-                                    ),
-                                    // child: Image.network(
-                                    //   snapshot.data,
-                                    //   width: 1000,
-                                    //   fit: BoxFit.cover,
-                                    //   height: 500,
-                                    // ),
-                                  );
-                                } else {
-                                  return Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      Image.asset(
-                                          "lib/assets/userData/defaultUserAvatar.png"),
-                                      CircularProgressIndicator(
-                                        backgroundColor: Colors.amberAccent,
-                                      ),
-                                    ],
-                                  );
-                                }
-                              })),
+                      height: MediaQuery.of(context).size.height / 4,
+                      // decoration: BoxDecoration(),
+                      child: FutureBuilder(
+                          future: _storage.getImage(currentUser_bloc.uid),
+                          builder: (context, snapshot) {
+                            // print("sdss");
+                            if (snapshot.hasData) {
+                              return CircleAvatar(
+                                backgroundImage: NetworkImage(snapshot.data,),
+                                radius: MediaQuery.of(context).size.width,
+
+                              );
+                            } else {
+                              return Stack(
+                                alignment: Alignment.center,
+                                children: [
+                              CircleAvatar(
+                              backgroundImage: AssetImage("lib/assets/userData/defaultUserAvatar.png"),
+                            radius: MediaQuery.of(context).size.width,
+
+                            ),
+                                  // Image.asset(
+                                  //     "lib/assets/userData/defaultUserAvatar.png"),
+                                  CircularProgressIndicator(
+                                    backgroundColor: Colors.amberAccent,
+                                  ),
+                                ],
+                              );
+                            }
+                          }),
                     ),
                     Positioned(
                       bottom: 20,

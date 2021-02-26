@@ -14,6 +14,7 @@ class _Welcome1State extends State<Welcome1> {
         color: Colors.white,
         padding: EdgeInsets.all(10),
         height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

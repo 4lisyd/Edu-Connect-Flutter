@@ -1,6 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+
+// ?????????             ???????????
+
+
+
+/*
+
+the chat works like this:
+1 if sendertID >> recID document id would be chatID+recID else opposite
+2 to find relevant chats if chatID has any of them ^ it your chat in home_chat
+3 to find relevant messages for your chatroom condition 1 + sendertID + ' '+  recID
+4 send message and save them in format from condtion 3
+5
+
+*/
+
+
+//           ????????????           ????????????
+
 class ChatService {
   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
@@ -16,6 +35,7 @@ class ChatService {
           .collection('messages')
           .where("chatID", arrayContains: uid)
           // .orderBy('messages.time', descending: true)
+      
           .snapshots();
     } else {
       print('is tutor nt exe');
@@ -26,6 +46,24 @@ class ChatService {
 
     // firestoreInstance.collection(collectionPath)
   }
+  // CollectionReference returnCurrentChatRef(String senderID, String receiverID){
+  //   return firestoreInstance.collection('messages').where('senderID',isEqualTo: senderID).where("receiverID",isEqualTo: receiverID);
+  //
+  // }
+  Future<dynamic> returnCurrentChatRef(String senderID, String receiverID){
+    var cmp_temp = senderID.compareTo(receiverID);
+    if (cmp_temp == -1){
+       return firestoreInstance.collection('messages').doc(senderID+' '+receiverID).get();
+    }
+    else{
+      return firestoreInstance.collection('messages').doc(receiverID+' '+senderID).get();
+
+    }
+    // return firestoreInstance.collection('messages').doc();
+
+  }
+
+
 
   sendMessage(String senderID, String receiverID, String message) async {
     print('sd');
@@ -48,7 +86,8 @@ class ChatService {
 
             // .doc('1V1CKAsyUOtAMGwLPPYP Uvwb4fAWuyRnWyKB2rarRnD8DBH2')
             .set({
-      "messages": FieldValue.arrayUnion([
+          "lastmessagetime": Timestamp.now(),
+          "messages": FieldValue.arrayUnion([
         {
           "message": message,
           "seen": false,
@@ -57,6 +96,7 @@ class ChatService {
         }
       ])
     }, SetOptions(merge: true));
+
 
     // print("temp.whenComplete(() => temp.toString())");
   }

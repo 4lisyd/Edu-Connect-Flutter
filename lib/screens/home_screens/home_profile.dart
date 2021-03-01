@@ -80,7 +80,8 @@ class _HomeProfileState extends State<HomeProfile> {
                             // print("sdss");
                             if (snapshot.hasData) {
                               return CircleAvatar(
-                                backgroundImage: NetworkImage(snapshot.data,),
+                                // backgroundImage: NetworkImage(snapshot.data,),
+                                backgroundImage: CachedNetworkImageProvider(snapshot.data),
                                 radius: MediaQuery.of(context).size.width,
 
                               );

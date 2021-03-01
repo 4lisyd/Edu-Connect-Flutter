@@ -372,7 +372,9 @@ class _TutorSignUpState extends State<TutorSignUp> {
                     ParentsCollection.doc(
                             Provider.of<UserCurrent>(context, listen: false)
                                 .uid)
-                        .update({"tutor": true});
+                        .update({"tutor": true, "name": tutor_bloc_NL.name, "phoneNo": currentUser_bloc_NL.phoneNo});
+
+                    // this ^ updates the name in parent as well as tutor to make them match. (chat reference)
                     Navigator.pop(context);
 
                     // any tutor is also a parent

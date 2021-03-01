@@ -1,10 +1,10 @@
-import 'package:edu_connect/components/animations.dart';
+// import 'package:edu_connect/components/animations.dart';
 import 'package:edu_connect/screens/search_result/searchResult.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_connect/components/homeblocks.dart';
 import 'package:flutter/rendering.dart';
-import 'package:lottie/lottie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:lottie/lottie.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:edu_connect/models/user.dart';
@@ -147,7 +147,7 @@ class _HomeHomeState extends State<HomeHome> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SearchResult(
-                                      _location,
+                                      context.read<UserCurrent>().locationString,
                                       list_searchbysubjectblock[index].title,
                                       'subject')));
                         },

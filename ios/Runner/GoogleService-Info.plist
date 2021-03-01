@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>334925963451-lfq0kp8lo3rr8aveuc9r2p578jpn8h9e.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.334925963451-lfq0kp8lo3rr8aveuc9r2p578jpn8h9e</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>334925963451-rsmom1qsf4287npor385evkrp6m6oi4b.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC-ldk0920TdeXVXOYk7XGHgUQBEiPBDXA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>334925963451</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.eduConnect</string>
+	<key>PROJECT_ID</key>
+	<string>edu-connect-ee289</string>
+	<key>STORAGE_BUCKET</key>
+	<string>edu-connect-ee289.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:334925963451:ios:946009a05f802f368e499e</string>
+	<key>DATABASE_URL</key>
+	<string>https://edu-connect-ee289.firebaseio.com</string>
+</dict>
+</plist>

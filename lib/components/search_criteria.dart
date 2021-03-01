@@ -1,10 +1,12 @@
 import 'package:edu_connect/components/buildTogglesW.dart';
 import 'package:edu_connect/components/buttons.dart';
+import 'package:edu_connect/models/user.dart';
 import 'package:edu_connect/screens/search_result/searchResult.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_connect/models/tutor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 class SearchCriteria extends StatefulWidget {
   @override
@@ -98,19 +100,21 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                                   child: Icon(Icons.cancel),
                                   onPressed: () {
                                     setState(() {
-                                      widget._selectedLocation = null;
-                                      widget._location = null;
+                                      // widget._selectedLocation = null;
+                                      // widget._location = null;
                                       // currentUser_bloc_NL.locationString = null;
-                                    });
+                                      Provider.of<UserCurrent>(context,listen: false).locationString = null;
+                                      });
                                   },
                                 ),
                                 DropdownButton(
                                   onChanged: (value) {
                                     setState(() {
+                                      print('value: $value');
                                       widget._selectedLocation = value;
                                       widget._location = value;
-                                      // currentUser_bloc_NL.locationString =
-                                      //     value;
+                                      Provider.of<UserCurrent>(context,listen: false).locationString =
+                                          value;
                                     });
                                   },
                                   hint: Text(
@@ -119,7 +123,8 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                                         Theme.of(context).textTheme.bodyText1,
                                   ),
                                   icon: Icon(Icons.location_on_outlined),
-                                  value: widget._selectedLocation,
+                                  // value: widget._selectedLocation,
+                                  value: Provider.of<UserCurrent>(context,listen: false).locationString,
                                   items: _locations.map((location) {
                                     return DropdownMenuItem(
                                       child: Text(location),
@@ -132,7 +137,7 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                               ],
                             );
                           } else
-                            return Text('');
+                            return Divider();
                         },
                       ),
                     ),
@@ -145,7 +150,9 @@ class _SearchCriteriaState extends State<SearchCriteria> {
         actions: [
           FlatButton(
             onPressed: () {
-              print('"seached..');
+              print('"searched..');
+              // Provider.of<UserCurrent>(context,listen: false).locationString = null;
+
               //
               // Navigator.push(
               //   context,

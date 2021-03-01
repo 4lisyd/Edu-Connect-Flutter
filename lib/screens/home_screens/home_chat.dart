@@ -86,13 +86,7 @@ class _HomeChatState extends State<HomeChat> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // Image.network('src'),
-                                  // Text(
-                                  //
-                                  //   ,
-                                  //
-                                  //   style: Theme.of(context).textTheme.bodyText2,
-                                  // ),
+                             // if you are tutor then show parents name, vice versa
 
                                   FutureBuilder<DocumentSnapshot>(
                                     future: firestoreInstance

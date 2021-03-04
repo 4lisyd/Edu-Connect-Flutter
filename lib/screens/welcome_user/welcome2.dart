@@ -57,7 +57,7 @@ class _Welcome2State extends State<Welcome2> {
                       padding: const EdgeInsets.only(
                           top: 0.0, bottom: 0.0, right: 10.0, left: 10.0),
                       child: Text(
-                        "Out of Sensible Options?",
+                        "Out of sensible options?",
                         style: Theme.of(context).textTheme.headline2.copyWith(
                             color: Theme.of(context).accentColor,
                             fontSize: 25,
@@ -75,7 +75,7 @@ class _Welcome2State extends State<Welcome2> {
                       padding: const EdgeInsets.only(
                           top: 10.0, bottom: 0.0, right: 10.0, left: 10.0),
                       child: Text(
-                        "We're committed to finding the right match between tutor and student; chat with tutors online before they book the appointment,",
+                        "Look no furthur, we're committed to finding the right match between tutor and students; chat with tutors online before booking an appointment.",
                         style: Theme.of(context).textTheme.bodyText1,
                         textAlign: TextAlign.justify,
                       ),

@@ -93,26 +93,20 @@ class customDialogBox2 extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.0),
         child: Container(
           color: Theme.of(context).primaryColor,
-          height: 300,
+          height: 350,
           width: 370,
           child: Container(
             margin: EdgeInsets.all(30),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // SizedBox(
-                //   height: 30,
-                // ),
+
                 Text(
                   message,
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.headline1.copyWith(fontSize: 25),
                   textAlign: TextAlign.center,
                 ),
-                // SizedBox(
-                //   height: 30,
-                // ),
-
                 SizedBox(
                   height: 10,
                 ),
@@ -126,9 +120,25 @@ class customDialogBox2 extends StatelessWidget {
                     border: OutlineInputBorder(),
                   ),
                 ),
-                Custombutton1(() {
-                  onPress(_codeformcontroller.text);
-                }, "Enter!"),
+                SizedBox(height: 10,),
+
+                Expanded(
+                  child: Custombutton1(() {
+                    onPress(_codeformcontroller.text);
+                  },
+                      "Enter!"),
+                ),
+                // SizedBox(height: 10,),
+                Container(
+                  height: 35,
+                  child: Expanded(
+                    child: Custombutton1(() {
+                     Navigator.of(context,rootNavigator: true,).pop();
+                    },
+                        "cancel",buttonColor: Theme.of(context).accentColor.withOpacity(.5),),
+                  ),
+                ),
+
               ],
             ),
           ),

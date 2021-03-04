@@ -29,6 +29,7 @@ class _HomeHomeState extends State<HomeHome> {
 
     return Scaffold(
       body: SingleChildScrollView(
+
         child: Container(
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
@@ -86,7 +87,7 @@ class _HomeHomeState extends State<HomeHome> {
                             style: Theme.of(context)
                                 .textTheme
                                 .headline1
-                                .copyWith(fontSize: 20),
+                                .copyWith(fontSize: 15),
                           )),
                         ),
                       ),

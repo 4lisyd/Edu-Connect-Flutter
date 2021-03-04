@@ -47,21 +47,30 @@ class _Welcome3State extends State<Welcome3> {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
+                // color: Colors.black54,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      height: 500,
+                      height: MediaQuery.of(context).size.height/2.3,
                       child: Lottie.asset(
                           "lib/assets/animations/lotties/welcome_email.json",
                           width: 400,
                           reverse: true,
                           height: 400,
                       ),
+
                     ),
-                    // Custombutton1(() {
-                    //   Navigator.pushNamed(context, '/signup');
-                    // }, "i am a Parent/Guardian."),
+
+                    // Before you embark upon the search for the perfect tutor, the first thing you need to do is make sure that you know exactly what you and your child needs from from a tutor.
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 50.0, bottom: 65.0, right: 10.0, left: 10.0),
+                      child: Text(
+"Before you embark upon the search for the perfect tutor, the first thing you need to do is make sure that you know exactly what you and your child needs from from a tutor.",                        style: Theme.of(context).textTheme.bodyText1,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
                     SizedBox(
                       height: 0,
                     ),
@@ -85,21 +94,3 @@ class _Welcome3State extends State<Welcome3> {
   }
 }
 
-// FlatButton(
-// color: Theme.of(context).primaryColor,
-// splashColor: Theme.of(context).accentColor,
-// focusColor: Theme.of(context).accentColor,
-// // shape: ,
-// onPressed: (){
-// Navigator.push(
-// context,
-// MaterialPageRoute(
-// builder: (context) => SignUp()),
-// );
-// },
-// child: Text(
-// "Continue",
-// style: (Theme.of(context).textTheme.bodyText2),
-//
-// ),
-// ),

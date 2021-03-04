@@ -6,6 +6,16 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
 version: 1.0.0+1
+#version: 0.0.1
+
+
+                         #^^^^^^^^^^^
+#  finally working on the new mac (version 1.0.0+1 written manually in the runner>info.plist in 	<key>CFBundleShortVersionString</key>
+#  <string>1.0.0+1</string> |||| AND ||||| 	<key>CFBundleVersion</key>
+#  <string>1.0.0+1</string>  )  1.0.0+1 <->  $(FLUTTER_BUILD_NAME) and $(FLUTTER_BUILD_NUMBER)
+
+
+
 
 #environment:
 #  sdk: ">=2.7.0 <3.0.0"

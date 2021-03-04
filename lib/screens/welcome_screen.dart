@@ -15,7 +15,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
+
       body: PageView(
         allowImplicitScrolling: true,
         // physics: ScrollPhysics(parent: ClampingScrollPhysics()),

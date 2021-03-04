@@ -51,10 +51,12 @@ Future<bool> loginUserPhone(
     ///////
     codeSent: (String verificationID, int forceResendingToken) {
       print("success12xx2!");
+
       showDialog(
           context: context,
           barrierDismissible: false,
           useSafeArea: true,
+          useRootNavigator: false, //this property needs to be added
           builder: (context) {
             return customDialogBox2(
               "enter the OTP code",
@@ -83,9 +85,9 @@ Future<bool> loginUserPhone(
                     currentUser_bloc.fromJson(await sharedpref.read('user'));
 
                     prefs.setBool('login', true);
+                    Navigator.pushNamed(context, "/",);
 
-                    Navigator.pushNamed(context, "/");
-
+                    // Navigator.canPop(context);
                     ////////////////////////////////////important//////////////////////////////////////////////
 
 // gets called when the verification is done automatically by auto code retrieval

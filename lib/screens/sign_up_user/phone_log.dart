@@ -25,7 +25,7 @@ class PhoneSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
+      // resizeToAvoidBottomPadding: true,
       resizeToAvoidBottomInset: true,
       extendBody: true,
       appBar: AppBar(
@@ -150,6 +150,8 @@ class PhoneSignUp extends StatelessWidget {
                             final userName = _usernameformcontroller.text.trim();
 
                             loginUserPhone(phone, userName, context);
+                            // Navigator.pushNamed(context, "/",);
+
                           }
                         },
                         'Continue',

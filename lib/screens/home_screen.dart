@@ -14,6 +14,8 @@ import 'package:provider/provider.dart';
 // import 'package:geolocator/geolocator.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:io' show Platform;
+
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -42,9 +44,19 @@ class _HomeScreenState extends State<HomeScreen> {
     // hello the user after a session starts
 
     hello() async {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-      ));
+
+      if (Platform.isAndroid)
+      {
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: Colors.white,
+        ));
+      }
+
+      if (Platform.isIOS)
+        {
+          SystemChrome.setEnabledSystemUIOverlays([]);
+        }
+
       _firebaseMessaging.getToken().then((value) => print(value));
       _firebaseMessaging.requestNotificationPermissions();
       _firebaseMessaging.configure(
@@ -102,46 +114,44 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Container(
       // color: Colors.pinkAccent,
-      child: SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomPadding: false,
+      child: Scaffold(
+        // resizeToAvoidBottomPadding: false,
 //https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
-          extendBodyBehindAppBar: true,
-          // backgroundColor: Colors.pink,
+        extendBodyBehindAppBar: true,
+        // backgroundColor: Colors.pink,
 
-          bottomNavigationBar: CurvedNavigationBar(
-            index: 1,
-            color: Theme.of(context).accentColor,
-            backgroundColor: Color(0xfffffff),
-            height: 60,
+        bottomNavigationBar: CurvedNavigationBar(
+          index: 1,
+          color: Theme.of(context).accentColor,
+          backgroundColor: Color(0xfffffff),
+          height: 60,
 
-            onTap: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            //type: BottomNavigationBarType.fixed,
+          onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          //type: BottomNavigationBarType.fixed,
 
-            items: [
-              Container(
-                child: Icon(Icons.chat),
-              ),
-              Container(
-                child: Icon(Icons.home),
-              ),
-              Container(
-                child: Icon(Icons.group_add_sharp),
-              ),
-              Container(
-                child: Icon(Icons.face),
-              ),
-            ],
-          ),
-          body: navbarWidgets.elementAt(_selectedIndex),
-          extendBody: true,
-
-          // backgroundColor: Colors.transparent,
+          items: [
+            Container(
+              child: Icon(Icons.chat),
+            ),
+            Container(
+              child: Icon(Icons.home),
+            ),
+            Container(
+              child: Icon(Icons.group_add_sharp),
+            ),
+            Container(
+              child: Icon(Icons.face),
+            ),
+          ],
         ),
+        body: navbarWidgets.elementAt(_selectedIndex),
+        extendBody: true,
+
+        // backgroundColor: Colors.transparent,
       ),
     );
   }

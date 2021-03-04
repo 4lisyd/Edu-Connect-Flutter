@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "334925963451-t1l93i8u9ih2adjifp17jqud58bfavkt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gtk_flutter",
+            "certificate_hash": "cca03fd9d7fde462a857eb1c88a4c35ebe5b2e9b"
+          }
+        },
+        {
           "client_id": "334925963451-1fpjrha66veo7kvs9q9bvou774vv8vv0.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "334925963451-1fpjrha66veo7kvs9q9bvou774vv8vv0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "334925963451-lfq0kp8lo3rr8aveuc9r2p578jpn8h9e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eduConnect"
+              }
             }
           ]
         }

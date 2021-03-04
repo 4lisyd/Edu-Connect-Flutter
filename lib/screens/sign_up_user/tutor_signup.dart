@@ -121,10 +121,8 @@ class _TutorSignUpState extends State<TutorSignUp> {
                             if (snapshot.hasData) {
                               return CircleAvatar(
                                 backgroundColor: Colors.white,
-                                child: Image.network(
+                                backgroundImage: NetworkImage(
                                   snapshot.data,
-                                  fit: BoxFit.fill,
-                                  height: 500,
                                 ),
                               );
                             } else {

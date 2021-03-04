@@ -22,10 +22,16 @@ class _HomeHomeState extends State<HomeHome> {
       FirebaseFirestore.instance.collection('locations').doc('qatar');
   String _location;
 
+
   @override
   Widget build(BuildContext context) {
     UserCurrent currentUser_bloc_NL =
         Provider.of<UserCurrent>(context, listen: false);
+
+    setState(() {
+      _location =         Provider.of<UserCurrent>(context, listen: false).locationString;
+
+    });
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -100,7 +106,32 @@ class _HomeHomeState extends State<HomeHome> {
                 //animationText_Gradient("You Always Wanted."),
 
                 SizedBox(
-                  height: 40,
+                  height: 10,
+                ),
+                MaterialButton(
+                  onPressed: (){
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        print('search clicked...');
+                        return SearchCriteria();
+
+                      },
+                    );
+                    },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.add_location_alt_outlined),
+                      SizedBox(width: 10,),
+                      // Text(Provider.of<UserCurrent>(context,listen: true).locationString,style: Theme.of(context).textTheme.headline2,),
+                      Text(context.watch<UserCurrent>().locationString  ,style: Theme.of(context).textTheme.headline2,),
+                    ],
+
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
 
                 ////////////////////////////////////////////////////////////////

@@ -8,7 +8,7 @@ import 'package:edu_connect/models/tutor.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
-class SearchCriteria extends StatefulWidget {
+class SearchCriteria extends StatefulWidget{
   @override
   var _selectedLocation;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -74,7 +74,7 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                 // ),
 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Icon(Icons.location_on_outlined),
                     Container(
@@ -110,7 +110,8 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                                       // widget._selectedLocation = null;
                                       // widget._location = null;
                                       // currentUser_bloc_NL.locationString = null;
-                                      Provider.of<UserCurrent>(context,listen: false).locationString = "All Areas";
+                                      Provider.of<UserCurrent>(context,listen: false).setLocationString('All Areas');
+                                      // Provider.of<UserCurrent>(context,listen: false).locationString = "All Areas";
                                       });
                                   },
                                 ),
@@ -121,8 +122,9 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                                       // widget._selectedLocation = value;
                                       // widget._location = value;
                                       setState(() {
-                                        Provider.of<UserCurrent>(context,listen: false).locationString =
-                                            value;
+                                        // Provider.of<UserCurrent>(context,listen: false).locationString =
+                                        //     value;
+                                        Provider.of<UserCurrent>(context,listen: false).setLocationString(value);
                                       });
 
                                     });
@@ -147,8 +149,8 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                               ],
                             );
                           } else
-                            return Container(child: Text("snapshot.error",style: Theme.of(context).textTheme.headline1,),);
-                        },
+                            return Center(child: CircularProgressIndicator(strokeWidth: 10,));
+                              },
                       ),
                     ),
                   ],
@@ -161,7 +163,7 @@ class _SearchCriteriaState extends State<SearchCriteria> {
           FlatButton(
             onPressed: () {
               print('"searched..');
-              // Provider.of<UserCurrent>(context,listen: false).locationString = null;
+              Navigator.pop(context);
 
               //
               // Navigator.push(

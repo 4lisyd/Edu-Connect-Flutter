@@ -29,6 +29,11 @@ class UserCurrent extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setLocationString(String location){
+    this.locationString = location;
+    notifyListeners();
+  }
+
   Map<String, dynamic> toJson() => {
         'name': name,
         'phoneNo': phoneNo,

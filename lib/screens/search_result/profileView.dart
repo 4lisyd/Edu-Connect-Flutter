@@ -95,12 +95,8 @@ class ProfileView extends StatelessWidget {
                                             CircleAvatar(
                                               radius: 60.0,
                                               backgroundColor: Colors.white,
-                                              child: Image.network(
-                                                snapshot.data,
-                                                // height: 30,
-                                                fit: BoxFit.fill,
-                                                height: 500,
-                                              ),
+                                              backgroundImage: NetworkImage(snapshot.data),
+
                                             ),
                                           ],
                                         );

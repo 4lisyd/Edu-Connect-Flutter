@@ -44,19 +44,6 @@ class SearchResult extends StatelessWidget {
       locAll = false;
     }
 
-    print('xxxx');
-    print('xxxx');
-    print('xxxx');
-
-    print(locAll);
-    print('xxxx');
-    print('xxxx');
-    print('xxxx');
-
-
-
-
-
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -159,12 +146,11 @@ class SearchResult extends StatelessWidget {
                                                       radius: 30.0,
                                                       backgroundColor:
                                                           Colors.white,
-                                                      child: Image.network(
+
+                                                      backgroundImage: NetworkImage(
                                                         snapshot.data,
-                                                        // height: 30,
-                                                        fit: BoxFit.fill,
-                                                        height: 500,
                                                       ),
+
                                                     );
                                                   } else {
                                                     return Stack(

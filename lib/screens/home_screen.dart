@@ -4,9 +4,9 @@ import 'package:edu_connect/screens/home_screens/home_chat.dart';
 import 'package:edu_connect/screens/home_screens/home_home.dart';
 import 'package:edu_connect/screens/home_screens/home_profile.dart';
 import 'package:edu_connect/screens/home_screens/home_groups.dart';
-import 'package:edu_connect/services/firestore_service.dart';
+// import 'package:edu_connect/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -39,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     SharedPref sharedpref = SharedPref();
     User user = FirebaseAuth.instance.currentUser;
+
     final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
     // hello the user after a session starts
@@ -77,14 +78,13 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       // SystemChrome.setEnabledSystemUIOverlays([]);
 
-      print(Provider.of<UserCurrent>(context, listen: false).uid);
-      print(user.uid);
+      // print(Provider.of<UserCurrent>(context, listen: false).uid);
       Provider.of<UserCurrent>(context, listen: false).uid = user.uid;
       // Provider.of<UserCurrent>(context, listen: false).name = user.;
       Provider.of<UserCurrent>(context, listen: false).phoneNo =
           user.phoneNumber;
-      print('ssoosset');
-      print(Provider.of<UserCurrent>(context, listen: false).profileSet);
+      // print('ssoosset');
+      // print(Provider.of<UserCurrent>(context, listen: false).profileSet);
 
       DocumentSnapshot temp_isTutor = await FirebaseFirestore.instance
           .collection('parents')
@@ -93,13 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
       Provider.of<UserCurrent>(context, listen: false).isTutor =
           temp_isTutor.data()['tutor'];
 
-      // print(snapshot.docs.first);
-
-      // get the location using geolocator plugin and submit it to the the user's cloudbase or just store it in currentuser to find tutor's distance from the user.
-
-      // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
-
-      // Provider.of<UserCurrent>(context, listen: false).uid =
     }
 
     hello();

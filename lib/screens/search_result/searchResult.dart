@@ -12,6 +12,8 @@ class SearchResult extends StatelessWidget {
   String subject;
   String searchBy;
 
+  bool locAll;
+
   var locationList = [];
   var subjectList = [];
   var SearchByList = [];
@@ -31,8 +33,30 @@ class SearchResult extends StatelessWidget {
 
   FirebaseFirestore parentRef = FirebaseFirestore.instance;
 
+
   @override
   Widget build(BuildContext context) {
+
+    if (location == 'All Areas'){
+      locAll = true;
+    }
+    else {
+      locAll = false;
+    }
+
+    print('xxxx');
+    print('xxxx');
+    print('xxxx');
+
+    print(locAll);
+    print('xxxx');
+    print('xxxx');
+    print('xxxx');
+
+
+
+
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -50,13 +74,21 @@ class SearchResult extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
                 child: StreamBuilder(
-                  stream: firestoreInstance
+                  stream: locAll ? firestoreInstance
                       .collection("tutors")
                       .where("${searchBy}sPreferred.${subject}",
                           isEqualTo: true)
-                      .where("area", isEqualTo: location)
                       .get()
-                      .asStream(),
+                      .asStream()
+                  :
+                  firestoreInstance
+                      .collection("tutors")
+                      .where("${searchBy}sPreferred.${subject}",
+                      isEqualTo: true)
+                      .where("area", isEqualTo: location )
+                      .get()
+                      .asStream()
+                  ,
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(

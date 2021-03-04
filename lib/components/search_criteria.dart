@@ -23,6 +23,10 @@ class SearchCriteria extends StatefulWidget {
 class _SearchCriteriaState extends State<SearchCriteria> {
   @override
   Widget build(BuildContext context) {
+
+    // Provider.of<UserCurrent>(context,listen: false).locationString =
+    //     'All Areas';
+
     return Container(
       margin: EdgeInsets.all(0),
       width: MediaQuery.of(context).size.width,
@@ -85,9 +89,12 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                           // print(snapshot.data['locations'].toString());
 
                           if (snapshot.hasData) {
+
+                            // print('hasData');
                             var dropdownList = snapshot.data['locations'];
-                            print(dropdownList);
+                            // print(dropdownList.toString());
                             List<dynamic> _locations = dropdownList;
+                            _locations.add('All Areas');
 
                             return Row(
                               mainAxisSize: MainAxisSize.max,
@@ -103,7 +110,7 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                                       // widget._selectedLocation = null;
                                       // widget._location = null;
                                       // currentUser_bloc_NL.locationString = null;
-                                      Provider.of<UserCurrent>(context,listen: false).locationString = null;
+                                      Provider.of<UserCurrent>(context,listen: false).locationString = "All Areas";
                                       });
                                   },
                                 ),
@@ -111,10 +118,13 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                                   onChanged: (value) {
                                     setState(() {
                                       print('value: $value');
-                                      widget._selectedLocation = value;
-                                      widget._location = value;
-                                      Provider.of<UserCurrent>(context,listen: false).locationString =
-                                          value;
+                                      // widget._selectedLocation = value;
+                                      // widget._location = value;
+                                      setState(() {
+                                        Provider.of<UserCurrent>(context,listen: false).locationString =
+                                            value;
+                                      });
+
                                     });
                                   },
                                   hint: Text(
@@ -124,7 +134,7 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                                   ),
                                   icon: Icon(Icons.location_on_outlined),
                                   // value: widget._selectedLocation,
-                                  value: Provider.of<UserCurrent>(context,listen: false).locationString,
+                                  value: Provider.of<UserCurrent>(context,listen: true).locationString,
                                   items: _locations.map((location) {
                                     return DropdownMenuItem(
                                       child: Text(location),
@@ -137,7 +147,7 @@ class _SearchCriteriaState extends State<SearchCriteria> {
                               ],
                             );
                           } else
-                            return Divider();
+                            return Container(child: Text("snapshot.error",style: Theme.of(context).textTheme.headline1,),);
                         },
                       ),
                     ),

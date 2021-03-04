@@ -13,7 +13,7 @@ class UserCurrent extends ChangeNotifier {
   String profilePhotoAsset = 'lib/assets/userData/defaultUserAvatar.png';
   bool profileSet = false;
   bool isTutor = false;
-  String locationString = "all";
+  String locationString = "All Areas";
   // Location location;
   // void setAuthInstance(FirebaseAuth authTEMP) {
   //   auth = authTEMP;

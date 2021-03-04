@@ -322,12 +322,6 @@ class _TutorSignUpState extends State<TutorSignUp> {
                 ),
                 Custombutton1(
                   () {
-                    // print(tutor_bloc_NL.email);
-                    // print(tutor_bloc_NL.area);
-                    // tutor_bloc_NL.area = _location;
-                    // print(tutor_bloc_NL.area);
-                    //
-
                     print('lololol');
                     print('lololol');
                     print(tutor_bloc_NL.name);
@@ -335,16 +329,26 @@ class _TutorSignUpState extends State<TutorSignUp> {
                     print(tutor_bloc_NL.email);
                     print('lololol');
                     print('lololol');
-                    if (tutor_bloc_NL.name.isEmpty ||
+                    if (tutor_bloc_NL.name == null ||
+                        tutor_bloc_NL.bio == null ||
+                        tutor_bloc_NL.email == null ||
+                        !tutor_bloc_NL.email.contains('@') ||
+                        _selectedLocation == null ||
+                        tutor_bloc_NL.name.isEmpty  ||
                         tutor_bloc_NL.bio.isEmpty ||
                         tutor_bloc_NL.email.isEmpty ||
                         _selectedLocation == null ||
                         Provider.of<Tutor>(context, listen: false).gender ==
                             null) {
+                      print('wtfwtf1');
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return Text('s');
+                            return SimpleDialog(
+                              backgroundColor: Colors.amberAccent,
+                              title:
+                              Text('make sure you enter all the details',),
+                            );
                           });
                     } else if (tutor_bloc_NL.name.length > 15 ||
                         tutor_bloc_NL.name.length < 3 ||
@@ -353,6 +357,8 @@ class _TutorSignUpState extends State<TutorSignUp> {
                         _selectedLocation == null ||
                         Provider.of<Tutor>(context, listen: false).gender ==
                             null) {
+                      print('wtfwtf2');
+
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -363,6 +369,7 @@ class _TutorSignUpState extends State<TutorSignUp> {
                             );
                           });
                     }
+                    print('sign up success');
 
                     userSign_Tutor.registerNewUser(tutor_bloc_NL);
                     Provider.of<UserCurrent>(context, listen: false).isTutor =
@@ -371,6 +378,13 @@ class _TutorSignUpState extends State<TutorSignUp> {
                             Provider.of<UserCurrent>(context, listen: false)
                                 .uid)
                         .update({"tutor": true, "name": tutor_bloc_NL.name, "phoneNo": currentUser_bloc_NL.phoneNo});
+                    //todo: make sure every parameter is entered correctly
+
+                    //1 none of them is null
+                    //2 email contains '@'
+                    //3bio is greater than 70 characters
+                    //4 profile pic is uploaded
+
 
                     // this ^ updates the name in parent as well as tutor to make them match. (chat reference)
                     Navigator.pop(context);
@@ -380,6 +394,7 @@ class _TutorSignUpState extends State<TutorSignUp> {
                   "Submit",
                   // buttonColor: Theme.of(context).accentColor.withOpacity(0.5),
                 ),
+                SizedBox(height: 40,),
               ],
             ),
           ),

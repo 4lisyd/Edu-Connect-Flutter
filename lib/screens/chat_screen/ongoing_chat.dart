@@ -32,10 +32,10 @@ class _OngoingChatState extends State<OngoingChat> {
     var senderRef = firestoreInstance
       ..collection('parents').doc(widget.senderID);
 
-
     ChatService chatservice = ChatService();
 
-    var chatRef = chatservice.returnCurrentChatRef(widget.senderID, widget.receiverID);
+    var chatRef =
+        chatservice.returnCurrentChatRef(widget.senderID, widget.receiverID);
     // var chatRef = firestoreInstance.collection('messages').where('senderID',isEqualTo: widget.senderID).where("receiverID",isEqualTo: widget.receiverID);
     // .orderBy('time', descending: true)
     //[widget.senderID,widget.receiverID]
@@ -53,20 +53,25 @@ class _OngoingChatState extends State<OngoingChat> {
             if (snapshot.hasData) {
               if (snapshot.data.data()['tutor'] == false) {
                 return Text(snapshot.data.data()['name']);
-              }
-              else
-                return FutureBuilder<DocumentSnapshot>(future: tutorCollection.doc(widget.receiverID).get(),builder: (context,snapshot) {if (snapshot.hasData) {return Text(snapshot.data.data()['name']);}
-
-
-                else{return Text('Tutor');}
-
-                },);
+              } else
+                return FutureBuilder<DocumentSnapshot>(
+                  future: tutorCollection.doc(widget.receiverID).get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(snapshot.data.data()['name']);
+                    } else {
+                      return Text('Tutor');
+                    }
+                  },
+                );
             } else {
               return Container();
             }
           },
         ),
         actions: [
+          //todo: it should not be a document snapshot as it will not update the messages in the real time.
+
           FutureBuilder<DocumentSnapshot>(
               future: receiverRef.get(),
               builder: (context, snapshot) {
@@ -80,7 +85,6 @@ class _OngoingChatState extends State<OngoingChat> {
 
                       _callNumber();
                       //
-
                     },
                     child: Icon(
                       Icons.call,
@@ -103,17 +107,13 @@ class _OngoingChatState extends State<OngoingChat> {
               controller: chatscrollcontroller,
               child: Container(
                 // height: MediaQuery.of(context).size.height,
-                child: FutureBuilder<DocumentSnapshot>(
-                    future: chatRef,
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: chatRef,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        print('has data');
-                        print('hashas has has ');
-                        print(snapshot.data.exists);
-                        print(snapshot.connectionState);
-                        print(snapshot.error);
-
-                        print('hashas has has ');
+                        print(snapshot.data.docChanges);
+                        print(snapshot.data.size);
+                        print("hasdata");
 
                         return Container(
                           // color: Colors.pinkAccent,
@@ -121,48 +121,50 @@ class _OngoingChatState extends State<OngoingChat> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // todo: chat should go up when a keyboard pops
                               //messages container column
                               SingleChildScrollView(
                                 child: Column(
                                   verticalDirection: VerticalDirection.down,
                                   children: [
-                                    for (var item in snapshot.data.data()['messages'])
-                                    // for (var item in snapshot.data.docs[0]
-                                        // .data()['messages'])
+                                    // for (var item
+                                    //     in snapshot.data.data()['messages'])
+                                    for (var item in snapshot.data.docs)
+                                      Text(
+                                        "item.toString()",
+                                        style: TextStyle(color: Colors.red),
+                                      )
 
-                                      // Text('as',style: TextStyle(color: Colors.black),),
-                                      Bubble(
-                                        margin: BubbleEdges.only(top: 10),
-                                        padding: BubbleEdges.all(20),
-                                        color:
-                                            item['senderID'] == widget.senderID
-                                                ? Theme.of(context).primaryColor
-                                                : Theme.of(context).accentColor,
-                                        alignment:
-                                            item['senderID'] == widget.senderID
-                                                ? Alignment.topRight
-                                                : Alignment.topLeft,
-
-                                        nip: item['senderID'] == widget.senderID
-                                            ? BubbleNip.rightTop
-                                            : BubbleNip.leftTop,
-                                        // nip: BubbleNip.rightTop,
-                                        // color: Theme.of(context).primaryColor,
-                                        child: Text(item['message'],
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText2
-                                                .copyWith(color: Colors.white),
-                                            // textAlign: item.data()['messages'][0]['senderID'] ==
-                                            //         widget.senderID
-                                            //     ? TextAlign.right
-                                            //     : TextAlign.left),
-                                            textAlign: item['senderID'] ==
-                                                    widget.senderID
-                                                ? TextAlign.left
-                                                : TextAlign.right),
-                                      ),
+                                    // Bubble(
+                                    //   margin: BubbleEdges.only(top: 10),
+                                    //   padding: BubbleEdges.all(20),
+                                    //   color:
+                                    //       item['senderID'] == widget.senderID
+                                    //           ? Theme.of(context).primaryColor
+                                    //           : Theme.of(context).accentColor,
+                                    //   alignment:
+                                    //       item['senderID'] == widget.senderID
+                                    //           ? Alignment.topRight
+                                    //           : Alignment.topLeft,
+                                    //
+                                    //   nip: item['senderID'] == widget.senderID
+                                    //       ? BubbleNip.rightTop
+                                    //       : BubbleNip.leftTop,
+                                    //   // nip: BubbleNip.rightTop,
+                                    //   // color: Theme.of(context).primaryColor,
+                                    //   child: Text(item['message'],
+                                    //       style: Theme.of(context)
+                                    //           .textTheme
+                                    //           .bodyText2
+                                    //           .copyWith(color: Colors.white),
+                                    //       // textAlign: item.data()['messages'][0]['senderID'] ==
+                                    //       //         widget.senderID
+                                    //       //     ? TextAlign.right
+                                    //       //     : TextAlign.left),
+                                    //       textAlign: item['senderID'] ==
+                                    //               widget.senderID
+                                    //           ? TextAlign.left
+                                    //           : TextAlign.right),
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -181,7 +183,7 @@ class _OngoingChatState extends State<OngoingChat> {
           Container(
             height: 75,
             width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(bottom: 10, right: 10, left: 10,top: 10),
+            margin: EdgeInsets.only(bottom: 10, right: 10, left: 10, top: 10),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
@@ -207,7 +209,7 @@ class _OngoingChatState extends State<OngoingChat> {
                     onPressed: () {
                       chatscrollcontroller.jumpTo(0);
                       print("send message");
-                      if (messageController.text.trim().isNotEmpty)   {
+                      if (messageController.text.trim().isNotEmpty) {
                         //send messages
                         widget.chatservice.sendMessage(widget.senderID,
                             widget.receiverID, messageController.text);

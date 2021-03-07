@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
 // ?????????             ???????????
-
-
 
 /*
 
@@ -16,7 +13,6 @@ the chat works like this:
 5
 
 */
-
 
 //           ????????????           ????????????
 
@@ -35,7 +31,7 @@ class ChatService {
           .collection('messages')
           .where("chatID", arrayContains: uid)
           // .orderBy('messages.time', descending: true)
-      
+
           .snapshots();
     } else {
       print('is tutor nt exe');
@@ -46,24 +42,40 @@ class ChatService {
 
     // firestoreInstance.collection(collectionPath)
   }
+
   // CollectionReference returnCurrentChatRef(String senderID, String receiverID){
   //   return firestoreInstance.collection('messages').where('senderID',isEqualTo: senderID).where("receiverID",isEqualTo: receiverID);
   //
   // }
-  Future<dynamic> returnCurrentChatRef(String senderID, String receiverID){
+  Stream<dynamic> returnCurrentChatRef(String senderID, String receiverID) {
+    // var cmp_temp = senderID.compareTo(receiverID);
+    // if (cmp_temp == -1){
+    //    return firestoreInstance.collection('messages').doc(senderID+' '+receiverID).get();
+    // }
+    // else{
+    //   return firestoreInstance.collection('messages').doc(receiverID+' '+senderID).get();
+    //
+    // }
+    ///////////////////////////
     var cmp_temp = senderID.compareTo(receiverID);
-    if (cmp_temp == -1){
-       return firestoreInstance.collection('messages').doc(senderID+' '+receiverID).get();
-    }
-    else{
-      return firestoreInstance.collection('messages').doc(receiverID+' '+senderID).get();
-
+    if (cmp_temp == -1) {
+      return firestoreInstance
+          .collection('messages')
+          .doc(senderID + ' ' + receiverID)
+          .collection('messages')
+          .snapshots();
+      // .collection('messages')
+      // .get();
+    } else {
+      return firestoreInstance
+          .collection('messages')
+          .doc(receiverID + ' ' + senderID)
+          .collection('messages')
+          .snapshots();
+      // .get();
     }
     // return firestoreInstance.collection('messages').doc();
-
   }
-
-
 
   sendMessage(String senderID, String receiverID, String message) async {
     print('sd');
@@ -79,15 +91,14 @@ class ChatService {
         .then((value) => value.docs.first.id);
     // String mmessageID_inCloud = messageID_inCloud.then((value) => value.docs.first.id);// print('sdssss');
     print(await messageID_inCloud);
-    print('666666');
 
     var temp =
         firestoreInstance.collection('messages').doc(await messageID_inCloud)
 
             // .doc('1V1CKAsyUOtAMGwLPPYP Uvwb4fAWuyRnWyKB2rarRnD8DBH2')
             .set({
-          "lastmessagetime": Timestamp.now(),
-          "messages": FieldValue.arrayUnion([
+      "lastmessagetime": Timestamp.now(),
+      "messages": FieldValue.arrayUnion([
         {
           "message": message,
           "seen": false,
@@ -96,7 +107,6 @@ class ChatService {
         }
       ])
     }, SetOptions(merge: true));
-
 
     // print("temp.whenComplete(() => temp.toString())");
   }

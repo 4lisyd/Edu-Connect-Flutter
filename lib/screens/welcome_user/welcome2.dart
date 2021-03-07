@@ -80,11 +80,13 @@ class _Welcome2State extends State<Welcome2> {
                         textAlign: TextAlign.justify,
                       ),
                     ),
-                    Container(
-                        height: 150,
-                        child: Lottie.asset(
-                            "lib/assets/animations/lotties/swipe_left.json",
-                            frameRate: FrameRate.max)),
+                    Expanded(
+                      child: Container(
+                          height: 150,
+                          child: Lottie.asset(
+                              "lib/assets/animations/lotties/swipe_left.json",
+                              frameRate: FrameRate.max)),
+                    ),
 
                     // Text(
                     //   "Swipe Left to continuex",

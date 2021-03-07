@@ -22,34 +22,34 @@ class _HomeHomeState extends State<HomeHome> {
       FirebaseFirestore.instance.collection('locations').doc('qatar');
   String _location;
 
-
   @override
   Widget build(BuildContext context) {
+    var pixratio = MediaQuery.of(context).devicePixelRatio;
+
     UserCurrent currentUser_bloc_NL =
         Provider.of<UserCurrent>(context, listen: false);
 
     setState(() {
-      _location =         Provider.of<UserCurrent>(context, listen: false).locationString;
-
+      _location =
+          Provider.of<UserCurrent>(context, listen: false).locationString;
     });
 
     return Scaffold(
-      body: SingleChildScrollView(
-
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              // colorFilter: ColorFilter.mode(
-              //     Theme.of(context).primaryColor.withOpacity(1),
-              //     BlendMode.colorBurn),
-              image: AssetImage(
-                'lib/assets/background_img/tiles_bg6.jpg',
-              ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            // colorFilter: ColorFilter.mode(
+            //     Theme.of(context).primaryColor.withOpacity(1),
+            //     BlendMode.colorBurn),
+            image: AssetImage(
+              'lib/assets/background_img/tiles_bg6.jpg',
             ),
           ),
-          child: SafeArea(
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -105,29 +105,29 @@ class _HomeHomeState extends State<HomeHome> {
                 ),
                 //animationText_Gradient("You Always Wanted."),
 
-                SizedBox(
-                  height: 10,
-                ),
                 MaterialButton(
-                  onPressed: (){
+                  onPressed: () {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         print('search clicked...');
                         return SearchCriteria();
-
                       },
                     );
-                    },
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.add_location_alt_outlined),
-                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       // Text(Provider.of<UserCurrent>(context,listen: true).locationString,style: Theme.of(context).textTheme.headline2,),
-                      Text(context.watch<UserCurrent>().locationString  ,style: Theme.of(context).textTheme.headline2,),
+                      Text(
+                        context.watch<UserCurrent>().locationString,
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
                     ],
-
                   ),
                 ),
                 SizedBox(
@@ -136,7 +136,7 @@ class _HomeHomeState extends State<HomeHome> {
 
                 ////////////////////////////////////////////////////////////////
                 Container(
-                  width: 200,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   height: 50,
                   // margin: EdgeInsets.only(left: 20),
                   // padding: EdgeInsets.only(left: 25),
@@ -146,19 +146,26 @@ class _HomeHomeState extends State<HomeHome> {
                         bottomRight: Radius.circular(20),
                         topRight: Radius.circular(20)),
                   ),
-                  child: Center(
-                    child: Text(
-                      "By Subject.",
-                      style: Theme.of(context).textTheme.headline1.copyWith(
-                        shadows: [
-                          Shadow(
-                              blurRadius: 40,
-                              offset: Offset(0, 7),
-                              color: Colors.black),
-                        ],
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            "By Subject.",
+                            style:
+                                Theme.of(context).textTheme.headline1.copyWith(
+                              shadows: [
+                                Shadow(
+                                    blurRadius: 40,
+                                    offset: Offset(0, 7),
+                                    color: Colors.black),
+                              ],
+                            ),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ),
                       ),
-                      textAlign: TextAlign.justify,
-                    ),
+                    ],
                   ),
                 ),
                 Container(
@@ -179,7 +186,9 @@ class _HomeHomeState extends State<HomeHome> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SearchResult(
-                                      context.read<UserCurrent>().locationString,
+                                      context
+                                          .read<UserCurrent>()
+                                          .locationString,
                                       list_searchbysubjectblock[index].title,
                                       'subject')));
                         },
@@ -228,7 +237,7 @@ class _HomeHomeState extends State<HomeHome> {
                 ////////////////////////////////////////////////////////////
 
                 Container(
-                  width: 200,
+                  width: MediaQuery.of(context).size.width * 0.5,
                   height: 50,
                   // margin: EdgeInsets.only(left: 20),
                   // padding: EdgeInsets.only(left: 25),
@@ -238,19 +247,27 @@ class _HomeHomeState extends State<HomeHome> {
                         bottomRight: Radius.circular(20),
                         topRight: Radius.circular(20)),
                   ),
-                  child: Center(
-                    child: Text(
-                      "By Test Prep.",
-                      style: Theme.of(context).textTheme.headline1.copyWith(
-                        shadows: [
-                          Shadow(
-                              blurRadius: 40,
-                              offset: Offset(0, 7),
-                              color: Colors.black),
-                        ],
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            "By Test Prep.",
+                            maxLines: 1,
+                            style:
+                                Theme.of(context).textTheme.headline1.copyWith(
+                              shadows: [
+                                Shadow(
+                                    blurRadius: 40,
+                                    offset: Offset(0, 7),
+                                    color: Colors.black),
+                              ],
+                            ),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ),
                       ),
-                      textAlign: TextAlign.justify,
-                    ),
+                    ],
                   ),
                 ),
                 Container(

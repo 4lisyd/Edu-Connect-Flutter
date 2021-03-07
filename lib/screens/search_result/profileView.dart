@@ -28,7 +28,6 @@ class ProfileView extends StatelessWidget {
 
   FirebaseFirestore parentRef = FirebaseFirestore.instance;
 
-
   cal_stars(List<dynamic> numbers) {
     int temp_counter1 = 0;
     int temp_counter2 = 0;
@@ -95,8 +94,8 @@ class ProfileView extends StatelessWidget {
                                             CircleAvatar(
                                               radius: 60.0,
                                               backgroundColor: Colors.white,
-                                              backgroundImage: NetworkImage(snapshot.data),
-
+                                              backgroundImage:
+                                                  NetworkImage(snapshot.data),
                                             ),
                                           ],
                                         );
@@ -141,9 +140,7 @@ class ProfileView extends StatelessWidget {
                               //       );
                               //     } else
                               //       return Container();
-
-                              ),
-
+                            ),
                             Positioned(
                               top: 75,
                               left: 170,
@@ -252,12 +249,34 @@ class ProfileView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 MaterialButton(
+                                  onPressed: () {
+                                    _sendEmail() async {
+                                      final Email email = Email(
+                                        body:
+                                            'Describe your query here, Do not forget to be respectful.',
+                                        subject:
+                                            'Hi i am ${Provider.of<UserCurrent>(context, listen: false).name} from Edu-Connect i am interested in your tutoring services.',
+                                        recipients: [
+                                          "${snapshot.data.data()['email']}"
+                                        ],
+                                        bcc: ['p180035@nu.edu.pk'],
+                                        // cc: ['p180035@nu.edu.pk'],
+                                        // attachmentPaths: [
+                                        //   '/path/to/attachment.zip'
+                                        // ],
+                                        isHTML: false,
+                                      );
 
-                                  onPressed: () {},
+                                      await FlutterEmailSender.send(email);
+                                    }
+
+                                    _sendEmail();
+                                  },
                                   height: 50,
                                   splashColor: Theme.of(context).primaryColor,
                                   enableFeedback: true,
-                                  minWidth: MediaQuery.of(context).size.width/4,
+                                  minWidth:
+                                      MediaQuery.of(context).size.width / 4,
 
                                   // shape: ShapeBorder.lerp(S, b, t),
                                   color: Theme.of(context).accentColor,
@@ -272,11 +291,22 @@ class ProfileView extends StatelessWidget {
                                   ),
                                 ),
                                 MaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    print('called');
+
+                                    _callNumber() async {
+                                      bool res = await FlutterPhoneDirectCaller
+                                          .callNumber(
+                                              snapshot.data.data()['phoneNo']);
+                                    }
+
+                                    _callNumber();
+                                  },
                                   height: 50,
                                   splashColor: Theme.of(context).primaryColor,
                                   enableFeedback: true,
-                                  minWidth: MediaQuery.of(context).size.width/4,
+                                  minWidth:
+                                      MediaQuery.of(context).size.width / 4,
 
                                   // shape: ShapeBorder.lerp(S, b, t),
                                   color: Theme.of(context).accentColor,
@@ -305,7 +335,8 @@ class ProfileView extends StatelessWidget {
                                   height: 50,
                                   splashColor: Theme.of(context).primaryColor,
                                   enableFeedback: true,
-                                  minWidth: MediaQuery.of(context).size.width/4,
+                                  minWidth:
+                                      MediaQuery.of(context).size.width / 4,
                                   // shape: ShapeBorder.lerp(S, b, t),
                                   color: Theme.of(context).accentColor,
                                   child: Row(

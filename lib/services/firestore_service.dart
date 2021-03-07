@@ -54,7 +54,7 @@ class UserSign_Tutor {
     return await TutorCollection.doc(uid).set({
       "name": tutor.name,
       "uid": uid,
-      "phoneNo": tutor.name,
+      "phoneNo": tutor.phoneNo,
       "gender": tutor.gender,
       'bio': tutor.bio,
       'area': tutor.area,
@@ -63,7 +63,7 @@ class UserSign_Tutor {
       'subjectsPreferred': tutor.subjectPreferred,
       "testsPreferred": tutor.testPreferred,
       "employed": tutor.areYou["employed"],
-      "ratings": [0,5]
+      "ratings": [0, 5]
     });
   }
 

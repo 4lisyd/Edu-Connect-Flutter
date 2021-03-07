@@ -6,6 +6,7 @@ class Tutor extends ChangeNotifier {
   bool gender;
   String bio;
   String area;
+  String phoneNo;
   Map<String, bool> daysAvailable = {
     "Monday": false,
     "Tuesday": false,

@@ -52,34 +52,36 @@ class _Welcome3State extends State<Welcome3> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      height: MediaQuery.of(context).size.height/2.3,
+                      height: MediaQuery.of(context).size.height / 2.3,
                       child: Lottie.asset(
-                          "lib/assets/animations/lotties/welcome_email.json",
-                          width: 400,
-                          reverse: true,
-                          height: 400,
+                        "lib/assets/animations/lotties/welcome_email.json",
+                        width: 400,
+                        reverse: true,
+                        height: 400,
                       ),
-
                     ),
 
                     // Before you embark upon the search for the perfect tutor, the first thing you need to do is make sure that you know exactly what you and your child needs from from a tutor.
                     Padding(
                       padding: const EdgeInsets.only(
-                          top: 50.0, bottom: 65.0, right: 10.0, left: 10.0),
+                          top: 50.0, bottom: 65.0, right: 40.0, left: 40.0),
                       child: Text(
-"Before you embark upon the search for the perfect tutor, the first thing you need to do is make sure that you know exactly what you and your child needs from from a tutor.",                        style: Theme.of(context).textTheme.bodyText1,
+                        "Before you embark upon the search for the perfect tutor, the first thing you need to do is make sure that you know exactly what you and your child needs from from a tutor.",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(fontSize: 10),
                         textAlign: TextAlign.justify,
                       ),
                     ),
-                    SizedBox(
-                      height: 0,
-                    ),
+
                     Hero(
                       tag: 'lets find some tutors',
                       child: Custombutton1(() {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => PhoneSignUp()),
+                          MaterialPageRoute(
+                              builder: (context) => PhoneSignUp()),
                         );
                       }, "Let's find some Tutors"),
                     ),
@@ -93,4 +95,3 @@ class _Welcome3State extends State<Welcome3> {
     );
   }
 }
-

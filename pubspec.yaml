@@ -103,3 +103,5 @@ assets.fonts:
   - family: AlfaSlabOne
     assets.fonts:
       - asset: lib/assets/fonts/AlfaSlabOne-Regular.ttf
+      - asset: lib/assets/fonts/Bangers-Regular.ttf
+

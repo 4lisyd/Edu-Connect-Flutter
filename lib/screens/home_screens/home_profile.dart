@@ -59,8 +59,8 @@ class _HomeProfileState extends State<HomeProfile> {
                     children: [
                       // todo: make this PP cached using a string somehow from _storage.getimage we have to get a string future builder messes it up.
 
-
                       //////////////////////////end of the beta PP
+                      // Positio(child: Container()),
                       Container(
                         margin: EdgeInsets.only(bottom: 40),
                         width: MediaQuery.of(context).size.width / 2.1,
@@ -73,19 +73,19 @@ class _HomeProfileState extends State<HomeProfile> {
                               if (snapshot.hasData) {
                                 return CircleAvatar(
                                   // backgroundImage: NetworkImage(snapshot.data,),
-                                  backgroundImage: CachedNetworkImageProvider(snapshot.data),
+                                  backgroundImage:
+                                      CachedNetworkImageProvider(snapshot.data),
                                   radius: MediaQuery.of(context).size.width,
-
                                 );
                               } else {
                                 return Stack(
                                   alignment: Alignment.center,
                                   children: [
-                                CircleAvatar(
-                                backgroundImage: AssetImage("lib/assets/userData/defaultUserAvatar.png"),
-                              radius: MediaQuery.of(context).size.width,
-
-                              ),
+                                    CircleAvatar(
+                                      backgroundImage: AssetImage(
+                                          "lib/assets/userData/defaultUserAvatar.png"),
+                                      radius: MediaQuery.of(context).size.width,
+                                    ),
                                     // Image.asset(
                                     //     "lib/assets/userData/defaultUserAvatar.png"),
                                     CircularProgressIndicator(
@@ -148,62 +148,84 @@ class _HomeProfileState extends State<HomeProfile> {
                             //   'Hi, ',
                             //   style: Theme.of(context).textTheme.headline1,
                             // ),
+                            Icon(Icons.face_retouching_natural),
+                            SizedBox(
+                              width: 20,
+                            ),
                             Text(
                               currentUser_bloc.name,
-                              style: Theme.of(context).textTheme.headline2.copyWith(fontSize: 25),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline3
+                                  .copyWith(
+                                    fontSize: 25,
+                                    fontFamily: 'Bangers',
+                                  ),
                             ),
                           ],
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        Wrap(
-                          runSpacing: 0,
-                          spacing: 1,
-                          runAlignment: WrapAlignment.start,
-                          children: [
-                            Chip(
-                              padding: EdgeInsets.all(10),
-                              backgroundColor: Theme.of(context).accentColor,
-                              label: Text(
-                                currentUser_bloc != null
-                                    ? currentUser_bloc_NL.phoneNo.toString()
-                                    : "null",
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                              avatar: Icon(
-                                Icons.phone_forwarded_outlined,
-                                color: Colors.white,
-                              ),
+                        Container(
+                          width: MediaQuery.of(context).size.width - 20,
+                          height: 80,
+                          child: Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Chip(
+                                  padding: EdgeInsets.all(18),
+                                  backgroundColor:
+                                      Theme.of(context).accentColor,
+                                  label: Text(
+                                    currentUser_bloc != null
+                                        ? currentUser_bloc_NL.phoneNo.toString()
+                                        : "null",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2
+                                        .copyWith(fontSize: 12),
+                                  ),
+                                  avatar: Icon(
+                                    Icons.phone_forwarded_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Chip(
+                                  padding: EdgeInsets.all(18),
+                                  backgroundColor:
+                                      Theme.of(context).accentColor,
+                                  label: Provider.of<UserCurrent>(context,
+                                              listen: false)
+                                          .isTutor
+                                      ? Text(
+                                          'looking for students',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2
+                                              .copyWith(fontSize: 12),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      : Text(
+                                          'looking for a Tutor.',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2
+                                              .copyWith(fontSize: 12),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                  avatar: Icon(
+                                    Icons.supervised_user_circle,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Chip(
-                              padding: EdgeInsets.all(10),
-                              backgroundColor: Theme.of(context).accentColor,
-                              label: Provider.of<UserCurrent>(context,
-                                          listen: false)
-                                      .isTutor
-                                  ? Text(
-                                      'looking for students',
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                      textAlign: TextAlign.center,
-                                    )
-                                  : Text(
-                                      'looking for a Tutor.',
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                      textAlign: TextAlign.center,
-                                    ),
-                              avatar: Icon(
-                                Icons.supervised_user_circle,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                          alignment: WrapAlignment.start,
+                          ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         Provider.of<UserCurrent>(context).isTutor
                             ? Custombutton1(() {
@@ -222,7 +244,9 @@ class _HomeProfileState extends State<HomeProfile> {
                                             TutorSignUp(false)));
                               }, "Register as a Tutor"),
                         // Divider(),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         TextButton(
                             onPressed: () {},
                             child: Container(
@@ -238,16 +262,24 @@ class _HomeProfileState extends State<HomeProfile> {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Account Preferences',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 15),),
-                                  Icon(Icons.navigate_next,color: Theme.of(context).accentColor,),
+                                  Text(
+                                    'Account Preferences',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        .copyWith(fontSize: 12),
+                                  ),
+                                  Icon(
+                                    Icons.navigate_next,
+                                    color: Theme.of(context).accentColor,
+                                  ),
                                 ],
                               ),
                             )),
                         TextButton(
-
-
                             onPressed: () {
                               showDialog(
                                   context: context,
@@ -282,61 +314,81 @@ class _HomeProfileState extends State<HomeProfile> {
                                 ),
                               ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Terms and Support',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 15),),
-                                  Icon(Icons.navigate_next,color: Theme.of(context).accentColor,),
+                                  Text(
+                                    'Terms and Support',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        .copyWith(fontSize: 12),
+                                  ),
+                                  Icon(
+                                    Icons.navigate_next,
+                                    color: Theme.of(context).accentColor,
+                                  ),
                                 ],
                               ),
                             )),
                         TextButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return SimpleDialog(
-                                      title: Text(
-                                        'About',
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      contentPadding: EdgeInsets.all(50),
-                                      children: [
-                                        Text(
-                                          'tell me something about the app i really believe in your idea!tell me something about the app i really believe in your idea!tell me something about the app i really believe in your idea!tell me something about the app i really believe in your idea!',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1,
-                                        )
-                                      ],
-                                    );
-                                  });
-                            },
-                            child: Container(
-                              // margin: EdgeInsets.all(20),
-                              padding: EdgeInsets.all(10),
-                               height: 60,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                color: Colors.white,
-                                border: Border.all(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return SimpleDialog(
+                                    title: Text(
+                                      'About',
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    contentPadding: EdgeInsets.all(50),
+                                    children: [
+                                      Text(
+                                        'tell me something about the app i really believe in your idea!tell me something about the app i really believe in your idea!tell me something about the app i really believe in your idea!tell me something about the app i really believe in your idea!',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1,
+                                      )
+                                    ],
+                                  );
+                                });
+                          },
+                          child: Container(
+                            // margin: EdgeInsets.all(20),
+                            padding: EdgeInsets.all(10),
+                            height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              color: Colors.white,
+                              border: Border.all(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'About',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      .copyWith(fontSize: 12),
+                                ),
+                                Icon(
+                                  Icons.navigate_next,
                                   color: Theme.of(context).accentColor,
                                 ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('About',style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 15),),
-                                  Icon(Icons.navigate_next,color: Theme.of(context).accentColor,),
-                                ],
-                              ),
-                            ),),
+                              ],
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: 20,
                         ),
                         Custombutton1(() async {
                           SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
+                              await SharedPreferences.getInstance();
                           prefs.setBool('login', false);
                           Navigator.pushNamed(context, "/welcome");
                         }, "Sign Out"),
@@ -344,20 +396,12 @@ class _HomeProfileState extends State<HomeProfile> {
                           height: 20,
                         ),
                         // if its already tutor itll go there to update info else it will sign up new user.
-
                       ],
                     ),
-
-
                   ),
-
-
                 ],
-
               ),
-
             ),
-
           ],
         ),
       ),

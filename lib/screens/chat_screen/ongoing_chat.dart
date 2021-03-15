@@ -52,7 +52,9 @@ class _OngoingChatState extends State<OngoingChat> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data.data()['tutor'] == false) {
-                return Text(snapshot.data.data()['name']);
+                return Text(
+                  snapshot.data.data()['name'],
+                );
               } else
                 return FutureBuilder<DocumentSnapshot>(
                   future: tutorCollection.doc(widget.receiverID).get(),
@@ -108,11 +110,19 @@ class _OngoingChatState extends State<OngoingChat> {
               child: Container(
                 // height: MediaQuery.of(context).size.height,
                 child: StreamBuilder<QuerySnapshot>(
-                    stream: chatRef,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        print(snapshot.data.docChanges);
+                    // AsyncSnapshot<QuerySnapshot> snapshot
+
+                    stream: chatRef.snapshots(),
+                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasData &&
+                          snapshot.connectionState == ConnectionState.active) {
                         print(snapshot.data.size);
+                        print(snapshot.connectionState);
+
+                        print(snapshot.data.size.toString());
+                        // print(snapshot.data.metadata.toString());
+                        // print(snapshot.data.size);
+
                         print("hasdata");
 
                         return Container(
@@ -128,43 +138,38 @@ class _OngoingChatState extends State<OngoingChat> {
                                   children: [
                                     // for (var item
                                     //     in snapshot.data.data()['messages'])
-                                    for (var item in snapshot.data.docs)
-                                      Text(
-                                        "item.toString()",
-                                        style: TextStyle(color: Colors.red),
-                                      )
-
-                                    // Bubble(
-                                    //   margin: BubbleEdges.only(top: 10),
-                                    //   padding: BubbleEdges.all(20),
-                                    //   color:
-                                    //       item['senderID'] == widget.senderID
-                                    //           ? Theme.of(context).primaryColor
-                                    //           : Theme.of(context).accentColor,
-                                    //   alignment:
-                                    //       item['senderID'] == widget.senderID
-                                    //           ? Alignment.topRight
-                                    //           : Alignment.topLeft,
+                                    // for (var item in snapshot.data.docs)
+                                    //   Bubble(
+                                    //     margin: BubbleEdges.only(top: 10),
+                                    //     padding: BubbleEdges.all(20),
+                                    //     color:
+                                    //         item['senderID'] == widget.senderID
+                                    //             ? Theme.of(context).primaryColor
+                                    //             : Theme.of(context).accentColor,
+                                    //     alignment:
+                                    //         item['senderID'] == widget.senderID
+                                    //             ? Alignment.topRight
+                                    //             : Alignment.topLeft,
                                     //
-                                    //   nip: item['senderID'] == widget.senderID
-                                    //       ? BubbleNip.rightTop
-                                    //       : BubbleNip.leftTop,
-                                    //   // nip: BubbleNip.rightTop,
-                                    //   // color: Theme.of(context).primaryColor,
-                                    //   child: Text(item['message'],
-                                    //       style: Theme.of(context)
-                                    //           .textTheme
-                                    //           .bodyText2
-                                    //           .copyWith(color: Colors.white),
-                                    //       // textAlign: item.data()['messages'][0]['senderID'] ==
-                                    //       //         widget.senderID
-                                    //       //     ? TextAlign.right
-                                    //       //     : TextAlign.left),
-                                    //       textAlign: item['senderID'] ==
-                                    //               widget.senderID
-                                    //           ? TextAlign.left
-                                    //           : TextAlign.right),
-                                    // ),
+                                    //     nip: item['senderID'] == widget.senderID
+                                    //         ? BubbleNip.rightTop
+                                    //         : BubbleNip.leftTop,
+                                    //     // nip: BubbleNip.rightTop,
+                                    //     // color: Theme.of(context).primaryColor,
+                                    //     child: Text(item['message'],
+                                    //         style: Theme.of(context)
+                                    //             .textTheme
+                                    //             .bodyText2
+                                    //             .copyWith(color: Colors.white),
+                                    //         // textAlign: item.data()['messages'][0]['senderID'] ==
+                                    //         //         widget.senderID
+                                    //         //     ? TextAlign.right
+                                    //         //     : TextAlign.left),
+                                    //         textAlign: item['senderID'] ==
+                                    //                 widget.senderID
+                                    //             ? TextAlign.left
+                                    //             : TextAlign.right),
+                                    //   ),
                                   ],
                                 ),
                               ),
@@ -174,7 +179,13 @@ class _OngoingChatState extends State<OngoingChat> {
                         );
                       } else {
                         print('doesnt have data');
-                        return Container();
+                        return Container(
+                          color: Colors.blue,
+                          child: Text(
+                            'sdsd',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
                       }
                     }),
               ),

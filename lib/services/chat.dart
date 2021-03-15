@@ -24,6 +24,7 @@ class ChatService {
   ) {
     bool isTutor = true;
     // firestoreInstance.collection('parents').doc(uid).get().then((value) => () {
+
     if (isTutor) {
       print('is tutor nt exe');
 
@@ -47,7 +48,7 @@ class ChatService {
   //   return firestoreInstance.collection('messages').where('senderID',isEqualTo: senderID).where("receiverID",isEqualTo: receiverID);
   //
   // }
-  Stream<dynamic> returnCurrentChatRef(String senderID, String receiverID) {
+  dynamic returnCurrentChatRef(String senderID, String receiverID) {
     // var cmp_temp = senderID.compareTo(receiverID);
     // if (cmp_temp == -1){
     //    return firestoreInstance.collection('messages').doc(senderID+' '+receiverID).get();
@@ -59,20 +60,19 @@ class ChatService {
     ///////////////////////////
     var cmp_temp = senderID.compareTo(receiverID);
     if (cmp_temp == -1) {
+      print("-1");
       return firestoreInstance
           .collection('messages')
           .doc(senderID + ' ' + receiverID)
-          .collection('messages')
-          .snapshots();
-      // .collection('messages')
-      // .get();
+          .collection('messages');
     } else {
+      print('+1');
+      print(receiverID + ' ' + senderID);
+
       return firestoreInstance
           .collection('messages')
           .doc(receiverID + ' ' + senderID)
-          .collection('messages')
-          .snapshots();
-      // .get();
+          .collection('messages');
     }
     // return firestoreInstance.collection('messages').doc();
   }

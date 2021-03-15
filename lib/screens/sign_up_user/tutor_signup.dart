@@ -100,7 +100,7 @@ class _TutorSignUpState extends State<TutorSignUp> {
                   child: Text(
                     widget.alreadyTutor
                         ? 'Edit Your information'
-                        : ' Sign Up as a tutor Today!',
+                        : ' Sign up as a tutor today.',
                     style: Theme.of(context).textTheme.headline1,
                   ),
                 ),
@@ -157,12 +157,15 @@ class _TutorSignUpState extends State<TutorSignUp> {
                             },
                             child: Icon(
                               Icons.add_a_photo,
-                              size: 35,
+                              size: 25,
                             ),
                           ),
                           Text(
-                            "Add photo",
-                            style: Theme.of(context).textTheme.bodyText1,
+                            "Add a photo",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(color: Colors.white),
                           ),
                         ],
                       ),

@@ -34,13 +34,8 @@ class _OngoingChatState extends State<OngoingChat> {
 
     ChatService chatservice = ChatService();
 
-    var chatRef =
+    DocumentReference chatRef =
         chatservice.returnCurrentChatRef(widget.senderID, widget.receiverID);
-    // var chatRef = firestoreInstance.collection('messages').where('senderID',isEqualTo: widget.senderID).where("receiverID",isEqualTo: widget.receiverID);
-    // .orderBy('time', descending: true)
-    //[widget.senderID,widget.receiverID]
-
-    // .where('chatID', arrayContains:  widget.receiverID, ,);
 
     ScrollController chatscrollcontroller = ScrollController();
 
@@ -109,96 +104,87 @@ class _OngoingChatState extends State<OngoingChat> {
               controller: chatscrollcontroller,
               child: Container(
                 // height: MediaQuery.of(context).size.height,
-                child: StreamBuilder<QuerySnapshot>(
+                child: StreamBuilder<DocumentSnapshot>(
                     // AsyncSnapshot<QuerySnapshot> snapshot
 
                     stream: chatRef.snapshots(),
-                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (snapshot.hasData &&
-                          snapshot.connectionState == ConnectionState.active) {
-                        print(snapshot.data.size);
-                        print(snapshot.connectionState);
-
-                        print(snapshot.data.size.toString());
-                        // print(snapshot.data.metadata.toString());
-                        // print(snapshot.data.size);
-
-                        print("hasdata");
-
-                        return Container(
-                          // color: Colors.pinkAccent,
-                          // height: MediaQuery.of(context).size.height * 0.94,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              //messages container column
-                              SingleChildScrollView(
-                                child: Column(
-                                  verticalDirection: VerticalDirection.down,
-                                  children: [
-                                    // for (var item
-                                    //     in snapshot.data.data()['messages'])
-                                    // for (var item in snapshot.data.docs)
-                                    //   Bubble(
-                                    //     margin: BubbleEdges.only(top: 10),
-                                    //     padding: BubbleEdges.all(20),
-                                    //     color:
-                                    //         item['senderID'] == widget.senderID
-                                    //             ? Theme.of(context).primaryColor
-                                    //             : Theme.of(context).accentColor,
-                                    //     alignment:
-                                    //         item['senderID'] == widget.senderID
-                                    //             ? Alignment.topRight
-                                    //             : Alignment.topLeft,
-                                    //
-                                    //     nip: item['senderID'] == widget.senderID
-                                    //         ? BubbleNip.rightTop
-                                    //         : BubbleNip.leftTop,
-                                    //     // nip: BubbleNip.rightTop,
-                                    //     // color: Theme.of(context).primaryColor,
-                                    //     child: Text(item['message'],
-                                    //         style: Theme.of(context)
-                                    //             .textTheme
-                                    //             .bodyText2
-                                    //             .copyWith(color: Colors.white),
-                                    //         // textAlign: item.data()['messages'][0]['senderID'] ==
-                                    //         //         widget.senderID
-                                    //         //     ? TextAlign.right
-                                    //         //     : TextAlign.left),
-                                    //         textAlign: item['senderID'] ==
-                                    //                 widget.senderID
-                                    //             ? TextAlign.left
-                                    //             : TextAlign.right),
-                                    //   ),
-                                  ],
-                                ),
-                              ),
-                              //end of messages container
-                            ],
-                          ),
-                        );
-                      } else {
-                        print('doesnt have data');
-                        return Container(
-                          color: Colors.blue,
-                          child: Text(
-                            'sdsd',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        );
+                    builder:
+                        (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        return Text('Something went wrong');
                       }
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Text("Loading");
+                      }
+
+                      return Container(
+                        // color: Colors.pinkAccent,
+                        // height: MediaQuery.of(context).size.height * 0.94,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            //messages container column
+                            SingleChildScrollView(
+                              child: Column(
+                                verticalDirection: VerticalDirection.down,
+                                children: [
+                                  Text(
+                                    snapshot.data.data().toString(),
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  for (var item
+                                      in snapshot.data.data()['messages'])
+                                    // for (var item in snapshot.data.docs)
+                                    Bubble(
+                                      margin: BubbleEdges.only(top: 10),
+                                      padding: BubbleEdges.all(20),
+                                      color: item['senderID'] == widget.senderID
+                                          ? Theme.of(context).primaryColor
+                                          : Theme.of(context).accentColor,
+                                      alignment:
+                                          item['senderID'] == widget.senderID
+                                              ? Alignment.topRight
+                                              : Alignment.topLeft,
+
+                                      nip: item['senderID'] == widget.senderID
+                                          ? BubbleNip.rightTop
+                                          : BubbleNip.leftTop,
+                                      // nip: BubbleNip.rightTop,
+                                      // color: Theme.of(context).primaryColor,
+                                      child: Text(item['message'],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2
+                                              .copyWith(color: Colors.white),
+                                          // textAlign: item.data()['messages'][0]['senderID'] ==
+                                          //         widget.senderID
+                                          //     ? TextAlign.right
+                                          //     : TextAlign.left),
+                                          textAlign: item['senderID'] ==
+                                                  widget.senderID
+                                              ? TextAlign.left
+                                              : TextAlign.right),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            //end of messages container
+                          ],
+                        ),
+                      );
                     }),
               ),
             ),
           ),
           Container(
-            height: 75,
+            height: 80,
             width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(bottom: 10, right: 10, left: 10, top: 10),
+            margin: EdgeInsets.only(bottom: 22, right: 10, left: 10, top: 10),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.all(Radius.circular(10))),
+                borderRadius: BorderRadius.all(Radius.circular(25))),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

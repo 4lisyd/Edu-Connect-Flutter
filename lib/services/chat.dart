@@ -48,31 +48,28 @@ class ChatService {
   //   return firestoreInstance.collection('messages').where('senderID',isEqualTo: senderID).where("receiverID",isEqualTo: receiverID);
   //
   // }
-  dynamic returnCurrentChatRef(String senderID, String receiverID) {
-    // var cmp_temp = senderID.compareTo(receiverID);
-    // if (cmp_temp == -1){
-    //    return firestoreInstance.collection('messages').doc(senderID+' '+receiverID).get();
-    // }
-    // else{
-    //   return firestoreInstance.collection('messages').doc(receiverID+' '+senderID).get();
-    //
-    // }
+  DocumentReference returnCurrentChatRef(String senderID, String receiverID) {
     ///////////////////////////
     var cmp_temp = senderID.compareTo(receiverID);
     if (cmp_temp == -1) {
       print("-1");
+
+      // return firestoreInstance
+      //     .collection('messages')
+      //     .doc(senderID + ' ' + receiverID)
+      //     .collection('messages');
+      //
       return firestoreInstance
           .collection('messages')
-          .doc(senderID + ' ' + receiverID)
-          .collection('messages');
+          .doc(senderID + ' ' + receiverID);
+      // .collection('messages');
     } else {
       print('+1');
       print(receiverID + ' ' + senderID);
 
       return firestoreInstance
           .collection('messages')
-          .doc(receiverID + ' ' + senderID)
-          .collection('messages');
+          .doc(receiverID + ' ' + senderID);
     }
     // return firestoreInstance.collection('messages').doc();
   }

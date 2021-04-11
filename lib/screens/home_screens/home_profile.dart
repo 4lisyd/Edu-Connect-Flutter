@@ -63,13 +63,12 @@ class _HomeProfileState extends State<HomeProfile> {
                     children: [
                       // todo: make this PP cached using a string somehow from _storage.getimage we have to get a string future builder messes it up.
 
-                      Divider(),
                       //////////////////////////end of the beta PP
                       Positioned(
                         child: Container(
                             margin:
                                 EdgeInsets.only(right: 18, bottom: 10, top: 10),
-                            height: 350,
+                            height: MediaQuery.of(context).size.height / 2.5,
                             width: MediaQuery.of(context).size.width - 10,
                             decoration: BoxDecoration(
                               color: Theme.of(context).accentColor,
@@ -82,7 +81,7 @@ class _HomeProfileState extends State<HomeProfile> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(bottom: 0),
+                                  margin: EdgeInsets.only(bottom: 0, top: 0),
                                   width:
                                       MediaQuery.of(context).size.width / 2.1,
                                   height:
@@ -128,102 +127,103 @@ class _HomeProfileState extends State<HomeProfile> {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Hi, ',
-                                      style:
-                                          Theme.of(context).textTheme.headline2,
-                                    ),
-                                    Icon(
-                                      Icons.face_retouching_natural,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Text(
-                                      currentUser_bloc.name,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline1
-                                          .copyWith(
-                                              fontSize: 25,
-                                              fontFamily: 'Bangers',
-                                              color: Theme.of(context)
-                                                  .primaryColor),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width -
-                                          20,
-                                      height: 80,
-                                      child: Expanded(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Chip(
-                                              padding: EdgeInsets.all(15),
-                                              backgroundColor: Theme.of(context)
-                                                  .primaryColor,
-                                              label: Text(
-                                                currentUser_bloc != null
-                                                    ? currentUser_bloc_NL
-                                                        .phoneNo
-                                                        .toString()
-                                                    : "null",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .bodyText2
-                                                    .copyWith(fontSize: 12),
-                                              ),
-                                              avatar: Icon(
-                                                Icons.phone_forwarded_outlined,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ),
-                                            Divider(),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Chip(
-                                              padding: EdgeInsets.all(15),
-                                              backgroundColor: Theme.of(context)
-                                                  .primaryColor,
-                                              label: Provider.of<UserCurrent>(
-                                                          context,
-                                                          listen: false)
-                                                      .isTutor
-                                                  ? Text(
-                                                      'looking for students',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText2
-                                                          .copyWith(
-                                                              fontSize: 12),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    )
-                                                  : Text(
-                                                      'looking for a Tutor.',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText2
-                                                          .copyWith(
-                                                              fontSize: 12),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                    ),
-                                              avatar: Icon(
-                                                Icons.supervised_user_circle,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ),
-                                          ],
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Hi, ',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2,
                                         ),
-                                      ),
+                                        Icon(
+                                          Icons.face_retouching_natural,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                          currentUser_bloc.name,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline1
+                                              .copyWith(
+                                                  fontSize: 25,
+                                                  fontFamily: 'Bangers',
+                                                  color: Theme.of(context)
+                                                      .primaryColor),
+                                        ),
+                                      ],
                                     ),
                                   ],
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width - 20,
+                                  height: 80,
+                                  child: Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Chip(
+                                          padding: EdgeInsets.all(15),
+                                          backgroundColor:
+                                              Theme.of(context).primaryColor,
+                                          label: Text(
+                                            currentUser_bloc != null
+                                                ? currentUser_bloc_NL.phoneNo
+                                                    .toString()
+                                                : "null",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText2
+                                                .copyWith(fontSize: 12),
+                                          ),
+                                          avatar: Icon(
+                                            Icons.phone_forwarded_outlined,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
+                                        ),
+                                        Divider(),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Chip(
+                                          padding: EdgeInsets.all(15),
+                                          backgroundColor:
+                                              Theme.of(context).primaryColor,
+                                          label: Provider.of<UserCurrent>(
+                                                      context,
+                                                      listen: false)
+                                                  .isTutor
+                                              ? Text(
+                                                  'looking for students',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText2
+                                                      .copyWith(fontSize: 12),
+                                                  textAlign: TextAlign.center,
+                                                )
+                                              : Text(
+                                                  'looking for a Tutor.',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .bodyText2
+                                                      .copyWith(fontSize: 12),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                          avatar: Icon(
+                                            Icons.supervised_user_circle,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ],
                             )),
@@ -276,63 +276,7 @@ class _HomeProfileState extends State<HomeProfile> {
                         SizedBox(
                           height: 20,
                         ),
-                        // Container(
-                        //   width: MediaQuery.of(context).size.width - 20,
-                        //   height: 80,
-                        //   child: Expanded(
-                        //     child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.center,
-                        //       children: [
-                        //         Chip(
-                        //           padding: EdgeInsets.all(18),
-                        //           backgroundColor:
-                        //               Theme.of(context).accentColor,
-                        //           label: Text(
-                        //             currentUser_bloc != null
-                        //                 ? currentUser_bloc_NL.phoneNo.toString()
-                        //                 : "null",
-                        //             style: Theme.of(context)
-                        //                 .textTheme
-                        //                 .bodyText2
-                        //                 .copyWith(fontSize: 12),
-                        //           ),
-                        //           avatar: Icon(
-                        //             Icons.phone_forwarded_outlined,
-                        //             color: Colors.white,
-                        //           ),
-                        //         ),
-                        //         Chip(
-                        //           padding: EdgeInsets.all(18),
-                        //           backgroundColor:
-                        //               Theme.of(context).accentColor,
-                        //           label: Provider.of<UserCurrent>(context,
-                        //                       listen: false)
-                        //                   .isTutor
-                        //               ? Text(
-                        //                   'looking for students',
-                        //                   style: Theme.of(context)
-                        //                       .textTheme
-                        //                       .bodyText2
-                        //                       .copyWith(fontSize: 12),
-                        //                   textAlign: TextAlign.center,
-                        //                 )
-                        //               : Text(
-                        //                   'looking for a Tutor.',
-                        //                   style: Theme.of(context)
-                        //                       .textTheme
-                        //                       .bodyText2
-                        //                       .copyWith(fontSize: 12),
-                        //                   textAlign: TextAlign.center,
-                        //                 ),
-                        //           avatar: Icon(
-                        //             Icons.supervised_user_circle,
-                        //             color: Colors.white,
-                        //           ),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
+
                         SizedBox(
                           height: 20,
                         ),

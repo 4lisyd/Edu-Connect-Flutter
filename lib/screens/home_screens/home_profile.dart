@@ -46,7 +46,7 @@ class _HomeProfileState extends State<HomeProfile> {
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
-          'Profile',
+          'Profile  ',
           style: Theme.of(context).textTheme.headline2.copyWith(
                 fontSize: 30,
               ),
@@ -80,49 +80,57 @@ class _HomeProfileState extends State<HomeProfile> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 0, top: 0),
-                                  width:
-                                      MediaQuery.of(context).size.width / 2.1,
-                                  height:
-                                      MediaQuery.of(context).size.height / 4,
-                                  // decoration: BoxDecoration(),
-                                  child: FutureBuilder(
-                                      future: _storage
-                                          .getImage(currentUser_bloc.uid),
-                                      builder: (context, snapshot) {
-                                        // print("sdss");
-                                        if (snapshot.hasData) {
-                                          return CircleAvatar(
-                                            // backgroundImage: NetworkImage(snapshot.data,),
-                                            backgroundImage:
-                                                CachedNetworkImageProvider(
-                                                    snapshot.data),
-                                            radius: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                          );
-                                        } else {
-                                          return Stack(
-                                            alignment: Alignment.center,
-                                            children: [
-                                              CircleAvatar(
-                                                backgroundImage: AssetImage(
-                                                    "lib/assets/userData/defaultUserAvatar.png"),
-                                                radius: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                              ),
-                                              // Image.asset(
-                                              //     "lib/assets/userData/defaultUserAvatar.png"),
-                                              CircularProgressIndicator(
-                                                backgroundColor:
-                                                    Colors.amberAccent,
-                                              ),
-                                            ],
-                                          );
-                                        }
-                                      }),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.only(bottom: 0, top: 0),
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.1,
+                                    height:
+                                        MediaQuery.of(context).size.height / 4,
+                                    // decoration: BoxDecoration(),
+                                    child: FutureBuilder(
+                                        future: _storage
+                                            .getImage(currentUser_bloc.uid),
+                                        builder: (context, snapshot) {
+                                          // print("sdss");
+                                          if (snapshot.hasData) {
+                                            return CircleAvatar(
+                                              // backgroundImage: NetworkImage(snapshot.data,),
+                                              backgroundImage:
+                                                  CachedNetworkImageProvider(
+                                                      snapshot.data),
+                                              radius: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                            );
+                                          } else {
+                                            return Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                CircleAvatar(
+                                                  backgroundImage: AssetImage(
+                                                      "lib/assets/userData/defaultUserAvatar.png"),
+                                                  radius: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                ),
+                                                // Image.asset(
+                                                //     "lib/assets/userData/defaultUserAvatar.png"),
+                                                CircularProgressIndicator(
+                                                  backgroundColor:
+                                                      Colors.amberAccent,
+                                                ),
+                                              ],
+                                            );
+                                          }
+                                        }),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -142,7 +150,7 @@ class _HomeProfileState extends State<HomeProfile> {
                                           color: Theme.of(context).primaryColor,
                                         ),
                                         SizedBox(
-                                          width: 20,
+                                          width: 10,
                                         ),
                                         Text(
                                           currentUser_bloc.name,

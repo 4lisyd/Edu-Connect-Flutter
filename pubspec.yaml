@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: ^0.5.12+4
   image_picker: ^0.6.7+22
   splashscreen: ^1.3.5
+  # firebase_messaging: ^9.1.1
 #  image_picker:
 #    git:
 #      url: https://github.com/cpboyd/plugins.git

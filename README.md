@@ -4,7 +4,9 @@ A  Flutter application, which enables Tutors and parents/Students to interact wi
 
 # Video demo
 
-https://github.com/4lisyd/Edu-Connect-Flutter/assets/43340423/2039c102-8f7b-4cf1-bed0-dd6fabba9798
+
+https://github.com/4lisyd/Edu-Connect-Flutter/assets/43340423/9c9f64d7-83e6-4243-8aae-8f0d1d51ed7a
+
 
 ## Getting Started
 
